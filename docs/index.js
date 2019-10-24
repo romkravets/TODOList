@@ -100,7 +100,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_1__);
 
 
-new _scripts_toDoList__WEBPACK_IMPORTED_MODULE_0__["TodoList"](document.querySelector("#todoList"));
+var todoDataItems = [{
+  title: "execute test task",
+  descriprion: "Ciklum internship",
+  isOpen: true,
+  priority: "high"
+}, {
+  title: "lern javascript",
+  descriprion: "",
+  isOpen: true,
+  priority: "low"
+}, {
+  title: "apply internship",
+  descriprion: "send email",
+  isOpen: false,
+  priority: "normal"
+}];
+new _scripts_toDoList__WEBPACK_IMPORTED_MODULE_0__["TodoList"](document.querySelector("#todoList"), todoDataItems);
 
 /***/ }),
 
@@ -134,17 +150,24 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var TodoList =
 /*#__PURE__*/
 function () {
-  function TodoList(rootElement) {
+  function TodoList(rootElement, todoData) {
     _classCallCheck(this, TodoList);
 
     this.rootElement = rootElement;
+    this.todoData = todoData;
+    this.todoItem;
     this.render();
   }
 
   _createClass(TodoList, [{
     key: "render",
     value: function render() {
-      console.log("hello world");
+      var _this = this;
+
+      this.todoData.forEach(function (todo) {
+        _this.todoItem = "\n       <div class=\"todo\">\n         <h3>".concat(todo.title, "</h3>\n         <p>").concat(todo.descriprion, "</p>\n         <div>\n            <div>\n            <span>").concat(todo.priority, "</span>\n            </div>\n         <select>\n            <option value=\"done\">done</option>\n            <option value=\"edit\">edit</option>\n            <option value=\"delete\">delete</option>\n         </select>\n         </div>\n       </div>");
+        _this.rootElement.innerHTML += _this.todoItem;
+      });
     }
   }]);
 
