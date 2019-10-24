@@ -1,5 +1,17 @@
+// export class TodoList {
+//   constructor(rootElement, todoData) {
+//     this.rootElement = rootElement;
+//     this.todoData = todoData;
+//     this.todoItem;
+//     this.render();
+//   }
+
+//   render() {}
+// }
+
 // Get the modal
 let modal = document.querySelector("#myModal");
+console.log(modal);
 
 // Get the button that opens the modal
 var btnToDo = document.querySelector("#addBtn");
