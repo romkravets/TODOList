@@ -168,6 +168,28 @@ function () {
         _this.todoItem = "\n       <div class=\"todo\">\n         <h3>".concat(todo.title, "</h3>\n         <p>").concat(todo.descriprion, "</p>\n         <div>\n            <div>\n            <span>").concat(todo.priority, "</span>\n            </div>\n         <select>\n            <option value=\"done\">done</option>\n            <option value=\"edit\">edit</option>\n            <option value=\"delete\">delete</option>\n         </select>\n         </div>\n       </div>");
         _this.rootElement.innerHTML += _this.todoItem;
       });
+      var modal = document.querySelector("#myModal");
+      console.log(modal); // Get the button that opens the modal
+
+      var btnToDo = document.querySelector("#addBtn"); // Get the <span> element that closes the modal
+
+      var span = document.getElementsByClassName("close")[0]; // When the user clicks on the button, open the modal
+
+      btnToDo.addEventListener("click", function () {
+        console.log("click");
+        modal.style.display = "block";
+      }); //When the user clicks on <span> (x), close the modal
+
+      span.onclick = function () {
+        modal.style.display = "none";
+      }; // When the user clicks anywhere outside of the modal, close it
+
+
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
     }
   }]);
 
