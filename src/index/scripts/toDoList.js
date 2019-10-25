@@ -1,14 +1,17 @@
+import { Toggler } from "./toggler";
 export class TodoList {
   constructor(rootElement, todoData) {
     this.rootElement = rootElement;
     this.todoData = todoData;
     this.todoItem;
-    this.saveBtn = document.querySelector(".savelist");
+    this.todoItemD;
+    this.data;
+    //this.saveBtn = document.querySelector(".savelist");
     this.render();
   }
 
   render() {
-    this.todoData.forEach(todo => {
+    this.todoData.map((todo, index) => {
       this.todoItem = `
        <div class="todo">
          <h3>${todo.title}</h3>
@@ -24,10 +27,34 @@ export class TodoList {
          </select>
          </div>
        </div>`;
+      // this.todoItem.key = index + 1;
       this.rootElement.innerHTML += this.todoItem;
     });
 
-    this.saveBtn.addEventListener("click", () => this.addToDo());
+    const addList = document.querySelector(".savelist");
+
+    addList.addEventListener("click", e => {
+      e.preventDefault();
+      let indentification = 0;
+      let titleData = document.querySelector("#addTitle").value;
+      let descriptionData = document.querySelector("textarea").value;
+      let priorityData = document.querySelector("select").value;
+      console.log(titleData);
+      console.log(descriptionData);
+      console.log(priorityData);
+      console.log(this.todoData);
+      //let id = indentification++;
+      let title = titleData;
+      let description = descriptionData;
+      let priority = priorityData;
+
+      this.data = this.todoData.push(new Toggler());
+
+      modal.style.display = "none";
+      this.rootElement.innerHTML += this.data;
+    });
+
+    //this.saveBtn.addEventListener("click", () => this.addToDo());
 
     const modal = document.querySelector("#ModalWindow");
     const btnToDo = document.querySelector("#addBtn");
@@ -47,9 +74,5 @@ export class TodoList {
         modal.style.display = "none";
       }
     });
-  }
-
-  addToDo() {
-    this.rootElement.push(console.log(this.todoData));
   }
 }

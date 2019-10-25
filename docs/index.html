@@ -21,16 +21,21 @@
     <div id="ModalWindow" class="modal">
       <div class="modal-content">
         <div>
-          <input placeholder="title" />
+          <input id="addTitle" type="text" placeholder="title" value=" " />
         </div>
         <div>
-          <textarea placeholder="description"></textarea>
+          <textarea
+            id="addDescription"
+            type="text"
+            placeholder="description"
+            value=" "
+          ></textarea>
         </div>
         <div>
-          <select>
-            <option value="done">High</option>
-            <option value="edit">Normal</option>
-            <option value="delete">Low</option>
+          <select id="priority">
+            <option value="high">High</option>
+            <option value="normal">Normal</option>
+            <option value="low">Low</option>
           </select>
         </div>
         <div>
@@ -49,5 +54,109 @@
     <footer>
       <p>Roman Kravets</p>
     </footer>
+
+    <div class="cont_principal">
+      <div class="cont_centrar">
+        <div class="cont_todo_list_top">
+          <div class="cont_titulo_cont">
+            <h3>THINGS TO DO</h3>
+          </div>
+          <div class="cont_add_titulo_cont">
+            <a href="#e" onclick="add_new()"
+              ><i class="material-icons">&#xE145;</i></a
+            >
+          </div>
+
+          <!--   End cont_todo_list_top  -->
+        </div>
+        <div class="cont_crear_new">
+          <table class="table">
+            <tr>
+              <th>Action</th>
+              <th>Title</th>
+              <th>Date</th>
+            </tr>
+            <tr>
+              <td>
+                <select name="" id="action_select">
+                  <option value="SHOPPING">SHOPPING</option>
+                  <option value="WORK">WORK</option>
+                  <option value="SPORT">SPORT</option>
+                  <option value="MUSIC">MUSIC</option>
+                </select>
+                <!-- End td 1 -->
+              </td>
+              <td>
+                <input type="text" class="input_title_desc" />
+
+                <!-- End td 2 -->
+              </td>
+              <td>
+                <select
+                  name=""
+                  class="input_description_title"
+                  id="date_select"
+                >
+                  <option value="TODAY">TODAY</option>
+                  <option value="TOMORROW">TOMORROW</option>
+                </select>
+
+                <!-- End td 3 -->
+              </td>
+            </tr>
+            <tr>
+              <th class="titl_description">Description</th>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <input type="text" class="input_description" required />
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <button class="btn_add_fin" onclick="add_to_list()">ADD</button>
+              </td>
+            </tr>
+          </table>
+
+          <!--   End cont_crear_new  -->
+        </div>
+
+        <div class="cont_princ_lists">
+          <ul>
+            <li class="list_shopping li_num_0_1">
+              <div class="col_md_1_list">
+                <p>SHOPPIGN</p>
+              </div>
+              <div class="col_md_2_list">
+                <h4>BUY COFFEE BEANS</h4>
+                <p>DODIDONE COFFEE STORE</p>
+              </div>
+              <div class="col_md_3_list">
+                <div class="cont_text_date">
+                  <p>TODAY</p>
+                </div>
+                <div class="cont_btns_options">
+                  <ul>
+                    <li>
+                      <a href="#" onclick="finish_action('0','0_1');"
+                        ><i class="material-icons">&#xE5CA;</i></a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <!-- <li class="list_work"></li>
+        <li class="list_sport"></li>
+        <li class="list_music"></li>
+       -->
+          </ul>
+          <!--   End cont_todo_list_top  -->
+        </div>
+
+        <!--   End cont_central  -->
+      </div>
+    </div>
   <script type="text/javascript" src="index.js"></script></body>
 </html>
