@@ -27,7 +27,7 @@ export class TodoList {
       this.rootElement.innerHTML += this.todoItem;
     });
 
-    this.saveBtn.addEventListener("click", () => console.log("saveBtn"));
+    this.saveBtn.addEventListener("click", () => this.addToDo());
 
     const modal = document.querySelector("#ModalWindow");
     const btnToDo = document.querySelector("#addBtn");
@@ -50,9 +50,6 @@ export class TodoList {
   }
 
   addToDo() {
-    this.togglers.push(
-      new Toggler(this.contentBlock, "TEXT", this.generateColor())
-    );
-    this.counterElement.textContent = this.togglers.length;
+    this.rootElement.push(console.log(this.todoData));
   }
 }

@@ -176,7 +176,7 @@ function () {
         _this.rootElement.innerHTML += _this.todoItem;
       });
       this.saveBtn.addEventListener("click", function () {
-        return console.log("saveBtn");
+        return _this.addToDo();
       });
       var modal = document.querySelector("#ModalWindow");
       var btnToDo = document.querySelector("#addBtn");
@@ -196,8 +196,7 @@ function () {
   }, {
     key: "addToDo",
     value: function addToDo() {
-      this.togglers.push(new Toggler(this.contentBlock, "TEXT", this.generateColor()));
-      this.counterElement.textContent = this.togglers.length;
+      this.rootElement.push(console.log(this.todoData));
     }
   }]);
 
