@@ -1,4 +1,3 @@
-import { Toggler } from "./toggler";
 export class TodoList {
   constructor(rootElement, todoData) {
     this.rootElement = rootElement;
@@ -48,7 +47,7 @@ export class TodoList {
       let description = descriptionData;
       let priority = priorityData;
 
-      this.data = this.todoData.push(new Toggler());
+      this.data = this.todoData.push({ title, description, priority });
 
       modal.style.display = "none";
       this.rootElement.innerHTML += this.data;
