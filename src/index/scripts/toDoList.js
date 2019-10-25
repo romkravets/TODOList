@@ -3,6 +3,7 @@ export class TodoList {
     this.rootElement = rootElement;
     this.todoData = todoData;
     this.todoItem;
+    this.saveBtn = document.querySelector(".savelist");
     this.render();
   }
 
@@ -26,31 +27,32 @@ export class TodoList {
       this.rootElement.innerHTML += this.todoItem;
     });
 
-    let modal = document.querySelector("#myModal");
-    console.log(modal);
+    this.saveBtn.addEventListener("click", () => console.log("saveBtn"));
 
-    // Get the button that opens the modal
-    var btnToDo = document.querySelector("#addBtn");
+    const modal = document.querySelector("#ModalWindow");
+    const btnToDo = document.querySelector("#addBtn");
 
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
+    const span = document.getElementsByClassName("cancel")[0];
 
-    // When the user clicks on the button, open the modal
     btnToDo.addEventListener("click", () => {
-      console.log("click");
       modal.style.display = "block";
     });
 
-    //When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
+    span.addEventListener("click", () => {
       modal.style.display = "none";
-    };
+    });
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
+    window.addEventListener("click", () => {
       if (event.target == modal) {
         modal.style.display = "none";
       }
-    };
+    });
+  }
+
+  addToDo() {
+    this.togglers.push(
+      new Toggler(this.contentBlock, "TEXT", this.generateColor())
+    );
+    this.counterElement.textContent = this.togglers.length;
   }
 }
