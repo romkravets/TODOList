@@ -1,4 +1,6 @@
 import { TodoList } from "./scripts/toDoList";
+import { TogglerControl } from "./scripts/togglerControl";
+import { Toggler } from "./scripts/toggler";
 
 import "./index.scss";
 
@@ -26,3 +28,5 @@ const todoDataItems = [
 ];
 
 new TodoList(document.querySelector("#todoList"), todoDataItems);
+new Toggler(document.querySelector("#togglerFirst"), "HELLOW WORLD!", "green");
+new TogglerControl(document.querySelector("#togglerController"));
