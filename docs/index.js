@@ -137,7 +137,8 @@ function () {
     this.btnAddEventListeners();
     this.deleteTask();
     this.modalToggle();
-    this.searchToggle();
+    this.searchToggle(); //this.editToggle();
+
     console.log(this.tasks);
   }
 
@@ -215,7 +216,7 @@ function () {
   }, {
     key: "generateTaskHtml",
     value: function generateTaskHtml(task, index) {
-      return "\n      <li class=\"list__item\">\n        <label class=\"list__checkbox\"><input id=\"toggleTaskStatus\" type=\"checkbox\" onchange=\"toDo.toggleTaskStatus(".concat(index, ")\" value=\"\" class=\"\" ").concat(task.isComplete ? "checked" : "", "></label>\n          <div class=\"list__title task-text ").concat(task.isComplete ? "complete" : "", "\">\n            ").concat(task.task, "\n          </div>\n          <div class=\"list__description\">\n          ").concat(task.desc, "\n          </div>\n          <div class=\"list__bottom-section\">\n            <div class=\"list__priority\">\n            ").concat(task.priority, "\n            </div>\n\n            <div class=\"dropdown\">\n              <button class=\"dropbtn\">...</button>\n              <div class=\"dropdown-content\">\n                <a href=\"#\" value=\"done\">done</a>\n                <a href=\"#\" value=\"edit\">edit</a>\n                <a href=\"#\" value=\"delete\" id=\"deleteTask\">delete</a>\n              </div>\n            </div>\n          </div>\n        </div>\n      </li>\n    ");
+      return "\n      <li class=\"list__item\">\n        <label class=\"list__checkbox\"><input id=\"toggleTaskStatus\" type=\"checkbox\" onchange=\"toDo.toggleTaskStatus(".concat(index, ")\" value=\"\" class=\"\" ").concat(task.isComplete ? "checked" : "", "></label>\n          <div class=\"list__title task-text ").concat(task.isComplete ? "complete" : "", "\">\n            ").concat(task.task, "\n          </div>\n          <div class=\"list__description\">\n          ").concat(task.desc, "\n          </div>\n          <div class=\"list__bottom-section\">\n            <div class=\"list__priority\">\n            ").concat(task.priority, "\n            </div>\n\n            <div class=\"dropdown\">\n              <button class=\"dropbtn\">...</button>\n              <div class=\"dropdown-content\">\n                <a href=\"#\" value=\"done\">done</a>\n                <a href=\"#\" value=\"edit\" class=\"edit\">edit</a>\n                <a href=\"#\" value=\"delete\" id=\"deleteTask\">delete</a>\n              </div>\n            </div>\n          </div>\n        </div>\n      </li>\n    ");
     }
   }, {
     key: "modalToggle",
@@ -237,18 +238,47 @@ function () {
           modal.style.display = "none";
         }
       });
-    }
+    } // editToggle() {
+    //   const editBtn = document.querySelector(".edit");
+    //   for (const editBtn of editBtns) {
+    //     control.addEventListener("click", () => {
+    //       console.log("click edit");
+    //   }
+    // document.querySelector(".edit").addEventListener("click", function(e) {
+    //   console.log("click edit");
+    //   //if user click on edit
+    //   //add to input text the border line
+    //   //allow update input text by change readOnly
+    //   const span = e.target.parentElement;
+    //   const li = span.parentElement;
+    //   const inputText = li.querySelector(".list__item");
+    //   // const saveInfo = li.querySelector(".name .saveInfo");
+    //   //inputText.classList.add("input-border");
+    //   //inputText.style.cursor = "text";
+    //   // saveInfo.style.display = "block";
+    //   //inputText.readOnly = false;
+    //   //save by press enter btn
+    //   // inputText.addEventListener("keypress", function(e) {
+    //   //   var key = e.which || e.keyCode;
+    //   //   if (key === 13) {
+    //   //     // 13 is enter
+    //   //     inputText.readOnly = true;
+    //   //     inputText.style.cursor = "context-menu";
+    //   //     inputText.classList.remove("input-border");
+    //   //     // saveInfo.style.display = "none";
+    //   //   }
+    //   // });
+    // });
+    //}
+
   }, {
     key: "searchToggle",
     value: function searchToggle() {
       document.querySelector(".form__search").addEventListener("keyup", function (e) {
-        var target = document.getElementById("addTask");
         var inputVal = e.target.value.toLowerCase();
         var items = document.querySelectorAll("li");
-        console.log(items);
         Array.from(items).forEach(function (item) {
           var itemName = item.querySelector(".list__title").innerHTML;
-          console.log(itemName);
 
           if (itemName.toLowerCase().indexOf(inputVal) != -1) {
             item.style.display = "flex";

@@ -32,6 +32,7 @@ class ToDoClass {
     this.deleteTask();
     this.modalToggle();
     this.searchToggle();
+    //this.editToggle();
     console.log(this.tasks);
   }
 
@@ -112,7 +113,7 @@ class ToDoClass {
               <button class="dropbtn">...</button>
               <div class="dropdown-content">
                 <a href="#" value="done">done</a>
-                <a href="#" value="edit">edit</a>
+                <a href="#" value="edit" class="edit">edit</a>
                 <a href="#" value="delete" id="deleteTask">delete</a>
               </div>
             </div>
@@ -144,15 +145,47 @@ class ToDoClass {
     });
   }
 
+  // editToggle() {
+  //   const editBtn = document.querySelector(".edit");
+
+  //   for (const editBtn of editBtns) {
+  //     control.addEventListener("click", () => {
+  //       console.log("click edit");
+  //   }
+  // document.querySelector(".edit").addEventListener("click", function(e) {
+  //   console.log("click edit");
+  //   //if user click on edit
+  //   //add to input text the border line
+  //   //allow update input text by change readOnly
+  //   const span = e.target.parentElement;
+  //   const li = span.parentElement;
+  //   const inputText = li.querySelector(".list__item");
+  //   // const saveInfo = li.querySelector(".name .saveInfo");
+  //   //inputText.classList.add("input-border");
+  //   //inputText.style.cursor = "text";
+  //   // saveInfo.style.display = "block";
+  //   //inputText.readOnly = false;
+
+  //   //save by press enter btn
+  //   // inputText.addEventListener("keypress", function(e) {
+  //   //   var key = e.which || e.keyCode;
+  //   //   if (key === 13) {
+  //   //     // 13 is enter
+  //   //     inputText.readOnly = true;
+  //   //     inputText.style.cursor = "context-menu";
+  //   //     inputText.classList.remove("input-border");
+  //   //     // saveInfo.style.display = "none";
+  //   //   }
+  //   // });
+  // });
+  //}
+
   searchToggle() {
     document.querySelector(".form__search").addEventListener("keyup", e => {
-      let target = document.getElementById("addTask");
       const inputVal = e.target.value.toLowerCase();
       const items = document.querySelectorAll("li");
-      console.log(items);
       Array.from(items).forEach(function(item) {
         const itemName = item.querySelector(".list__title").innerHTML;
-        console.log(itemName);
         if (itemName.toLowerCase().indexOf(inputVal) != -1) {
           item.style.display = "flex";
         } else {
