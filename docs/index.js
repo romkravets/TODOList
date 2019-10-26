@@ -137,6 +137,7 @@ function () {
     this.btnAddEventListeners();
     this.deleteTask();
     this.modalToggle();
+    this.searchToggle();
     console.log(this.tasks);
   }
 
@@ -164,6 +165,7 @@ function () {
         var target = document.getElementById("addTask");
         var targetDesc = document.getElementById("addDesc");
         var priority = document.getElementById("priority");
+        var modal = document.querySelector("#modalToggle");
 
         _this2.addTask(target.value, targetDesc.value, priority.value);
 
@@ -213,7 +215,7 @@ function () {
   }, {
     key: "generateTaskHtml",
     value: function generateTaskHtml(task, index) {
-      return "\n      <li class=\"list__item\">\n        <label class=\"list__checkbox\"><input id=\"toggleTaskStatus\" type=\"checkbox\" onchange=\"toDo.toggleTaskStatus(".concat(index, ")\" value=\"\" class=\"\" ").concat(task.isComplete ? "checked" : "", "></label>\n          <div class=\"list__title task-text ").concat(task.isComplete ? "complete" : "", "\">\n            ").concat(task.task, "\n          </div>\n          <div class=\"list__description\">\n          ").concat(task.desc, "\n          </div>\n          <div class=\"list__bottom-section\">\n              <div class=\"list__priority\">\n              ").concat(task.priority, "\n              </div>\n              <div>\n                <select class=\"list__option\">\n                  <option value=\"\">...</option>\n                  <option value=\"done\">done</option>\n                  <option value=\"edit\">edit</option>\n                  <option value=\"delete\" id=\"deleteTask\">delete</option>\n                </select>\n              </div>\n          </div>\n        </div>\n      </li>\n    ");
+      return "\n      <li class=\"list__item\">\n        <label class=\"list__checkbox\"><input id=\"toggleTaskStatus\" type=\"checkbox\" onchange=\"toDo.toggleTaskStatus(".concat(index, ")\" value=\"\" class=\"\" ").concat(task.isComplete ? "checked" : "", "></label>\n          <div class=\"list__title task-text ").concat(task.isComplete ? "complete" : "", "\">\n            ").concat(task.task, "\n          </div>\n          <div class=\"list__description\">\n          ").concat(task.desc, "\n          </div>\n          <div class=\"list__bottom-section\">\n            <div class=\"list__priority\">\n            ").concat(task.priority, "\n            </div>\n\n            <div class=\"dropdown\">\n              <button class=\"dropbtn\">...</button>\n              <div class=\"dropdown-content\">\n                <a href=\"#\" value=\"done\">done</a>\n                <a href=\"#\" value=\"edit\">edit</a>\n                <a href=\"#\" value=\"delete\" id=\"deleteTask\">delete</a>\n              </div>\n            </div>\n          </div>\n        </div>\n      </li>\n    ");
     }
   }, {
     key: "modalToggle",
@@ -234,6 +236,26 @@ function () {
           e.preventDefault();
           modal.style.display = "none";
         }
+      });
+    }
+  }, {
+    key: "searchToggle",
+    value: function searchToggle() {
+      document.querySelector(".form__search").addEventListener("keyup", function (e) {
+        var target = document.getElementById("addTask");
+        var inputVal = e.target.value.toLowerCase();
+        var items = document.querySelectorAll("li");
+        console.log(items);
+        Array.from(items).forEach(function (item) {
+          var itemName = item.querySelector(".list__title").innerHTML;
+          console.log(itemName);
+
+          if (itemName.toLowerCase().indexOf(inputVal) != -1) {
+            item.style.display = "flex";
+          } else {
+            item.style.display = "none";
+          }
+        });
       });
     }
   }, {

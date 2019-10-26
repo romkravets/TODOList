@@ -68,6 +68,21 @@
 * {
   box-sizing: border-box; }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+header,
+nav,
+section,
+footer {
+  margin: 0;
+  padding: 0; }
+
 body {
   margin: 0;
   padding: 0;
@@ -122,6 +137,8 @@ body {
 .list__priority {
   font-size: 20px;
   padding: 10px 10px;
+  width: 100px;
+  text-align: center;
   border: 1px solid #000000;
   border-radius: 5px; }
 
@@ -177,22 +194,70 @@ body {
 
 .form {
   display: flex;
-  margin: 0 auto; }
+  margin: 0 auto;
+  width: 100%;
+  justify-content: space-evenly; }
   .form__search {
     width: 300px;
     padding: 10px; }
   .form__complite {
-    width: 100px;
-    cursor: pointer; }
+    width: 110px;
+    cursor: pointer;
+    padding: 10px; }
   .form__priority {
-    width: 100px;
-    cursor: pointer; }
+    width: 110px;
+    cursor: pointer;
+    padding: 10px; }
   .form__btn {
     background: transparent;
     padding: 10px 40px;
     border: 1px solid #111111;
     border-radius: 5px;
     cursor: pointer; }
+
+/* Style The Dropdown Button */
+.dropbtn {
+  background-color: #a9a9a9;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  border-radius: 30%;
+  cursor: pointer; }
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block; }
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  right: 0; }
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block; }
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #f1f1f1; }
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block; }
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #a9a9a9d7; }
 
 input,
 select,
