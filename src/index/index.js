@@ -1,24 +1,5 @@
 import "./index.scss";
 
-const modal = document.querySelector("#ModalWindow");
-const btnToDo = document.querySelector("#addBtn");
-
-const span = document.getElementsByClassName("cancel")[0];
-
-btnToDo.addEventListener("click", () => {
-  modal.style.display = "block";
-});
-
-span.addEventListener("click", () => {
-  modal.style.display = "none";
-});
-
-window.addEventListener("click", () => {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-});
-
 class ToDoClass {
   constructor() {
     this.tasks = JSON.parse(localStorage.getItem("TASKS"));
@@ -49,6 +30,8 @@ class ToDoClass {
     this.addEventListeners();
     this.btnAddEventListeners();
     this.deleteTask();
+    this.modalToggle();
+    this.searchToggle();
     console.log(this.tasks);
   }
 
@@ -68,6 +51,7 @@ class ToDoClass {
       let target = document.getElementById("addTask");
       let targetDesc = document.getElementById("addDesc");
       let priority = document.getElementById("priority");
+      const modal = document.querySelector("#modalToggle");
       this.addTask(target.value, targetDesc.value, priority.value);
       modal.style.display = "none";
       target.value = "";
@@ -120,22 +104,62 @@ class ToDoClass {
           ${task.desc}
           </div>
           <div class="list__bottom-section">
-              <div class="list__priority">
-              ${task.priority}
+            <div class="list__priority">
+            ${task.priority}
+            </div>
+
+            <div class="dropdown">
+              <button class="dropbtn">...</button>
+              <div class="dropdown-content">
+                <a href="#" value="done">done</a>
+                <a href="#" value="edit">edit</a>
+                <a href="#" value="delete" id="deleteTask">delete</a>
               </div>
-              <div>
-                <select class="list__option">
-                  <option value="">...</option>
-                  <option value="done">done</option>
-                  <option value="edit">edit</option>
-                  <option value="delete" id="deleteTask">delete</option>
-                </select>
-              </div>
-             
+            </div>
           </div>
         </div>
       </li>
     `;
+  }
+
+  modalToggle() {
+    const modal = document.querySelector("#modalToggle");
+    document.querySelector("#addBtn").addEventListener("click", e => {
+      e.preventDefault();
+      console.log(modal);
+      console.log("click");
+      modal.style.display = "block";
+    });
+
+    document.querySelector(".modal__cancel").addEventListener("click", e => {
+      e.preventDefault();
+      modal.style.display = "none";
+    });
+
+    window.addEventListener("click", e => {
+      if (event.target == modal) {
+        e.preventDefault();
+        modal.style.display = "none";
+      }
+    });
+  }
+
+  searchToggle() {
+    document.querySelector(".form__search").addEventListener("keyup", e => {
+      let target = document.getElementById("addTask");
+      const inputVal = e.target.value.toLowerCase();
+      const items = document.querySelectorAll("li");
+      console.log(items);
+      Array.from(items).forEach(function(item) {
+        const itemName = item.querySelector(".list__title").innerHTML;
+        console.log(itemName);
+        if (itemName.toLowerCase().indexOf(inputVal) != -1) {
+          item.style.display = "flex";
+        } else {
+          item.style.display = "none";
+        }
+      });
+    });
   }
 
   loadTasks() {

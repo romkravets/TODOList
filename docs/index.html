@@ -19,32 +19,39 @@
 
     <main class="main-content">
       <div class="container">
-        <form action="">form</form>
-        <input placeholder="search by title" />
-        <select id="complite">
-          <option value="all">all</option>
-          <option value="open">open</option>
-          <option value="done">done</option>
-        </select>
-        <select id="">
-          <option value="all">all</option>
-          <option value="high">high</option>
-          <option value="normal">hormal</option>
-          <option value="low">how</option>
-        </select>
-        <button id="addBtn">Create</button>
         <div class="row-flex">
+          <form action="" class="form">
+            <div>
+              <input class="form__search" placeholder="search by title" />
+            </div>
+            <div>
+              <select id="complite" class="form__complite">
+                <option value="all">all</option>
+                <option value="open">open</option>
+                <option value="done">done</option>
+              </select>
+            </div>
+            <div>
+              <select id="" class="form__priority">
+                <option value="all">all</option>
+                <option value="high">high</option>
+                <option value="normal">hormal</option>
+                <option value="low">how</option>
+              </select>
+            </div>
+            <button id="addBtn" class="form__btn">Create</button>
+          </form>
           <ul class="list__items" id="taskList"></ul>
         </div>
       </div>
     </main>
-    <footer class="footer-content">
+    <!-- <footer class="footer-content">
       <div class="container">
         <p>Roman Kravets</p>
       </div>
-    </footer>
+    </footer> -->
 
-    <div id="ModalWindow" class="modal">
+    <div id="modalToggle" class="modal">
       <form class="modal__content">
         <label for="addTask">
           Title:<input
@@ -71,7 +78,7 @@
           </select>
         </div>
         <div class="modal__btn-block">
-          <button class="cancel modal__btn">Cancel</button>
+          <button class="modal__cancel modal__btn">Cancel</button>
           <button id="btnTask" class="modal__btn">Save</button>
         </div>
       </form>
