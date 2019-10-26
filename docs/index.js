@@ -226,7 +226,7 @@ function () {
   }, {
     key: "generateTaskHtml",
     value: function generateTaskHtml(task, index) {
-      return "\n      <li class=\"list__item\">\n        <label class=\"list__checkbox\"><input id=\"toggleTaskStatus\" type=\"checkbox\" onchange=\"toDo.toggleTaskStatus(".concat(index, ")\" value=\"\" class=\"\" ").concat(task.isComplete ? "checked" : "", "></label>\n          <div class=\"list__title task-text ").concat(task.isComplete ? "complete" : "", "\">\n            ").concat(task.task, "\n          </div>\n          <div class=\"list__description\">\n          ").concat(task.desc, "\n          </div>\n          <div class=\"list__bottom-section\">\n              <div class=\"list__priority\">\n              ").concat(task.priority, "\n              </div>\n              <select class=\"list__option\">\n                <option value=\"\">...</option>\n                <option value=\"done\">done</option>\n                <option value=\"edit\">edit</option>\n                <option value=\"delete\" id=\"deleteTask\">delete</option>\n              </select>\n          </div>\n        </div>\n      </li>\n    ");
+      return "\n      <li class=\"list__item\">\n        <label class=\"list__checkbox\"><input id=\"toggleTaskStatus\" type=\"checkbox\" onchange=\"toDo.toggleTaskStatus(".concat(index, ")\" value=\"\" class=\"\" ").concat(task.isComplete ? "checked" : "", "></label>\n          <div class=\"list__title task-text ").concat(task.isComplete ? "complete" : "", "\">\n            ").concat(task.task, "\n          </div>\n          <div class=\"list__description\">\n          ").concat(task.desc, "\n          </div>\n          <div class=\"list__bottom-section\">\n              <div class=\"list__priority\">\n              ").concat(task.priority, "\n              </div>\n              <div>\n                <select class=\"list__option\">\n                  <option value=\"\">...</option>\n                  <option value=\"done\">done</option>\n                  <option value=\"edit\">edit</option>\n                  <option value=\"delete\" id=\"deleteTask\">delete</option>\n                </select>\n              </div>\n             \n          </div>\n        </div>\n      </li>\n    ");
     }
   }, {
     key: "loadTasks",
@@ -237,8 +237,7 @@ function () {
       var tasksHtml = this.tasks.reduce(function (html, task, index) {
         return html += _this4.generateTaskHtml(task, index);
       }, "");
-      document.getElementById("taskList").innerHTML = tasksHtml;
-      localStorage.clear();
+      document.getElementById("taskList").innerHTML = tasksHtml; //localStorage.clear();
     }
   }]);
 
