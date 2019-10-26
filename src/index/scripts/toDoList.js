@@ -4,7 +4,7 @@ export class TodoList {
     this.todoData = todoData;
     this.todoItem;
     this.todoItemD;
-    this.data;
+    this.data = {};
     //this.saveBtn = document.querySelector(".savelist");
     this.render();
   }
@@ -34,7 +34,7 @@ export class TodoList {
 
     addList.addEventListener("click", e => {
       e.preventDefault();
-      let indentification = 0;
+      //let indentification = 0;
       let titleData = document.querySelector("#addTitle").value;
       let descriptionData = document.querySelector("textarea").value;
       let priorityData = document.querySelector("select").value;
@@ -43,14 +43,22 @@ export class TodoList {
       console.log(priorityData);
       console.log(this.todoData);
       //let id = indentification++;
-      let title = titleData;
-      let description = descriptionData;
-      let priority = priorityData;
+      // let title = titleData;
+      // let description = descriptionData;
+      // let priority = priorityData;
 
-      this.data = this.todoData.push({ title, description, priority });
+      //this.data = { title, description, priority };
+
+      this.data = this.todoData.push({
+        title: titleData,
+        description: descriptionData,
+        priority: priorityData
+      });
+      this.rootElement.innerHTML += this.todoItem;
 
       modal.style.display = "none";
-      this.rootElement.innerHTML += this.data;
+      //var dataString = JSON.stringify(this.data);
+      //this.rootElement.innerHTML += newArr;
     });
 
     //this.saveBtn.addEventListener("click", () => this.addToDo());

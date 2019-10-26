@@ -21,14 +21,13 @@
     <div id="ModalWindow" class="modal">
       <div class="modal-content">
         <div>
-          <input id="addTitle" type="text" placeholder="title" value=" " />
+          <input class="todo-form__field" type="text" placeholder="title" />
         </div>
         <div>
           <textarea
             id="addDescription"
             type="text"
             placeholder="description"
-            value=" "
           ></textarea>
         </div>
         <div>
@@ -40,12 +39,14 @@
         </div>
         <div>
           <button class="cancel">Cancel</button>
-          <button class="savelist">Save</button>
+          <button class="todo-form__btn">Save</button>
         </div>
       </div>
     </div>
 
     <main id="todoList"></main>
+    <!-- <button class="btn btn-primary" onclick="toDo.addTaskClick()">Add</button>
+    <div id="taskList"></div> -->
 
     <div id="togglerFirst"></div>
     <div id="togglerSecond"></div>
@@ -55,108 +56,42 @@
       <p>Roman Kravets</p>
     </footer>
 
-    <div class="cont_principal">
-      <div class="cont_centrar">
-        <div class="cont_todo_list_top">
-          <div class="cont_titulo_cont">
-            <h3>THINGS TO DO</h3>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/">ToDo List</a>
           </div>
-          <div class="cont_add_titulo_cont">
-            <a href="#e" onclick="add_new()"
-              ><i class="material-icons">&#xE145;</i></a
-            >
+        </div>
+      </nav>
+    
+      <div class="container">
+    
+        <div class="content-area row">
+          <div class="col-md-2 col-xs-2 col-lg-2 col-sm-2"></div>
+    
+          <div class="col-md-8 col-xs-8 col-lg-8 col-sm-8">
+            <h2>ToDo List</h2>
+    
+            <div class="row input-area">
+              <div class="col-md-1"></div>
+              <div class="form-group col-md-9">
+                <input type="text" placeholder="New Task" class="form-control" id="addTask">
+              </div>
+              <div class="form-group col-md-1">
+                <button  id="btnTask" class="btn btn-primary">Add</button>
+              </div>
+              <div class="col-md-1"></div>
+            </div>
+    
+            <ul class="list-group" id="taskList">
+    
+            </ul>
           </div>
-
-          <!--   End cont_todo_list_top  -->
+    
+          <div class="col-md-2 col-xs-2 col-lg-2 col-sm-2"></div>
         </div>
-        <div class="cont_crear_new">
-          <table class="table">
-            <tr>
-              <th>Action</th>
-              <th>Title</th>
-              <th>Date</th>
-            </tr>
-            <tr>
-              <td>
-                <select name="" id="action_select">
-                  <option value="SHOPPING">SHOPPING</option>
-                  <option value="WORK">WORK</option>
-                  <option value="SPORT">SPORT</option>
-                  <option value="MUSIC">MUSIC</option>
-                </select>
-                <!-- End td 1 -->
-              </td>
-              <td>
-                <input type="text" class="input_title_desc" />
-
-                <!-- End td 2 -->
-              </td>
-              <td>
-                <select
-                  name=""
-                  class="input_description_title"
-                  id="date_select"
-                >
-                  <option value="TODAY">TODAY</option>
-                  <option value="TOMORROW">TOMORROW</option>
-                </select>
-
-                <!-- End td 3 -->
-              </td>
-            </tr>
-            <tr>
-              <th class="titl_description">Description</th>
-            </tr>
-            <tr>
-              <td colspan="3">
-                <input type="text" class="input_description" required />
-              </td>
-            </tr>
-            <tr>
-              <td colspan="3">
-                <button class="btn_add_fin" onclick="add_to_list()">ADD</button>
-              </td>
-            </tr>
-          </table>
-
-          <!--   End cont_crear_new  -->
-        </div>
-
-        <div class="cont_princ_lists">
-          <ul>
-            <li class="list_shopping li_num_0_1">
-              <div class="col_md_1_list">
-                <p>SHOPPIGN</p>
-              </div>
-              <div class="col_md_2_list">
-                <h4>BUY COFFEE BEANS</h4>
-                <p>DODIDONE COFFEE STORE</p>
-              </div>
-              <div class="col_md_3_list">
-                <div class="cont_text_date">
-                  <p>TODAY</p>
-                </div>
-                <div class="cont_btns_options">
-                  <ul>
-                    <li>
-                      <a href="#" onclick="finish_action('0','0_1');"
-                        ><i class="material-icons">&#xE5CA;</i></a
-                      >
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </li>
-            <!-- <li class="list_work"></li>
-        <li class="list_sport"></li>
-        <li class="list_music"></li>
-       -->
-          </ul>
-          <!--   End cont_todo_list_top  -->
-        </div>
-
-        <!--   End cont_central  -->
-      </div>
+    
+      </div><!-- /.container -->
     </div>
   <script type="text/javascript" src="index.js"></script></body>
 </html>
