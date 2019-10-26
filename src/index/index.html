@@ -7,24 +7,49 @@
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>TODOList</title>
     <script src="http://localhost:35729/livereload.js"></script>
   </head>
   <body>
-    <header class="header-top">
-      <div>
+    <header class="header-content">
+      <div class="container">
         <h1>TODOList</h1>
       </div>
     </header>
 
-    <button id="addBtn">Create</button>
-    <ul class="list-group" id="taskList"></ul>
+    <main class="main-content">
+      <div class="container">
+        <form action="">form</form>
+        <input placeholder="search by title" />
+        <select id="complite">
+          <option value="all">all</option>
+          <option value="open">open</option>
+          <option value="done">done</option>
+        </select>
+        <select id="">
+          <option value="all">all</option>
+          <option value="high">high</option>
+          <option value="normal">hormal</option>
+          <option value="low">how</option>
+        </select>
+        <button id="addBtn">Create</button>
+        <div class="row-flex">
+          <ul class="list__items" id="taskList"></ul>
+        </div>
+      </div>
+    </main>
+    <footer class="footer-content ">
+      <div class="container">
+        <p>Roman Kravets</p>
+      </div>
+    </footer>
 
     <div id="ModalWindow" class="modal">
-      <div class="modal-content">
+      <div class="modal__content">
         <div>
           <input
             type="text"
-            placeholder="New Task"
+            placeholder="Title"
             class="form-control"
             id="addTask"
           />
@@ -32,7 +57,7 @@
         <div>
           <textarea
             type="text"
-            placeholder="New Desc"
+            placeholder="Desctiption"
             class="form-control"
             id="addDesc"
           ></textarea>
@@ -50,8 +75,5 @@
         </div>
       </div>
     </div>
-    <footer>
-      <p>Roman Kravets</p>
-    </footer>
   </body>
 </html>

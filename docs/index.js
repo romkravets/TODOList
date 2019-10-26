@@ -103,9 +103,6 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-//import { TodoList } from "./scripts/toDoList";
-// import { TogglerControl } from "./scripts/togglerControl";
-// import { Toggler } from "./scripts/toggler";
 
 var modal = document.querySelector("#ModalWindow");
 var btnToDo = document.querySelector("#addBtn");
@@ -185,6 +182,7 @@ function () {
 
         modal.style.display = "none";
         target.value = "";
+        targetDesc.value = "";
       });
     }
   }, {
@@ -228,7 +226,7 @@ function () {
   }, {
     key: "generateTaskHtml",
     value: function generateTaskHtml(task, index) {
-      return "\n      <li class=\"list-group-item checkbox\">\n        <div class=\"row\">\n          <div class=\"col-md-1 col-xs-1 col-lg-1 col-sm-1 checkbox\">\n            <label><input id=\"toggleTaskStatus\" type=\"checkbox\" onchange=\"toDo.toggleTaskStatus(".concat(index, ")\" value=\"\" class=\"\" ").concat(task.isComplete ? "checked" : "", "></label>\n          </div>\n          <div class=\"col-md-10 col-xs-10 col-lg-10 col-sm-10 task-text ").concat(task.isComplete ? "complete" : "", "\">\n            ").concat(task.task, "\n          </div>\n          <div>\n          ").concat(task.desc, "\n          </div>\n          <div>\n          ").concat(task.priority, "\n          </div>\n          <div class=\"col-md-1 col-xs-1 col-lg-1 col-sm-1 delete-icon-area\">\n            <button class=\"\" id=\"deleteTask\"><i class=\"delete-icon glyphicon glyphicon-trash\"></i>del</button>\n          </div>\n        </div>\n      </li>\n    ");
+      return "\n      <li class=\"list__item\">\n        <label class=\"list__checkbox\"><input id=\"toggleTaskStatus\" type=\"checkbox\" onchange=\"toDo.toggleTaskStatus(".concat(index, ")\" value=\"\" class=\"\" ").concat(task.isComplete ? "checked" : "", "></label>\n          <div class=\"list__title task-text ").concat(task.isComplete ? "complete" : "", "\">\n            ").concat(task.task, "\n          </div>\n          <div class=\"list__description\">\n          ").concat(task.desc, "\n          </div>\n          <div class=\"list__bottom-section\">\n              <div class=\"list__priority\">\n              ").concat(task.priority, "\n              </div>\n              <select class=\"list__option\">\n                <option value=\"\">...</option>\n                <option value=\"done\">done</option>\n                <option value=\"edit\">edit</option>\n                <option value=\"delete\" id=\"deleteTask\">delete</option>\n              </select>\n          </div>\n        </div>\n      </li>\n    ");
     }
   }, {
     key: "loadTasks",
