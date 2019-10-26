@@ -267,8 +267,7 @@ function () {
       var tasksHtml = this.tasks.reduce(function (html, task, index) {
         return html += _this4.generateTaskHtml(task, index);
       }, "");
-      document.getElementById("taskList").innerHTML = tasksHtml;
-      localStorage.clear();
+      document.getElementById("taskList").innerHTML = tasksHtml; //localStorage.clear();
     }
   }]);
 
