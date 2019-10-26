@@ -3,11 +3,14 @@ export class TodoList {
     this.rootElement = rootElement;
     this.todoData = todoData;
     this.todoItem;
+    this.todoItemD;
+    this.data = {};
+    //this.saveBtn = document.querySelector(".savelist");
     this.render();
   }
 
   render() {
-    this.todoData.forEach(todo => {
+    this.todoData.map((todo, index) => {
       this.todoItem = `
        <div class="todo">
          <h3>${todo.title}</h3>
@@ -23,34 +26,60 @@ export class TodoList {
          </select>
          </div>
        </div>`;
+      // this.todoItem.key = index + 1;
       this.rootElement.innerHTML += this.todoItem;
     });
 
-    let modal = document.querySelector("#myModal");
-    console.log(modal);
+    const addList = document.querySelector(".savelist");
 
-    // Get the button that opens the modal
-    var btnToDo = document.querySelector("#addBtn");
+    addList.addEventListener("click", e => {
+      e.preventDefault();
+      //let indentification = 0;
+      let titleData = document.querySelector("#addTitle").value;
+      let descriptionData = document.querySelector("textarea").value;
+      let priorityData = document.querySelector("select").value;
+      console.log(titleData);
+      console.log(descriptionData);
+      console.log(priorityData);
+      console.log(this.todoData);
+      //let id = indentification++;
+      // let title = titleData;
+      // let description = descriptionData;
+      // let priority = priorityData;
 
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
+      //this.data = { title, description, priority };
 
-    // When the user clicks on the button, open the modal
+      this.data = this.todoData.push({
+        title: titleData,
+        description: descriptionData,
+        priority: priorityData
+      });
+      this.rootElement.innerHTML += this.todoItem;
+
+      modal.style.display = "none";
+      //var dataString = JSON.stringify(this.data);
+      //this.rootElement.innerHTML += newArr;
+    });
+
+    //this.saveBtn.addEventListener("click", () => this.addToDo());
+
+    const modal = document.querySelector("#ModalWindow");
+    const btnToDo = document.querySelector("#addBtn");
+
+    const span = document.getElementsByClassName("cancel")[0];
+
     btnToDo.addEventListener("click", () => {
-      console.log("click");
       modal.style.display = "block";
     });
 
-    //When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
+    span.addEventListener("click", () => {
       modal.style.display = "none";
-    };
+    });
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
+    window.addEventListener("click", () => {
       if (event.target == modal) {
         modal.style.display = "none";
       }
-    };
+    });
   }
 }

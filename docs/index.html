@@ -17,15 +17,39 @@
     </header>
 
     <button id="addBtn">Create</button>
+    <ul class="list-group" id="taskList"></ul>
 
-    <div id="myModal" class="modal">
+    <div id="ModalWindow" class="modal">
       <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Some text in the Modal..</p>
+        <div>
+          <input
+            type="text"
+            placeholder="New Task"
+            class="form-control"
+            id="addTask"
+          />
+        </div>
+        <div>
+          <textarea
+            type="text"
+            placeholder="New Desc"
+            class="form-control"
+            id="addDesc"
+          ></textarea>
+        </div>
+        <div>
+          <select id="priority">
+            <option value="high">High</option>
+            <option value="normal">Normal</option>
+            <option value="low">Low</option>
+          </select>
+        </div>
+        <div>
+          <button class="cancel">Cancel</button>
+          <button id="btnTask">Save</button>
+        </div>
       </div>
     </div>
-
-    <main id="todoList"></main>
     <footer>
       <p>Roman Kravets</p>
     </footer>

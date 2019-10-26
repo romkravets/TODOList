@@ -95,28 +95,162 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _scripts_toDoList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scripts/toDoList */ "./src/index/scripts/toDoList.js");
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.scss */ "./src/index/index.scss");
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.scss */ "./src/index/index.scss");
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_0__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-var todoDataItems = [{
-  title: "execute test task",
-  descriprion: "Ciklum internship",
-  isOpen: true,
-  priority: "high"
-}, {
-  title: "lern javascript",
-  descriprion: "",
-  isOpen: true,
-  priority: "low"
-}, {
-  title: "apply internship",
-  descriprion: "send email",
-  isOpen: false,
-  priority: "normal"
-}];
-new _scripts_toDoList__WEBPACK_IMPORTED_MODULE_0__["TodoList"](document.querySelector("#todoList"), todoDataItems);
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+//import { TodoList } from "./scripts/toDoList";
+// import { TogglerControl } from "./scripts/togglerControl";
+// import { Toggler } from "./scripts/toggler";
+
+var modal = document.querySelector("#ModalWindow");
+var btnToDo = document.querySelector("#addBtn");
+var span = document.getElementsByClassName("cancel")[0];
+btnToDo.addEventListener("click", function () {
+  modal.style.display = "block";
+});
+span.addEventListener("click", function () {
+  modal.style.display = "none";
+});
+window.addEventListener("click", function () {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+});
+
+var ToDoClass =
+/*#__PURE__*/
+function () {
+  function ToDoClass() {
+    _classCallCheck(this, ToDoClass);
+
+    this.tasks = JSON.parse(localStorage.getItem("TASKS"));
+
+    if (!this.tasks) {
+      this.tasks = [{
+        task: "execute test task",
+        desc: "Ciklum internship",
+        isComplete: false,
+        priority: "high"
+      }, {
+        task: "lern javascript",
+        desc: "",
+        isComplete: false,
+        priority: "low"
+      }, {
+        task: "apply internship",
+        desc: "send email",
+        isComplete: true,
+        priority: "normal"
+      }];
+    }
+
+    this.loadTasks();
+    this.addEventListeners();
+    this.btnAddEventListeners();
+    this.deleteTask();
+    console.log(this.tasks);
+  }
+
+  _createClass(ToDoClass, [{
+    key: "addEventListeners",
+    value: function addEventListeners() {
+      var _this = this;
+
+      // Add Task keypress
+      document.getElementById("addTask").addEventListener("keypress", function (event) {
+        if (event.keyCode === 13) {
+          _this.addTask(event.target.value);
+
+          event.target.value = "";
+        }
+      });
+    }
+  }, {
+    key: "btnAddEventListeners",
+    value: function btnAddEventListeners() {
+      var _this2 = this;
+
+      // Add Task click
+      document.getElementById("btnTask").addEventListener("click", function (event) {
+        var target = document.getElementById("addTask");
+        var targetDesc = document.getElementById("addDesc");
+        var priority = document.getElementById("priority");
+
+        _this2.addTask(target.value, targetDesc.value, priority.value);
+
+        modal.style.display = "none";
+        target.value = "";
+      });
+    }
+  }, {
+    key: "addTask",
+    value: function addTask(task, desc, priority) {
+      var newTask = {
+        task: task,
+        desc: desc,
+        isComplete: false,
+        priority: priority
+      };
+      var parentDiv = document.getElementById("addTask").parentElement;
+
+      if (task === "") {
+        parentDiv.classList.add("has-error");
+      } else {
+        parentDiv.classList.remove("has-error");
+        this.tasks.push(newTask);
+        this.loadTasks();
+      }
+    }
+  }, {
+    key: "toggleTaskStatus",
+    value: function toggleTaskStatus(index) {
+      this.tasks[index].isComplete = !this.tasks[index].isComplete;
+      this.loadTasks();
+    }
+  }, {
+    key: "deleteTask",
+    value: function deleteTask(event, taskIndex) {
+      var _this3 = this;
+
+      document.querySelector("#deleteTask").addEventListener("click", function (event) {
+        event.preventDefault();
+
+        _this3.tasks.splice(taskIndex, 1);
+
+        _this3.loadTasks();
+      });
+    }
+  }, {
+    key: "generateTaskHtml",
+    value: function generateTaskHtml(task, index) {
+      return "\n      <li class=\"list-group-item checkbox\">\n        <div class=\"row\">\n          <div class=\"col-md-1 col-xs-1 col-lg-1 col-sm-1 checkbox\">\n            <label><input id=\"toggleTaskStatus\" type=\"checkbox\" onchange=\"toDo.toggleTaskStatus(".concat(index, ")\" value=\"\" class=\"\" ").concat(task.isComplete ? "checked" : "", "></label>\n          </div>\n          <div class=\"col-md-10 col-xs-10 col-lg-10 col-sm-10 task-text ").concat(task.isComplete ? "complete" : "", "\">\n            ").concat(task.task, "\n          </div>\n          <div>\n          ").concat(task.desc, "\n          </div>\n          <div>\n          ").concat(task.priority, "\n          </div>\n          <div class=\"col-md-1 col-xs-1 col-lg-1 col-sm-1 delete-icon-area\">\n            <a class=\"\" href=\"/\" id=\"deleteTask\"><i class=\"delete-icon glyphicon glyphicon-trash\"></i>del</a>\n          </div>\n        </div>\n      </li>\n    ");
+    }
+  }, {
+    key: "loadTasks",
+    value: function loadTasks() {
+      var _this4 = this;
+
+      localStorage.setItem("TASKS", JSON.stringify(this.tasks));
+      var tasksHtml = this.tasks.reduce(function (html, task, index) {
+        return html += _this4.generateTaskHtml(task, index);
+      }, "");
+      document.getElementById("taskList").innerHTML = tasksHtml;
+      localStorage.clear();
+    }
+  }]);
+
+  return ToDoClass;
+}();
+
+var toDo;
+window.addEventListener("load", function () {
+  toDo = new ToDoClass();
+});
 
 /***/ }),
 
@@ -128,73 +262,6 @@ new _scripts_toDoList__WEBPACK_IMPORTED_MODULE_0__["TodoList"](document.querySel
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ "./src/index/scripts/toDoList.js":
-/*!***************************************!*\
-  !*** ./src/index/scripts/toDoList.js ***!
-  \***************************************/
-/*! exports provided: TodoList */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TodoList", function() { return TodoList; });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var TodoList =
-/*#__PURE__*/
-function () {
-  function TodoList(rootElement, todoData) {
-    _classCallCheck(this, TodoList);
-
-    this.rootElement = rootElement;
-    this.todoData = todoData;
-    this.todoItem;
-    this.render();
-  }
-
-  _createClass(TodoList, [{
-    key: "render",
-    value: function render() {
-      var _this = this;
-
-      this.todoData.forEach(function (todo) {
-        _this.todoItem = "\n       <div class=\"todo\">\n         <h3>".concat(todo.title, "</h3>\n         <p>").concat(todo.descriprion, "</p>\n         <div>\n            <div>\n            <span>").concat(todo.priority, "</span>\n            </div>\n         <select>\n            <option value=\"done\">done</option>\n            <option value=\"edit\">edit</option>\n            <option value=\"delete\">delete</option>\n         </select>\n         </div>\n       </div>");
-        _this.rootElement.innerHTML += _this.todoItem;
-      });
-      var modal = document.querySelector("#myModal");
-      console.log(modal); // Get the button that opens the modal
-
-      var btnToDo = document.querySelector("#addBtn"); // Get the <span> element that closes the modal
-
-      var span = document.getElementsByClassName("close")[0]; // When the user clicks on the button, open the modal
-
-      btnToDo.addEventListener("click", function () {
-        console.log("click");
-        modal.style.display = "block";
-      }); //When the user clicks on <span> (x), close the modal
-
-      span.onclick = function () {
-        modal.style.display = "none";
-      }; // When the user clicks anywhere outside of the modal, close it
-
-
-      window.onclick = function (event) {
-        if (event.target == modal) {
-          modal.style.display = "none";
-        }
-      };
-    }
-  }]);
-
-  return TodoList;
-}();
 
 /***/ }),
 
