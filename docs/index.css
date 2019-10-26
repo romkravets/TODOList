@@ -162,7 +162,8 @@ body {
     width: 50%;
     padding: 10px;
     text-align: center;
-    margin: 10px 0; }
+    margin: 10px 0;
+    cursor: pointer; }
   .modal__btn-block {
     margin-top: 45px;
     display: flex;
@@ -171,19 +172,36 @@ body {
     background: transparent;
     padding: 10px 20px;
     border: 1px solid #111111;
-    border-radius: 5px; }
+    border-radius: 5px;
+    cursor: pointer; }
 
 .form {
-  margin: 0 auto;
-  display: flex; }
+  display: flex;
+  margin: 0 auto; }
   .form__search {
-    width: 200px; }
+    width: 300px;
+    padding: 10px; }
+  .form__complite {
+    width: 100px;
+    cursor: pointer; }
+  .form__priority {
+    width: 100px;
+    cursor: pointer; }
+  .form__btn {
+    background: transparent;
+    padding: 10px 40px;
+    border: 1px solid #111111;
+    border-radius: 5px;
+    cursor: pointer; }
 
+input,
+select,
 button {
   outline: none; }
 
 textarea {
-  resize: none; }
+  resize: none;
+  outline: none; }
 
 
 /*# sourceMappingURL=index.css.map*/

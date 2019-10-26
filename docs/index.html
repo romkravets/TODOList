@@ -22,18 +22,18 @@
         <div class="row-flex">
           <form action="" class="form">
             <input class="form__search" placeholder="search by title" />
-            <select id="complite">
+            <select id="complite" class="form__complite">
               <option value="all">all</option>
               <option value="open">open</option>
               <option value="done">done</option>
             </select>
-            <select id="">
+            <select id="" class="form__priority">
               <option value="all">all</option>
               <option value="high">high</option>
               <option value="normal">hormal</option>
               <option value="low">how</option>
             </select>
-            <button id="addBtn">Create</button>
+            <button id="addBtn" class="form__btn">Create</button>
           </form>
           <ul class="list__items" id="taskList"></ul>
         </div>
@@ -45,7 +45,7 @@
       </div>
     </footer>
 
-    <div id="ModalWindow" class="modal">
+    <div id="modalToggle" class="modal">
       <form class="modal__content">
         <label for="addTask">
           Title:<input
@@ -72,7 +72,7 @@
           </select>
         </div>
         <div class="modal__btn-block">
-          <button class="cancel modal__btn">Cancel</button>
+          <button class="modal__cancel modal__btn">Cancel</button>
           <button id="btnTask" class="modal__btn">Save</button>
         </div>
       </form>

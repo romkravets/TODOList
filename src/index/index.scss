@@ -180,6 +180,7 @@ body {
     padding: 10px;
     text-align: center;
     margin: 10px 0;
+    cursor: pointer;
   }
   &__btn-block {
     margin-top: 45px;
@@ -191,21 +192,41 @@ body {
     padding: 10px 20px;
     border: 1px solid #111111;
     border-radius: 5px;
+    cursor: pointer;
   }
 }
 
 .form {
-  margin: 0 auto;
   display: flex;
+  margin: 0 auto;
   &__search {
-    width: 200px;
+    width: 300px;
+    padding: 10px;
+  }
+  &__complite {
+    width: 100px;
+    cursor: pointer;
+  }
+  &__priority {
+    width: 100px;
+    cursor: pointer;
+  }
+  &__btn {
+    background: transparent;
+    padding: 10px 40px;
+    border: 1px solid #111111;
+    border-radius: 5px;
+    cursor: pointer;
   }
 }
 
+input,
+select,
 button {
   outline: none;
 }
 
 textarea {
   resize: none;
+  outline: none;
 }

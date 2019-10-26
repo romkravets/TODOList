@@ -1,24 +1,5 @@
 import "./index.scss";
 
-const modal = document.querySelector("#ModalWindow");
-const btnToDo = document.querySelector("#addBtn");
-
-const span = document.getElementsByClassName("cancel")[0];
-
-btnToDo.addEventListener("click", () => {
-  modal.style.display = "block";
-});
-
-span.addEventListener("click", () => {
-  modal.style.display = "none";
-});
-
-window.addEventListener("click", () => {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-});
-
 class ToDoClass {
   constructor() {
     this.tasks = JSON.parse(localStorage.getItem("TASKS"));
@@ -49,6 +30,7 @@ class ToDoClass {
     this.addEventListeners();
     this.btnAddEventListeners();
     this.deleteTask();
+    this.modalToggle();
     console.log(this.tasks);
   }
 
@@ -131,11 +113,32 @@ class ToDoClass {
                   <option value="delete" id="deleteTask">delete</option>
                 </select>
               </div>
-             
           </div>
         </div>
       </li>
     `;
+  }
+
+  modalToggle() {
+    const modal = document.querySelector("#modalToggle");
+    document.querySelector("#addBtn").addEventListener("click", e => {
+      e.preventDefault();
+      console.log(modal);
+      console.log("click");
+      modal.style.display = "block";
+    });
+
+    document.querySelector(".modal__cancel").addEventListener("click", e => {
+      e.preventDefault();
+      modal.style.display = "none";
+    });
+
+    window.addEventListener("click", e => {
+      if (event.target == modal) {
+        e.preventDefault();
+        modal.style.display = "none";
+      }
+    });
   }
 
   loadTasks() {
