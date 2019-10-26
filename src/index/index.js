@@ -129,7 +129,7 @@ class ToDoClass {
           ${task.priority}
           </div>
           <div class="col-md-1 col-xs-1 col-lg-1 col-sm-1 delete-icon-area">
-            <a class="" href="/" id="deleteTask"><i class="delete-icon glyphicon glyphicon-trash"></i>del</a>
+            <button class="" id="deleteTask"><i class="delete-icon glyphicon glyphicon-trash"></i>del</button>
           </div>
         </div>
       </li>
