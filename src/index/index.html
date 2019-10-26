@@ -17,17 +17,24 @@
     </header>
 
     <button id="addBtn">Create</button>
+    <ul class="list-group" id="taskList"></ul>
 
     <div id="ModalWindow" class="modal">
       <div class="modal-content">
         <div>
-          <input class="todo-form__field" type="text" placeholder="title" />
+          <input
+            type="text"
+            placeholder="New Task"
+            class="form-control"
+            id="addTask"
+          />
         </div>
         <div>
           <textarea
-            id="addDescription"
             type="text"
-            placeholder="description"
+            placeholder="New Desc"
+            class="form-control"
+            id="addDesc"
           ></textarea>
         </div>
         <div>
@@ -39,59 +46,12 @@
         </div>
         <div>
           <button class="cancel">Cancel</button>
-          <button class="todo-form__btn">Save</button>
+          <button id="btnTask">Save</button>
         </div>
       </div>
     </div>
-
-    <main id="todoList"></main>
-    <!-- <button class="btn btn-primary" onclick="toDo.addTaskClick()">Add</button>
-    <div id="taskList"></div> -->
-
-    <div id="togglerFirst"></div>
-    <div id="togglerSecond"></div>
-
-    <div id="togglerController"></div>
     <footer>
       <p>Roman Kravets</p>
     </footer>
-
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="/">ToDo List</a>
-          </div>
-        </div>
-      </nav>
-    
-      <div class="container">
-    
-        <div class="content-area row">
-          <div class="col-md-2 col-xs-2 col-lg-2 col-sm-2"></div>
-    
-          <div class="col-md-8 col-xs-8 col-lg-8 col-sm-8">
-            <h2>ToDo List</h2>
-    
-            <div class="row input-area">
-              <div class="col-md-1"></div>
-              <div class="form-group col-md-9">
-                <input type="text" placeholder="New Task" class="form-control" id="addTask">
-              </div>
-              <div class="form-group col-md-1">
-                <button  id="btnTask" class="btn btn-primary">Add</button>
-              </div>
-              <div class="col-md-1"></div>
-            </div>
-    
-            <ul class="list-group" id="taskList">
-    
-            </ul>
-          </div>
-    
-          <div class="col-md-2 col-xs-2 col-lg-2 col-sm-2"></div>
-        </div>
-    
-      </div><!-- /.container -->
-    </div>
   </body>
 </html>

@@ -4,43 +4,60 @@
 
 import "./index.scss";
 
-// const modal = document.querySelector("#ModalWindow");
-// const btnToDo = document.querySelector("#addBtn");
+const modal = document.querySelector("#ModalWindow");
+const btnToDo = document.querySelector("#addBtn");
 
-// const span = document.getElementsByClassName("cancel")[0];
+const span = document.getElementsByClassName("cancel")[0];
 
-// btnToDo.addEventListener("click", () => {
-//   modal.style.display = "block";
-// });
+btnToDo.addEventListener("click", () => {
+  modal.style.display = "block";
+});
 
-// span.addEventListener("click", () => {
-//   modal.style.display = "none";
-// });
+span.addEventListener("click", () => {
+  modal.style.display = "none";
+});
 
-// window.addEventListener("click", () => {
-//   if (event.target == modal) {
-//     modal.style.display = "none";
-//   }
-// });
+window.addEventListener("click", () => {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+});
 
 class ToDoClass {
   constructor() {
     this.tasks = JSON.parse(localStorage.getItem("TASKS"));
     if (!this.tasks) {
       this.tasks = [
-        { task: "Go to Dentist", isComplete: false },
-        { task: "Do Gardening", isComplete: true },
-        { task: "Renew Library Account", isComplete: false }
+        {
+          task: "execute test task",
+          desc: "Ciklum internship",
+          isComplete: false,
+          priority: "high"
+        },
+        {
+          task: "lern javascript",
+          desc: "",
+          isComplete: false,
+          priority: "low"
+        },
+        {
+          task: "apply internship",
+          desc: "send email",
+          isComplete: true,
+          priority: "normal"
+        }
       ];
     }
 
     this.loadTasks();
     this.addEventListeners();
     this.btnAddEventListeners();
+    this.deleteTask();
+    console.log(this.tasks);
   }
 
   addEventListeners() {
-    // Add Task
+    // Add Task keypress
     document.getElementById("addTask").addEventListener("keypress", event => {
       if (event.keyCode === 13) {
         this.addTask(event.target.value);
@@ -50,24 +67,23 @@ class ToDoClass {
   }
 
   btnAddEventListeners() {
-    // Add Task
+    // Add Task click
     document.getElementById("btnTask").addEventListener("click", event => {
       let target = document.getElementById("addTask");
-      this.addTask(target.value);
+      let targetDesc = document.getElementById("addDesc");
+      let priority = document.getElementById("priority");
+      this.addTask(target.value, targetDesc.value, priority.value);
+      modal.style.display = "none";
       target.value = "";
     });
   }
 
-  addTaskClick() {
-    let target = document.getElementById("addTask");
-    this.addTask(target.value);
-    target.value = "";
-  }
-
-  addTask(task) {
+  addTask(task, desc, priority) {
     let newTask = {
       task,
-      isComplete: false
+      desc,
+      isComplete: false,
+      priority
     };
     let parentDiv = document.getElementById("addTask").parentElement;
     if (task === "") {
@@ -85,9 +101,11 @@ class ToDoClass {
   }
 
   deleteTask(event, taskIndex) {
-    event.preventDefault();
-    this.tasks.splice(taskIndex, 1);
-    this.loadTasks();
+    document.querySelector("#deleteTask").addEventListener("click", event => {
+      event.preventDefault();
+      this.tasks.splice(taskIndex, 1);
+      this.loadTasks();
+    });
   }
 
   generateTaskHtml(task, index) {
@@ -104,8 +122,14 @@ class ToDoClass {
           }">
             ${task.task}
           </div>
+          <div>
+          ${task.desc}
+          </div>
+          <div>
+          ${task.priority}
+          </div>
           <div class="col-md-1 col-xs-1 col-lg-1 col-sm-1 delete-icon-area">
-            <a class="" href="/" onClick="toDo.deleteTask(event, ${index})"><i id="deleteTask" data-id="${index}" class="delete-icon glyphicon glyphicon-trash"></i>del</a>
+            <a class="" href="/" id="deleteTask"><i class="delete-icon glyphicon glyphicon-trash"></i>del</a>
           </div>
         </div>
       </li>
@@ -119,6 +143,8 @@ class ToDoClass {
       ""
     );
     document.getElementById("taskList").innerHTML = tasksHtml;
+
+    localStorage.clear();
   }
 }
 
