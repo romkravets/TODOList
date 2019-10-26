@@ -111,7 +111,7 @@ class ToDoClass {
   generateTaskHtml(task, index) {
     return `
       <li class="list__item">
-        <label><input id="toggleTaskStatus" type="checkbox" onchange="toDo.toggleTaskStatus(${index})" value="" class="" ${
+        <label class="list__checkbox"><input id="toggleTaskStatus" type="checkbox" onchange="toDo.toggleTaskStatus(${index})" value="" class="" ${
       task.isComplete ? "checked" : ""
     }></label>
           <div class="list__title task-text ${

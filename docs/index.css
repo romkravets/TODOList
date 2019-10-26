@@ -35,18 +35,32 @@ body {
     text-decoration: none;
     cursor: pointer; }
 
+.header {
+  border-bottom: 1px solid #000000;
+  padding: 10px 10px;
+  margin-bottom: 50px; }
+
 .list__items {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
   list-style: none; }
 
 .list__item {
-  border: 1px solid #000000;
-  padding: 10px 10px;
-  display: flex;
-  flex-direction: column;
   width: 250px;
   height: 250px;
-  align-content: space-between; }
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  padding: 10px 10px;
+  margin-bottom: 20px;
+  border: 1px solid #000000; }
+
+.list__checkbox {
+  position: absolute;
+  top: -10px;
+  right: -10px; }
 
 .list__title {
   font-size: 20px;
@@ -54,9 +68,9 @@ body {
   padding: 10px 0; }
 
 .list__description {
+  height: 80px;
   font-size: 18px;
-  margin: 20px 0;
-  height: 80px; }
+  margin: 20px 0; }
 
 .list__bottom-section {
   display: flex;
@@ -64,38 +78,9 @@ body {
 
 .list__priority {
   font-size: 20px;
+  padding: 5px 5px;
   border: 1px solid #000000;
-  border-radius: 5px;
-  padding: 5px 5px; }
-
-.starter-template {
-  padding: 40px 15px;
-  text-align: center; }
-
-.content-area {
-  margin: 30px; }
-
-.input-area {
-  margin: 25px; }
-
-.task-text {
-  display: flex;
-  align-items: center;
-  height: 40px; }
-
-.hidden {
-  display: none; }
-
-.delete-icon-area {
-  display: flex;
-  align-items: center;
-  height: 40px; }
-
-.delete-icon {
-  color: red; }
-
-.complete {
-  text-decoration: line-through; }
+  border-radius: 5px; }
 
 
 /*# sourceMappingURL=index.css.map*/
