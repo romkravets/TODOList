@@ -110,26 +110,28 @@ class ToDoClass {
 
   generateTaskHtml(task, index) {
     return `
-      <li class="list-group-item checkbox">
-        <div class="row">
-          <div class="col-md-1 col-xs-1 col-lg-1 col-sm-1 checkbox">
-            <label><input id="toggleTaskStatus" type="checkbox" onchange="toDo.toggleTaskStatus(${index})" value="" class="" ${
+      <li class="list__item">
+        <label><input id="toggleTaskStatus" type="checkbox" onchange="toDo.toggleTaskStatus(${index})" value="" class="" ${
       task.isComplete ? "checked" : ""
     }></label>
-          </div>
-          <div class="col-md-10 col-xs-10 col-lg-10 col-sm-10 task-text ${
+          <div class="list__title task-text ${
             task.isComplete ? "complete" : ""
           }">
             ${task.task}
           </div>
-          <div>
+          <div class="list__description">
           ${task.desc}
           </div>
-          <div>
-          ${task.priority}
-          </div>
-          <div class="col-md-1 col-xs-1 col-lg-1 col-sm-1 delete-icon-area">
-            <button class="" id="deleteTask"><i class="delete-icon glyphicon glyphicon-trash"></i>del</button>
+          <div class="list__bottom-section">
+              <div class="list__priority">
+              ${task.priority}
+              </div>
+              <select class="list__option">
+                <option value="">...</option>
+                <option value="done">done</option>
+                <option value="edit">edit</option>
+                <option value="delete" id="deleteTask">delete</option>
+              </select>
           </div>
         </div>
       </li>
