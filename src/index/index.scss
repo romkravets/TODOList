@@ -129,8 +129,8 @@ body {
     display: flex;
     justify-content: space-between;
   }
-  &__option {
-  }
+  // &__option {
+  // }
   &__priority {
     font-size: 20px;
     padding: 5px 5px;
@@ -160,6 +160,27 @@ body {
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 20%;
+    height: 50%;
+  }
+  &__title {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+  }
+  &__desctiption {
+    width: 100%;
+    padding: 15px;
+  }
+  &__priority {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  &__select {
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+    margin: 10px 0;
   }
 }

@@ -286,7 +286,24 @@ body {
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; }
+    width: 20%;
+    height: 50%; }
+  .modal__title {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px; }
+  .modal__desctiption {
+    width: 100%;
+    padding: 15px; }
+  .modal__priority {
+    display: flex;
+    justify-content: center;
+    width: 100%; }
+  .modal__select {
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+    margin: 10px 0; }
 
 
 /*# sourceMappingURL=index.css.map*/

@@ -38,32 +38,33 @@
         </div>
       </div>
     </main>
-    <footer class="footer-content ">
+    <footer class="footer-content">
       <div class="container">
         <p>Roman Kravets</p>
       </div>
     </footer>
 
     <div id="ModalWindow" class="modal">
-      <div class="modal__content">
-        <div>
-          <input
+      <form class="modal__content">
+        <label for="addTask">
+          Title:<input
             type="text"
             placeholder="Title"
-            class="form-control"
+            class="modal__title"
             id="addTask"
           />
-        </div>
-        <div>
+        </label>
+        <label for="addDesc">
+          Desctiption:
           <textarea
             type="text"
             placeholder="Desctiption"
-            class="form-control"
+            class="modal__desctiption"
             id="addDesc"
           ></textarea>
-        </div>
-        <div>
-          <select id="priority">
+        </label>
+        <div class="modal__priority">
+          <select id="priority" class="modal__select">
             <option value="high">High</option>
             <option value="normal">Normal</option>
             <option value="low">Low</option>
@@ -73,7 +74,7 @@
           <button class="cancel">Cancel</button>
           <button id="btnTask">Save</button>
         </div>
-      </div>
+      </form>
     </div>
   <script type="text/javascript" src="index.js"></script></body>
 </html>

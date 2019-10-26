@@ -143,7 +143,7 @@ class ToDoClass {
     );
     document.getElementById("taskList").innerHTML = tasksHtml;
 
-    localStorage.clear();
+    //localStorage.clear();
   }
 }
 
