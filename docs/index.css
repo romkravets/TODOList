@@ -260,9 +260,12 @@ body {
   display: flex;
   justify-content: space-between; }
 
+.list__option {
+  padding: 5px; }
+
 .list__priority {
   font-size: 20px;
-  padding: 5px 5px;
+  padding: 10px 10px;
   border: 1px solid #000000;
   border-radius: 5px; }
 
@@ -287,7 +290,7 @@ body {
     padding: 20px;
     border: 1px solid #888;
     width: 20%;
-    height: 50%; }
+    height: 55%; }
   .modal__title {
     width: 100%;
     margin-bottom: 20px;
@@ -304,6 +307,15 @@ body {
     padding: 10px;
     text-align: center;
     margin: 10px 0; }
+  .modal__btn-block {
+    margin-top: 45px;
+    display: flex;
+    justify-content: space-between; }
+  .modal__btn {
+    background: transparent;
+    padding: 10px 20px;
+    border: 1px solid #111111;
+    border-radius: 5px; }
 
 
 /*# sourceMappingURL=index.css.map*/

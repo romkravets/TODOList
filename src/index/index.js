@@ -123,12 +123,15 @@ class ToDoClass {
               <div class="list__priority">
               ${task.priority}
               </div>
-              <select class="list__option">
-                <option value="">...</option>
-                <option value="done">done</option>
-                <option value="edit">edit</option>
-                <option value="delete" id="deleteTask">delete</option>
-              </select>
+              <div>
+                <select class="list__option">
+                  <option value="">...</option>
+                  <option value="done">done</option>
+                  <option value="edit">edit</option>
+                  <option value="delete" id="deleteTask">delete</option>
+                </select>
+              </div>
+             
           </div>
         </div>
       </li>
