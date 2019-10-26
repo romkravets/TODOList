@@ -103,9 +103,6 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-//import { TodoList } from "./scripts/toDoList";
-// import { TogglerControl } from "./scripts/togglerControl";
-// import { Toggler } from "./scripts/toggler";
 
 var modal = document.querySelector("#ModalWindow");
 var btnToDo = document.querySelector("#addBtn");
@@ -185,6 +182,7 @@ function () {
 
         modal.style.display = "none";
         target.value = "";
+        targetDesc.value = "";
       });
     }
   }, {

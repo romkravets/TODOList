@@ -1,7 +1,3 @@
-//import { TodoList } from "./scripts/toDoList";
-// import { TogglerControl } from "./scripts/togglerControl";
-// import { Toggler } from "./scripts/toggler";
-
 import "./index.scss";
 
 const modal = document.querySelector("#ModalWindow");
@@ -75,6 +71,7 @@ class ToDoClass {
       this.addTask(target.value, targetDesc.value, priority.value);
       modal.style.display = "none";
       target.value = "";
+      targetDesc.value = "";
     });
   }
 
