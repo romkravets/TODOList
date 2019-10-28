@@ -142,7 +142,7 @@ function () {
     this.modalToggle();
     this.searchToggle(); //this.toggleTaskStatus();
 
-    this.filtredTask(); //this.editToggle();
+    this.filtredTask(this.tasks); //this.editToggle();
 
     console.log(this.tasks);
   }
@@ -211,43 +211,46 @@ function () {
   }, {
     key: "filtredTask",
     value: function filtredTask(tasks) {
-      var _this3 = this;
-
-      var selectElement = document.querySelector("#complite");
-      var output = document.querySelector(".compliteOption");
-      selectElement.addEventListener("click", function (event) {
-        var outpuTarget = selectElement.options[selectElement.selectedIndex].value; // const inputVal = e.target.value.toLowerCase();
-        // const items = document.querySelectorAll("li");
-        // Array.from(items).forEach(function(item) {
-        //   const itemName = item.querySelector(".list__title").innerHTML;
-        //   if (itemName.toLowerCase().indexOf(inputVal) != -1) {
-        //     item.style.display = "flex";
-        //   } else {
-        //     item.style.display = "none";
-        //   }
-        // });
-
-        var items = document.querySelectorAll("li");
-        Array.from(items).forEach(function (item) {
-          //const itemName = item.querySelector(".list__ccheck-status").value;
-          // if (itemName) {
-          //   item.style.display = "flex";
-          // } else {
-          //   item.style.display = "none";
-          if (outpuTarget === "done") {
-            console.log(outpuTarget, "outpuTarget");
-            item.style.display = "none";
-          } else if (outpuTarget === "open") {
-            console.log(outpuTarget, "outpuTarget Open");
-            item.style.display = "none";
-          } else {
-            console.log(outpuTarget, "All");
-            item.style.display = "flex";
-          }
-        });
-
-        _this3.loadTasks();
+      var unfinishedTasks = tasks.filter(function (task) {
+        return task.isComplete === true;
+      }).map(function (task) {
+        return task.task;
       });
+      console.log(unfinishedTasks); // const selectElement = document.querySelector("#complite");
+      // const output = document.querySelector(".compliteOption");
+      // selectElement.addEventListener("click", event => {
+      //   const outpuTarget =
+      //     selectElement.options[selectElement.selectedIndex].value;
+      // const inputVal = e.target.value.toLowerCase();
+      // const items = document.querySelectorAll("li");
+      // Array.from(items).forEach(function(item) {
+      //   const itemName = item.querySelector(".list__title").innerHTML;
+      //   if (itemName.toLowerCase().indexOf(inputVal) != -1) {
+      //     item.style.display = "flex";
+      //   } else {
+      //     item.style.display = "none";
+      //   }
+      // });
+      // const items = document.querySelectorAll("li");
+      // Array.from(items).forEach(item => {
+      //const itemName = item.querySelector(".list__ccheck-status").value;
+      // if (itemName) {
+      //   item.style.display = "flex";
+      // } else {
+      //   item.style.display = "none";
+      //     if (outpuTarget === "done") {
+      //       console.log(outpuTarget, "outpuTarget");
+      //       item.style.display = "none";
+      //     } else if (outpuTarget === "open") {
+      //       console.log(outpuTarget, "outpuTarget Open");
+      //       item.style.display = "none";
+      //     } else {
+      //       console.log(outpuTarget, "All");
+      //       item.style.display = "flex";
+      //     }
+      //   });
+      //   this.loadTasks();
+      // });
     } // toggleTaskStatus(tasks) {
     //   const list = document.querySelector(".list__items");
     //   const index = tasks.findIndex(task => task.id === Number(itemKey));
@@ -273,14 +276,14 @@ function () {
   }, {
     key: "deleteTask",
     value: function deleteTask(event, taskIndex) {
-      var _this4 = this;
+      var _this3 = this;
 
       document.querySelector("#deleteTask").addEventListener("click", function (event) {
         event.preventDefault();
 
-        _this4.tasks.splice(taskIndex, 1);
+        _this3.tasks.splice(taskIndex, 1);
 
-        _this4.loadTasks();
+        _this3.loadTasks();
       });
     }
   }, {
@@ -361,13 +364,14 @@ function () {
   }, {
     key: "loadTasks",
     value: function loadTasks() {
-      var _this5 = this;
+      var _this4 = this;
 
       localStorage.setItem("TASKS", JSON.stringify(this.tasks));
       var tasksHtml = this.tasks.reduce(function (html, task, index) {
-        return html += _this5.generateTaskHtml(task, index);
+        return html += _this4.generateTaskHtml(task, index);
       }, "");
-      document.getElementById("taskList").innerHTML = tasksHtml; //localStorage.clear();
+      document.getElementById("taskList").innerHTML = tasksHtml;
+      localStorage.clear();
     }
   }]);
 
