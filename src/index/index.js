@@ -6,18 +6,21 @@ class ToDoClass {
     if (!this.tasks) {
       this.tasks = [
         {
+          id: Date.now(),
           task: "execute test task",
           desc: "Ciklum internship",
           isComplete: false,
           priority: "high"
         },
         {
+          id: Date.now(),
           task: "lern javascript",
           desc: "",
           isComplete: false,
           priority: "low"
         },
         {
+          id: Date.now(),
           task: "apply internship",
           desc: "send email",
           isComplete: true,
@@ -32,6 +35,8 @@ class ToDoClass {
     this.deleteTask();
     this.modalToggle();
     this.searchToggle();
+    //this.toggleTaskStatus();
+    this.filtredTask();
     //this.editToggle();
     console.log(this.tasks);
   }
@@ -60,8 +65,9 @@ class ToDoClass {
     });
   }
 
-  addTask(task, desc, priority) {
+  addTask(id, task, desc, priority) {
     let newTask = {
+      id: Date.now(),
       task,
       desc,
       isComplete: false,
@@ -77,10 +83,77 @@ class ToDoClass {
     }
   }
 
-  toggleTaskStatus(index) {
-    this.tasks[index].isComplete = !this.tasks[index].isComplete;
-    this.loadTasks();
+  // toggleTaskStatus(index) {
+
+  // this.tasks[index].isComplete = !this.tasks[index].isComplete;
+  // this.loadTasks();
+  // }
+
+  // toggleTaskStatus(index) {
+  //   this.tasks[index].isComplete = !this.tasks[index].isComplete;
+  //   this.loadTasks();
+  // }
+
+  filtredTask(tasks) {
+    const selectElement = document.querySelector("#complite");
+    const output = document.querySelector(".compliteOption");
+    selectElement.addEventListener("click", event => {
+      const outpuTarget =
+        selectElement.options[selectElement.selectedIndex].value;
+      // const inputVal = e.target.value.toLowerCase();
+      // const items = document.querySelectorAll("li");
+      // Array.from(items).forEach(function(item) {
+      //   const itemName = item.querySelector(".list__title").innerHTML;
+      //   if (itemName.toLowerCase().indexOf(inputVal) != -1) {
+      //     item.style.display = "flex";
+      //   } else {
+      //     item.style.display = "none";
+      //   }
+      // });
+      const items = document.querySelectorAll("li");
+      Array.from(items).forEach(item => {
+        //const itemName = item.querySelector(".list__ccheck-status").value;
+        // if (itemName) {
+        //   item.style.display = "flex";
+        // } else {
+        //   item.style.display = "none";
+        if (outpuTarget === "done") {
+          console.log(outpuTarget, "outpuTarget");
+          item.style.display = "none";
+        } else if (outpuTarget === "open") {
+          console.log(outpuTarget, "outpuTarget Open");
+          item.style.display = "none";
+        } else {
+          console.log(outpuTarget, "All");
+          item.style.display = "flex";
+        }
+      });
+      this.loadTasks();
+    });
   }
+
+  // toggleTaskStatus(tasks) {
+  //   const list = document.querySelector(".list__items");
+  //   const index = tasks.findIndex(task => task.id === Number(itemKey));
+  //   const item = document.querySelector(`[data-key='${itemKey}']`);
+  //   list.addEventListener("click", event => {
+  //     if (event.target.classList.contains("list__checkbox")) {
+  //       const itemKey = event.target.parentElement.dataset.key;
+  //       console.log(itemKey);
+  //       //toggleDone(itemKey);
+  //     }
+  //   });
+  //   tasks[index].isComplete = !tasks[index].isComplete;
+
+  //   if (tasks[itemKey].isComplete) {
+  //     item.classList.add("done");
+  //     console.log("done");
+  //   } else {
+  //     item.classList.remove("done");
+  //     console.log("none");
+  //   }
+  //   this.loadTasks();
+  // }
 
   deleteTask(event, taskIndex) {
     document.querySelector("#deleteTask").addEventListener("click", event => {
@@ -92,8 +165,11 @@ class ToDoClass {
 
   generateTaskHtml(task, index) {
     return `
-      <li class="list__item">
-        <label class="list__checkbox"><input id="toggleTaskStatus" type="checkbox" onchange="toDo.toggleTaskStatus(${index})" value="" class="" ${
+      <li class="list__item" data-key="${task.id}">
+        <label class="list__checkbox" for="${task.id}">
+        <input class="list__ccheck-status" id="${
+          task.id
+        }" type="checkbox"  value="" class="" ${
       task.isComplete ? "checked" : ""
     }></label>
           <div class="list__title task-text ${
@@ -108,7 +184,6 @@ class ToDoClass {
             <div class="list__priority">
             ${task.priority}
             </div>
-
             <div class="dropdown">
               <button class="dropbtn">...</button>
               <div class="dropdown-content">
