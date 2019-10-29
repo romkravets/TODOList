@@ -268,5 +268,8 @@ textarea {
   resize: none;
   outline: none; }
 
+.is-hidden {
+  display: none; }
+
 
 /*# sourceMappingURL=index.css.map*/
