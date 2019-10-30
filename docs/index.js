@@ -133,18 +133,36 @@ function () {
     }
 
     this.loadTasks();
+    this.render();
     this.addEventListeners();
     this.btnAddEventListeners();
-    this.deleteTask();
     this.modalToggle();
     this.searchToggle();
-    this.filtredPriority(); // this.toggleTaskStatus(this.tasks);
-    //this.toggleTaskStatus();
-
+    this.filtredPriority();
+    this.deleteTask();
+    this.toggleTaskStatus();
     this.filtredTask(this.tasks);
+    this.itemIndex;
+    this.doneTaskBtn = document.querySelectorAll("#doneTask");
+    this.checkedTask = document.querySelectorAll("#list__item input");
   }
 
   _createClass(ToDoClass, [{
+    key: "render",
+    value: function render() {
+      for (var i = 0; i < this.tasks.length; i++) {
+        this.itemIndex = this.tasks[i];
+      } // for (let i = 0; i < this.checkedTask.length; i++) {
+      //   console.log(this.checedTask);
+      //   if (this.checkedTask.checked) {
+      //     console.log("checedTask.checked");
+      //   } else {
+      //     console.log("none");
+      //   }
+      // }
+
+    }
+  }, {
     key: "addEventListeners",
     value: function addEventListeners() {
       var _this = this;
@@ -195,15 +213,21 @@ function () {
         this.tasks.push(newTask);
         this.loadTasks();
       }
-    } // toggleTaskStatus(index) {
-    //   this.tasks[index].isComplete = !this.tasks[index].isComplete;
-    //   this.loadTasks();
-    // }
+    }
+  }, {
+    key: "toggleTaskStatus",
+    value: function toggleTaskStatus() {
+      var _this3 = this;
 
+      var checkedTasks = document.querySelector(".list__check-status");
+      checkedTasks.addEventListener("change", function (event) {
+        _this3.itemIndex.isComplete = !_this3.itemIndex.isComplete; //this.loadTasks();
+      });
+    }
   }, {
     key: "filtredTask",
     value: function filtredTask() {
-      var _this3 = this;
+      var _this4 = this;
 
       var selectElement = document.querySelector("#complite");
       var output = document.querySelector(".compliteOption");
@@ -211,18 +235,18 @@ function () {
         var outpuTarget = selectElement.options[selectElement.selectedIndex].value;
 
         if (outpuTarget == "done") {
-          var tasksDone = _this3.tasks.filter(function (task) {
+          _this4.tasks.filter(function (task) {
             return task.isComplete === true;
           }).map(function (task) {
-            return document.getElementById("taskList").innerHTML = _this3.generateTaskHtml(task);
+            return document.getElementById("taskList").innerHTML = _this4.generateTaskHtml(task);
           });
         } else if (outpuTarget == "all") {
-          _this3.loadTasks();
+          _this4.loadTasks();
         } else if (outpuTarget == "open") {
-          var tasksOpen = _this3.tasks.filter(function (task) {
+          _this4.tasks.filter(function (task) {
             return task.isComplete === false;
           }).map(function (task) {
-            return document.getElementById("taskList").innerHTML = _this3.generateTaskHtml(task);
+            return document.getElementById("taskList").innerHTML = _this4.generateTaskHtml(task);
           });
         }
       });
@@ -230,7 +254,7 @@ function () {
   }, {
     key: "filtredPriority",
     value: function filtredPriority() {
-      var _this4 = this;
+      var _this5 = this;
 
       var selectElement = document.querySelector("#prioritySelect");
       var output = document.querySelector(".compliteOption");
@@ -238,45 +262,57 @@ function () {
         var outpuTarget = selectElement.options[selectElement.selectedIndex].value;
 
         if (outpuTarget == "all") {
-          _this4.loadTasks();
+          _this5.loadTasks();
         } else if (outpuTarget == "high") {
-          var tasksHigh = _this4.tasks.filter(function (task) {
+          _this5.tasks.filter(function (task) {
             return task.priority === "high";
           }).map(function (task) {
-            return document.getElementById("taskList").innerHTML = _this4.generateTaskHtml(task);
+            return document.getElementById("taskList").innerHTML = _this5.generateTaskHtml(task);
           });
         } else if (outpuTarget == "normal") {
-          var tasksNormal = _this4.tasks.filter(function (task) {
+          _this5.tasks.filter(function (task) {
             return task.priority === "normal";
           }).map(function (task) {
-            return document.getElementById("taskList").innerHTML = _this4.generateTaskHtml(task);
+            return document.getElementById("taskList").innerHTML = _this5.generateTaskHtml(task);
           });
         } else if (outpuTarget == "low") {
-          var _tasksHigh = _this4.tasks.filter(function (task) {
+          _this5.tasks.filter(function (task) {
             return task.priority === "low";
           }).map(function (task) {
-            return document.getElementById("taskList").innerHTML = _this4.generateTaskHtml(task);
+            return document.getElementById("taskList").innerHTML = _this5.generateTaskHtml(task);
           });
         }
       });
-    }
+    } // loadEventListeners() {
+    //   taskList.addEventListener("click", e => {
+    //     if (e.target.parentElement.classList.contains("select-filter")) {
+    //       e.target.parentElement.parentElement.remove();
+    //       console.log(taskList, "click");
+    //     }
+    //   });
+    // }
+
   }, {
     key: "deleteTask",
-    value: function deleteTask(event, taskIndex) {
-      var _this5 = this;
+    value: function deleteTask(event, itemIndex) {
+      var _this6 = this;
 
-      document.querySelector("#deleteTask").addEventListener("click", function (event) {
-        event.preventDefault();
+      var deleteTask = document.querySelectorAll("#deleteTask");
 
-        _this5.tasks.splice(taskIndex, 1);
+      for (var i = 0; i < deleteTask.length; i++) {
+        deleteTask[i].addEventListener("click", function (event) {
+          console.log(deleteTask, "click");
 
-        _this5.loadTasks();
-      });
+          _this6.tasks.splice(_this6.itemIndex, 1);
+
+          _this6.loadTasks();
+        });
+      }
     }
   }, {
     key: "generateTaskHtml",
     value: function generateTaskHtml(task, index) {
-      return "\n        <li class=\"list__item\">\n          <label class=\"list__checkbox\" for=\"".concat(task.id, "\">\n            <input class=\"list__ccheck-status\" id=\"").concat(task.id, "\" type=\"checkbox\"  value=\"\" class=\"\" ").concat(task.isComplete ? "checked" : "", "></label>\n          <div class=\"list__title task-text ").concat(task.isComplete ? "complete" : "", "\">\n            ").concat(task.task, "\n          </div>\n          <div class=\"list__description\">\n          ").concat(task.desc, "\n          </div>\n          <div class=\"list__bottom-section\">\n            <div class=\"list__priority\">\n            ").concat(task.priority, "\n            </div>\n            <div class=\"dropdown\">\n              <button class=\"dropbtn\">...</button>\n              <div class=\"dropdown-content\">\n                <a href=\"#\" value=\"done\">done</a>\n                <a href=\"#\" value=\"edit\" class=\"edit\">edit</a>\n                <a href=\"#\" value=\"delete\" id=\"deleteTask\">delete</a>\n              </div>\n            </div>\n          </div>\n        </div>\n      </li>\n    ");
+      return "\n        <li class=\"list__item\">\n          <label class=\"list__checkbox\" for=\"".concat(task.id, "\">\n            <input class=\"list__check-status\" id=\"").concat(task.id, "\" type=\"checkbox\"  value=\"\" class=\"\" ").concat(task.isComplete ? "checked" : "", "></label>\n          <div class=\"list__title task-text ").concat(task.isComplete ? "complete" : "", "\">\n            ").concat(task.task, "\n          </div>\n          <div class=\"list__description\">\n          ").concat(task.desc, "\n          </div>\n          <div class=\"list__bottom-section\">\n            <div class=\"list__priority\">\n            ").concat(task.priority, "\n            </div>\n            <div class=\"dropdown \">\n              <button class=\"dropbtn\">...</button>\n              <div class=\"dropdown-content select-filter\">\n                <a href=\"#\" value=\"done  id=\"doneTask\"\">done</a>\n                <a href=\"#\" value=\"edit\" class=\"edit\">edit</a>\n                <a href=\"#\" value=\"delete\" id=\"deleteTask\">delete</a>\n              </div>\n            </div>\n          </div>\n        </div>\n      </li>\n    ");
     }
   }, {
     key: "modalToggle",
@@ -284,8 +320,6 @@ function () {
       var modal = document.querySelector("#modalToggle");
       document.querySelector("#addBtn").addEventListener("click", function (e) {
         e.preventDefault();
-        console.log(modal);
-        console.log("click");
         modal.style.display = "block";
       });
       document.querySelector(".modal__cancel").addEventListener("click", function (e) {
@@ -319,13 +353,14 @@ function () {
   }, {
     key: "loadTasks",
     value: function loadTasks() {
-      var _this6 = this;
+      var _this7 = this;
 
       localStorage.setItem("TASKS", JSON.stringify(this.tasks));
       var tasksHtml = this.tasks.reduce(function (html, task, index) {
-        return html += _this6.generateTaskHtml(task, index);
+        return html += _this7.generateTaskHtml(task, index);
       }, "");
-      document.getElementById("taskList").innerHTML = tasksHtml; //localStorage.clear();
+      document.getElementById("taskList").innerHTML = tasksHtml;
+      localStorage.clear();
     }
   }]);
 

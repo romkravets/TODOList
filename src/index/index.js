@@ -1,5 +1,4 @@
 import "./index.scss";
-
 class ToDoClass {
   constructor() {
     this.tasks = JSON.parse(localStorage.getItem("TASKS"));
@@ -27,15 +26,32 @@ class ToDoClass {
     }
 
     this.loadTasks();
+    this.render();
     this.addEventListeners();
     this.btnAddEventListeners();
-    this.deleteTask();
     this.modalToggle();
     this.searchToggle();
     this.filtredPriority();
-    // this.toggleTaskStatus(this.tasks);
-    //this.toggleTaskStatus();
+    this.deleteTask();
+    this.toggleTaskStatus();
     this.filtredTask(this.tasks);
+    this.itemIndex;
+    this.doneTaskBtn = document.querySelectorAll("#doneTask");
+    this.checkedTask = document.querySelectorAll("#list__item input");
+  }
+
+  render() {
+    for (let i = 0; i < this.tasks.length; i++) {
+      this.itemIndex = this.tasks[i];
+    }
+    // for (let i = 0; i < this.checkedTask.length; i++) {
+    //   console.log(this.checedTask);
+    //   if (this.checkedTask.checked) {
+    //     console.log("checedTask.checked");
+    //   } else {
+    //     console.log("none");
+    //   }
+    // }
   }
 
   addEventListeners() {
@@ -79,10 +95,13 @@ class ToDoClass {
     }
   }
 
-  // toggleTaskStatus(index) {
-  //   this.tasks[index].isComplete = !this.tasks[index].isComplete;
-  //   this.loadTasks();
-  // }
+  toggleTaskStatus() {
+    const checkedTasks = document.querySelector(".list__check-status");
+    checkedTasks.addEventListener("change", event => {
+      this.itemIndex.isComplete = !this.itemIndex.isComplete;
+      //this.loadTasks();
+    });
+  }
 
   filtredTask() {
     const selectElement = document.querySelector("#complite");
@@ -92,7 +111,7 @@ class ToDoClass {
         selectElement.options[selectElement.selectedIndex].value;
 
       if (outpuTarget == "done") {
-        const tasksDone = this.tasks
+        this.tasks
           .filter(task => task.isComplete === true)
           .map(
             task =>
@@ -103,7 +122,7 @@ class ToDoClass {
       } else if (outpuTarget == "all") {
         this.loadTasks();
       } else if (outpuTarget == "open") {
-        const tasksOpen = this.tasks
+        this.tasks
           .filter(task => task.isComplete === false)
           .map(
             task =>
@@ -124,7 +143,7 @@ class ToDoClass {
       if (outpuTarget == "all") {
         this.loadTasks();
       } else if (outpuTarget == "high") {
-        const tasksHigh = this.tasks
+        this.tasks
           .filter(task => task.priority === "high")
           .map(
             task =>
@@ -133,7 +152,7 @@ class ToDoClass {
               ).innerHTML = this.generateTaskHtml(task))
           );
       } else if (outpuTarget == "normal") {
-        const tasksNormal = this.tasks
+        this.tasks
           .filter(task => task.priority === "normal")
           .map(
             task =>
@@ -142,7 +161,7 @@ class ToDoClass {
               ).innerHTML = this.generateTaskHtml(task))
           );
       } else if (outpuTarget == "low") {
-        const tasksHigh = this.tasks
+        this.tasks
           .filter(task => task.priority === "low")
           .map(
             task =>
@@ -154,19 +173,31 @@ class ToDoClass {
     });
   }
 
-  deleteTask(event, taskIndex) {
-    document.querySelector("#deleteTask").addEventListener("click", event => {
-      event.preventDefault();
-      this.tasks.splice(taskIndex, 1);
-      this.loadTasks();
-    });
+  // loadEventListeners() {
+  //   taskList.addEventListener("click", e => {
+  //     if (e.target.parentElement.classList.contains("select-filter")) {
+  //       e.target.parentElement.parentElement.remove();
+  //       console.log(taskList, "click");
+  //     }
+  //   });
+  // }
+
+  deleteTask(event, itemIndex) {
+    const deleteTask = document.querySelectorAll("#deleteTask");
+    for (let i = 0; i < deleteTask.length; i++) {
+      deleteTask[i].addEventListener("click", event => {
+        console.log(deleteTask, "click");
+        this.tasks.splice(this.itemIndex, 1);
+        this.loadTasks();
+      });
+    }
   }
 
   generateTaskHtml(task, index) {
     return `
         <li class="list__item">
           <label class="list__checkbox" for="${task.id}">
-            <input class="list__ccheck-status" id="${
+            <input class="list__check-status" id="${
               task.id
             }" type="checkbox"  value="" class="" ${
       task.isComplete ? "checked" : ""
@@ -183,10 +214,10 @@ class ToDoClass {
             <div class="list__priority">
             ${task.priority}
             </div>
-            <div class="dropdown">
+            <div class="dropdown ">
               <button class="dropbtn">...</button>
-              <div class="dropdown-content">
-                <a href="#" value="done">done</a>
+              <div class="dropdown-content select-filter">
+                <a href="#" value="done  id="doneTask"">done</a>
                 <a href="#" value="edit" class="edit">edit</a>
                 <a href="#" value="delete" id="deleteTask">delete</a>
               </div>
@@ -201,8 +232,6 @@ class ToDoClass {
     const modal = document.querySelector("#modalToggle");
     document.querySelector("#addBtn").addEventListener("click", e => {
       e.preventDefault();
-      console.log(modal);
-      console.log("click");
       modal.style.display = "block";
     });
 
@@ -242,7 +271,7 @@ class ToDoClass {
     );
     document.getElementById("taskList").innerHTML = tasksHtml;
 
-    //localStorage.clear();
+    localStorage.clear();
   }
 }
 
