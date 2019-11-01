@@ -60,19 +60,25 @@ export class ToDoList {
       const outpuTarget =
         selectElement.options[selectElement.selectedIndex].value;
 
-      if (outpuTarget == "done") {
-        var listAllTasks = document.querySelectorAll("#list li");
-
-        for (var i = 0; i < listAllTasks.length; i++) {
-          let t = listAllTasks[i].classList.contains("complete");
-          console.log(t);
-          if (t) {
-            listAllTasks[i].style.display = "flex";
-          } else {
-            listAllTasks[i].style.display = "none";
+      if (outpuTarget === "done") {
+        const listAllTasks = document.querySelectorAll("#list li");
+        Array.from(listAllTasks).forEach(list => {
+          const completeTitle = list.querySelector(".list__title");
+          const complete = completeTitle.classList.contains("complete");
+          if (complete) {
+            list.style.display = "flex";
+          } else if (!complete) {
+            list.style.display = "none";
           }
-        }
+        });
       }
+      // else if (outpuTarget === "open") {
+      //   if (!complete) {
+      //     list.style.display = "flex";
+      //   } else if (complete) {
+      //     list.style.display = "none";
+      //   }
+      // }
     });
 
     list.addEventListener("click", function(e) {
@@ -85,20 +91,29 @@ export class ToDoList {
         }, 600);
       } else if (e.target.classList.contains("mark")) {
         const actionSpan = e.target.parentElement.previousElementSibling;
-        const liItems = document.querySelectorAll(".list__item");
-        let checkboxElement = actionSpan.querySelector("input[type=checkbox]");
+        const checkboxElement = actionSpan.querySelector(
+          "input[type=checkbox]"
+        );
         console.log(checkboxElement);
         actionSpan
           .querySelector("input[type=text]")
           .classList.toggle("complete");
         checkboxElement.checked = !checkboxElement.checked;
-        // for (var i = 0; i < liItems.length; i++) {
+        //const listIems = document.querySelector(".list__item");
+        //listIems.classList.toggle("checked");
+        // Array.from(listIems).forEach(list => {
         //   if (checkboxElement.checked) {
-        //     liItems[i].classList.add("list__item_check");
-        //   } else if (!checkboxElement.checked) {
-        //     liItems[i].classList.remove("list__item_check");
+        //     list.classList.add("checked");
         //   }
+        // else {
+        //   list.classList.toggle("unchecked");
         // }
+        //   if (checkboxElement.checked) {
+        //     liItems[i].classList.add("checked");
+        //   } else if (!checkboxElement.checked) {
+        //     liItems[i].classList.toggle("checked");
+        //   }
+        // });
       } else if (e.target.classList.contains("edit")) {
         const span = e.target.parentElement;
         const li = span.parentElement;
@@ -151,7 +166,7 @@ export class ToDoList {
       insertedData = `<li class="list__item">
               <span class="name">
                   <label class="list__checkbox">
-                      <input class="list__check-status" type="checkbox"  value="" class="">
+                      <input class="list__check-status" type="checkbox" class="">
                   </label>
                   <input class="list__title task-text" type="text" value="${insertedData}" readonly="readonly">
                   <input class="list__description" type="text" value="${insertedDescription}" readonly="readonly">

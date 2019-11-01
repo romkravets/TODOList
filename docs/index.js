@@ -248,20 +248,26 @@ function () {
       selectElement.addEventListener("click", function (event) {
         var outpuTarget = selectElement.options[selectElement.selectedIndex].value;
 
-        if (outpuTarget == "done") {
+        if (outpuTarget === "done") {
           var listAllTasks = document.querySelectorAll("#list li");
+          Array.from(listAllTasks).forEach(function (list) {
+            var completeTitle = list.querySelector(".list__title");
+            var complete = completeTitle.classList.contains("complete");
 
-          for (var i = 0; i < listAllTasks.length; i++) {
-            var t = listAllTasks[i].classList.contains("complete");
-            console.log(t);
-
-            if (t) {
-              listAllTasks[i].style.display = "flex";
-            } else {
-              listAllTasks[i].style.display = "none";
+            if (complete) {
+              list.style.display = "flex";
+            } else if (!complete) {
+              list.style.display = "none";
             }
-          }
-        }
+          });
+        } // else if (outpuTarget === "open") {
+        //   if (!complete) {
+        //     list.style.display = "flex";
+        //   } else if (complete) {
+        //     list.style.display = "none";
+        //   }
+        // }
+
       });
       list.addEventListener("click", function (e) {
         if (e.target.classList.contains("delete")) {
@@ -273,17 +279,24 @@ function () {
           }, 600);
         } else if (e.target.classList.contains("mark")) {
           var actionSpan = e.target.parentElement.previousElementSibling;
-          var liItems = document.querySelectorAll(".list__item");
           var checkboxElement = actionSpan.querySelector("input[type=checkbox]");
           console.log(checkboxElement);
           actionSpan.querySelector("input[type=text]").classList.toggle("complete");
-          checkboxElement.checked = !checkboxElement.checked; // for (var i = 0; i < liItems.length; i++) {
+          checkboxElement.checked = !checkboxElement.checked; //const listIems = document.querySelector(".list__item");
+          //listIems.classList.toggle("checked");
+          // Array.from(listIems).forEach(list => {
           //   if (checkboxElement.checked) {
-          //     liItems[i].classList.add("list__item_check");
-          //   } else if (!checkboxElement.checked) {
-          //     liItems[i].classList.remove("list__item_check");
+          //     list.classList.add("checked");
           //   }
+          // else {
+          //   list.classList.toggle("unchecked");
           // }
+          //   if (checkboxElement.checked) {
+          //     liItems[i].classList.add("checked");
+          //   } else if (!checkboxElement.checked) {
+          //     liItems[i].classList.toggle("checked");
+          //   }
+          // });
         } else if (e.target.classList.contains("edit")) {
           var _span = e.target.parentElement;
           var _li = _span.parentElement;
@@ -338,7 +351,7 @@ function () {
         var insertedData = formAdd.querySelector("#addTask").value;
         var insertedDescription = formAdd.querySelector("#addDesc").value;
         var insertedPriority = formAdd.querySelector("#priority").value;
-        insertedData = "<li class=\"list__item\">\n              <span class=\"name\">\n                  <label class=\"list__checkbox\">\n                      <input class=\"list__check-status\" type=\"checkbox\"  value=\"\" class=\"\">\n                  </label>\n                  <input class=\"list__title task-text\" type=\"text\" value=\"".concat(insertedData, "\" readonly=\"readonly\">\n                  <input class=\"list__description\" type=\"text\" value=\"").concat(insertedDescription, "\" readonly=\"readonly\">\n                  <input class=\"list__priority\" type=\"text\" value=\"").concat(insertedPriority, "\" readonly=\"readonly\">\n              </span>\n              <div class=\"action\">\n                  <button class=\"mark\">mark</button>\n                  <button class=\"edit\">edit</button>\n                  <button class=\"delete\">delete</button>\n              </div>\n              </li>");
+        insertedData = "<li class=\"list__item\">\n              <span class=\"name\">\n                  <label class=\"list__checkbox\">\n                      <input class=\"list__check-status\" type=\"checkbox\" class=\"\">\n                  </label>\n                  <input class=\"list__title task-text\" type=\"text\" value=\"".concat(insertedData, "\" readonly=\"readonly\">\n                  <input class=\"list__description\" type=\"text\" value=\"").concat(insertedDescription, "\" readonly=\"readonly\">\n                  <input class=\"list__priority\" type=\"text\" value=\"").concat(insertedPriority, "\" readonly=\"readonly\">\n              </span>\n              <div class=\"action\">\n                  <button class=\"mark\">mark</button>\n                  <button class=\"edit\">edit</button>\n                  <button class=\"delete\">delete</button>\n              </div>\n              </li>");
         list.insertAdjacentHTML("afterbegin", insertedData);
         formAdd.querySelector("input[type=text]").value = "";
         formAdd.querySelector("#addDesc").value = "";
