@@ -305,6 +305,8 @@ function () {
 
           _this6.tasks.splice(_this6.itemIndex, 1);
 
+          window.location.reload();
+
           _this6.loadTasks();
         });
       }
@@ -359,8 +361,7 @@ function () {
       var tasksHtml = this.tasks.reduce(function (html, task, index) {
         return html += _this7.generateTaskHtml(task, index);
       }, "");
-      document.getElementById("taskList").innerHTML = tasksHtml;
-      localStorage.clear();
+      document.getElementById("taskList").innerHTML = tasksHtml; //localStorage.clear();
     }
   }]);
 
@@ -370,7 +371,113 @@ function () {
 var toDo;
 window.addEventListener("load", function () {
   toDo = new ToDoClass();
+}); //ul list
+
+var list = document.getElementById("list"); // Use javascript Bubbling and capturing tech
+// once user click on UL or UL childern
+//predict if it move up, move down, delete, update or mark
+
+list.addEventListener("click", function (e) {
+  //delete
+  if (e.target.classList.contains("delete")) {
+    var span = e.target.parentElement;
+    var li = span.parentElement;
+    li.classList.add("hide"); //use time out to give css animation time
+
+    setTimeout(function () {
+      list.removeChild(li);
+    }, 600); //mark as complete
+  } else if (e.target.classList.contains("mark")) {
+    var actionSpan = e.target.parentElement.previousElementSibling;
+    actionSpan.querySelector("input[type=text]").classList.toggle("complete"); //move up
+  } else if (e.target.classList.contains("up")) {
+    var _span = e.target.parentElement;
+    var _li = _span.parentElement;
+    var prevLi = _li.previousElementSibling;
+
+    if (prevLi) {
+      _li.classList.add("move-pulsate");
+
+      list.insertBefore(_li, prevLi); //use time out to give css animation time
+
+      setTimeout(function () {
+        _li.classList.remove("move-pulsate");
+      }, 800);
+    } //move down
+
+  } else if (e.target.classList.contains("down")) {
+    var _span2 = e.target.parentElement;
+    var _li2 = _span2.parentElement;
+    var nextLi = _li2.nextElementSibling;
+
+    if (nextLi) {
+      _li2.classList.toggle("move-pulsate");
+
+      list.insertBefore(nextLi, _li2); //use time out to give css animation time
+
+      setTimeout(function () {
+        _li2.classList.remove("move-pulsate");
+      }, 800);
+    } //edit
+
+  } else if (e.target.classList.contains("edit")) {
+    //if user click on edit
+    //add to input text the border line
+    //allow update input text by change readOnly
+    var _span3 = e.target.parentElement;
+    var _li3 = _span3.parentElement;
+
+    var inputText = _li3.querySelector(".name input[type=text]");
+
+    var saveInfo = _li3.querySelector(".name .saveInfo");
+
+    inputText.classList.add("input-border");
+    inputText.style.cursor = "text";
+    saveInfo.style.display = "block";
+    inputText.readOnly = false; //save by press enter btn
+
+    inputText.addEventListener("keypress", function (e) {
+      var key = e.which || e.keyCode;
+
+      if (key === 13) {
+        // 13 is enter
+        inputText.readOnly = true;
+        inputText.style.cursor = "context-menu";
+        inputText.classList.remove("input-border");
+        saveInfo.style.display = "none";
+      }
+    });
+  }
+}); //Add new item
+
+var formAdd = document.forms["form-add"];
+formAdd.addEventListener("submit", function (e) {
+  e.preventDefault();
+  var insertedData = formAdd.querySelector("input[type=text]").value;
+  insertedData = "<li>\n     <span class=\"name\">\n         <input type=\"text\" value=\"".concat(insertedData, "\" readonly=\"readonly\"> \n         <p class=\"saveInfo\">Press \"Enter\" to save</p>\n     </span>\n     <span class=\"action\">\n         <button class=\"mark fas fas fa-check\"></button>\n         <button class=\"up fas fa-angle-up\"></button>\n         <button class=\"down fas fa-angle-down\"></button>\n         <button class=\"edit fas fa-pencil-alt\"></button>\n         <button class=\"delete fas fa-trash-alt\"></button>\n      </span>\n     </li>");
+  list.insertAdjacentHTML("afterbegin", insertedData);
+  formAdd.querySelector("input[type=text]").value = "";
+}); //Search thorw item
+
+var searchForm = document.forms["searchForm"].querySelector("input[type=text]"); //once key up
+
+searchForm.addEventListener("keyup", function (e) {
+  //convert input to lower case
+  var inputVal = e.target.value.toLowerCase(); // collect ul items and convert to array
+
+  var items = list.getElementsByTagName("li");
+  Array.from(items).forEach(function (item) {
+    //go to --> li>span>input text
+    var itemName = item.firstElementChild.querySelector("input").value; //compare input with ul items(li)
+
+    if (itemName.toLowerCase().indexOf(inputVal) != -1) {
+      item.style.display = "flex";
+    } else {
+      item.style.display = "none";
+    }
+  });
 });
+create - account - title - ru;
 
 /***/ }),
 
