@@ -95,228 +95,57 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.scss */ "./src/index/index.scss");
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _scripts_toDoList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scripts/toDoList */ "./src/index/scripts/toDoList.js");
+/* harmony import */ var _scripts_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./scripts/modal */ "./src/index/scripts/modal.js");
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index.scss */ "./src/index/index.scss");
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+new _scripts_toDoList__WEBPACK_IMPORTED_MODULE_0__["ToDoList"]();
+new _scripts_modal__WEBPACK_IMPORTED_MODULE_1__["ModalWindow"]();
+
+/***/ }),
+
+/***/ "./src/index/index.scss":
+/*!******************************!*\
+  !*** ./src/index/index.scss ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./src/index/scripts/modal.js":
+/*!************************************!*\
+  !*** ./src/index/scripts/modal.js ***!
+  \************************************/
+/*! exports provided: ModalWindow */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModalWindow", function() { return ModalWindow; });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-
-
-var ToDoClass =
+var ModalWindow =
 /*#__PURE__*/
 function () {
-  function ToDoClass() {
-    _classCallCheck(this, ToDoClass);
+  function ModalWindow() {
+    _classCallCheck(this, ModalWindow);
 
-    this.tasks = JSON.parse(localStorage.getItem("TASKS"));
-
-    if (!this.tasks) {
-      this.tasks = [{
-        task: "execute test task",
-        desc: "Ciklum internship",
-        isComplete: false,
-        priority: "high"
-      }, {
-        task: "lern javascript",
-        desc: "",
-        isComplete: false,
-        priority: "low"
-      }, {
-        task: "apply internship",
-        desc: "send email",
-        isComplete: true,
-        priority: "normal"
-      }];
-    }
-
-    this.loadTasks();
     this.render();
-    this.addEventListeners();
-    this.btnAddEventListeners();
-    this.modalToggle();
-    this.searchToggle();
-    this.filtredPriority();
-    this.deleteTask();
-    this.toggleTaskStatus();
-    this.filtredTask(this.tasks);
-    this.itemIndex;
-    this.doneTaskBtn = document.querySelectorAll("#doneTask");
-    this.checkedTask = document.querySelectorAll("#list__item input");
   }
 
-  _createClass(ToDoClass, [{
+  _createClass(ModalWindow, [{
     key: "render",
     value: function render() {
-      for (var i = 0; i < this.tasks.length; i++) {
-        this.itemIndex = this.tasks[i];
-      } // for (let i = 0; i < this.checkedTask.length; i++) {
-      //   console.log(this.checedTask);
-      //   if (this.checkedTask.checked) {
-      //     console.log("checedTask.checked");
-      //   } else {
-      //     console.log("none");
-      //   }
-      // }
-
-    }
-  }, {
-    key: "addEventListeners",
-    value: function addEventListeners() {
-      var _this = this;
-
-      // Add Task keypress
-      document.getElementById("addTask").addEventListener("keypress", function (event) {
-        if (event.keyCode === 13) {
-          _this.addTask(event.target.value);
-
-          event.target.value = "";
-        }
-      });
-    }
-  }, {
-    key: "btnAddEventListeners",
-    value: function btnAddEventListeners() {
-      var _this2 = this;
-
-      // Add Task click
-      document.getElementById("btnTask").addEventListener("click", function (event) {
-        var target = document.getElementById("addTask");
-        var targetDesc = document.getElementById("addDesc");
-        var priority = document.getElementById("priority");
-        var modal = document.querySelector("#modalToggle");
-
-        _this2.addTask(target.value, targetDesc.value, priority.value);
-
-        modal.style.display = "none";
-        target.value = "";
-        targetDesc.value = "";
-      });
-    }
-  }, {
-    key: "addTask",
-    value: function addTask(task, desc, priority) {
-      var newTask = {
-        task: task,
-        desc: desc,
-        isComplete: false,
-        priority: priority
-      };
-      var parentDiv = document.getElementById("addTask").parentElement;
-
-      if (task === "") {
-        parentDiv.classList.add("has-error");
-      } else {
-        parentDiv.classList.remove("has-error");
-        this.tasks.push(newTask);
-        this.loadTasks();
-      }
-    }
-  }, {
-    key: "toggleTaskStatus",
-    value: function toggleTaskStatus() {
-      var _this3 = this;
-
-      var checkedTasks = document.querySelector(".list__check-status");
-      checkedTasks.addEventListener("change", function (event) {
-        _this3.itemIndex.isComplete = !_this3.itemIndex.isComplete; //this.loadTasks();
-      });
-    }
-  }, {
-    key: "filtredTask",
-    value: function filtredTask() {
-      var _this4 = this;
-
-      var selectElement = document.querySelector("#complite");
-      var output = document.querySelector(".compliteOption");
-      selectElement.addEventListener("click", function (event) {
-        var outpuTarget = selectElement.options[selectElement.selectedIndex].value;
-
-        if (outpuTarget == "done") {
-          _this4.tasks.filter(function (task) {
-            return task.isComplete === true;
-          }).map(function (task) {
-            return document.getElementById("taskList").innerHTML = _this4.generateTaskHtml(task);
-          });
-        } else if (outpuTarget == "all") {
-          _this4.loadTasks();
-        } else if (outpuTarget == "open") {
-          _this4.tasks.filter(function (task) {
-            return task.isComplete === false;
-          }).map(function (task) {
-            return document.getElementById("taskList").innerHTML = _this4.generateTaskHtml(task);
-          });
-        }
-      });
-    }
-  }, {
-    key: "filtredPriority",
-    value: function filtredPriority() {
-      var _this5 = this;
-
-      var selectElement = document.querySelector("#prioritySelect");
-      var output = document.querySelector(".compliteOption");
-      selectElement.addEventListener("click", function (event) {
-        var outpuTarget = selectElement.options[selectElement.selectedIndex].value;
-
-        if (outpuTarget == "all") {
-          _this5.loadTasks();
-        } else if (outpuTarget == "high") {
-          _this5.tasks.filter(function (task) {
-            return task.priority === "high";
-          }).map(function (task) {
-            return document.getElementById("taskList").innerHTML = _this5.generateTaskHtml(task);
-          });
-        } else if (outpuTarget == "normal") {
-          _this5.tasks.filter(function (task) {
-            return task.priority === "normal";
-          }).map(function (task) {
-            return document.getElementById("taskList").innerHTML = _this5.generateTaskHtml(task);
-          });
-        } else if (outpuTarget == "low") {
-          _this5.tasks.filter(function (task) {
-            return task.priority === "low";
-          }).map(function (task) {
-            return document.getElementById("taskList").innerHTML = _this5.generateTaskHtml(task);
-          });
-        }
-      });
-    } // loadEventListeners() {
-    //   taskList.addEventListener("click", e => {
-    //     if (e.target.parentElement.classList.contains("select-filter")) {
-    //       e.target.parentElement.parentElement.remove();
-    //       console.log(taskList, "click");
-    //     }
-    //   });
-    // }
-
-  }, {
-    key: "deleteTask",
-    value: function deleteTask(event, itemIndex) {
-      var _this6 = this;
-
-      var deleteTask = document.querySelectorAll("#deleteTask");
-
-      for (var i = 0; i < deleteTask.length; i++) {
-        deleteTask[i].addEventListener("click", function (event) {
-          console.log(deleteTask, "click");
-
-          _this6.tasks.splice(_this6.itemIndex, 1);
-
-          _this6.loadTasks();
-        });
-      }
-    }
-  }, {
-    key: "generateTaskHtml",
-    value: function generateTaskHtml(task, index) {
-      return "\n        <li class=\"list__item\">\n          <label class=\"list__checkbox\" for=\"".concat(task.id, "\">\n            <input class=\"list__check-status\" id=\"").concat(task.id, "\" type=\"checkbox\"  value=\"\" class=\"\" ").concat(task.isComplete ? "checked" : "", "></label>\n          <div class=\"list__title task-text ").concat(task.isComplete ? "complete" : "", "\">\n            ").concat(task.task, "\n          </div>\n          <div class=\"list__description\">\n          ").concat(task.desc, "\n          </div>\n          <div class=\"list__bottom-section\">\n            <div class=\"list__priority\">\n            ").concat(task.priority, "\n            </div>\n            <div class=\"dropdown \">\n              <button class=\"dropbtn\">...</button>\n              <div class=\"dropdown-content select-filter\">\n                <a href=\"#\" value=\"done  id=\"doneTask\"\">done</a>\n                <a href=\"#\" value=\"edit\" class=\"edit\">edit</a>\n                <a href=\"#\" value=\"delete\" id=\"deleteTask\">delete</a>\n              </div>\n            </div>\n          </div>\n        </div>\n      </li>\n    ");
-    }
-  }, {
-    key: "modalToggle",
-    value: function modalToggle() {
       var modal = document.querySelector("#modalToggle");
       document.querySelector("#addBtn").addEventListener("click", function (e) {
         e.preventDefault();
@@ -333,14 +162,157 @@ function () {
         }
       });
     }
-  }, {
-    key: "searchToggle",
-    value: function searchToggle() {
-      document.querySelector(".form__search").addEventListener("keyup", function (e) {
+  }]);
+
+  return ModalWindow;
+}();
+
+/***/ }),
+
+/***/ "./src/index/scripts/toDoList.js":
+/*!***************************************!*\
+  !*** ./src/index/scripts/toDoList.js ***!
+  \***************************************/
+/*! exports provided: ToDoList */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ToDoList", function() { return ToDoList; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var list = document.getElementById("list");
+var modal = document.querySelector("#modalToggle");
+var ToDoList =
+/*#__PURE__*/
+function () {
+  function ToDoList() {
+    _classCallCheck(this, ToDoList);
+
+    this.render();
+  }
+
+  _createClass(ToDoList, [{
+    key: "render",
+    value: function render() {
+      var selectElement = document.querySelector("#complite");
+      selectElement.addEventListener("click", function (e) {
+        var outpuTarget = selectElement.options[selectElement.selectedIndex].value;
+        var listAllTasks = document.querySelectorAll("#list li");
+        Array.from(listAllTasks).forEach(function (list) {
+          if (outpuTarget === "done") {
+            var completeTitle = list.querySelector(".list__title");
+            var complete = completeTitle.classList.contains("complete");
+
+            if (complete) {
+              list.style.display = "flex";
+            } else if (!complete) {
+              list.style.display = "none";
+            }
+          } else if (outpuTarget === "open") {
+            var _completeTitle = list.querySelector(".list__title");
+
+            var _complete = _completeTitle.classList.contains("complete");
+
+            if (!_complete) {
+              list.style.display = "flex";
+            } else if (_complete) {
+              list.style.display = "none";
+            }
+          } else if (outpuTarget === "all") {
+            var _completeTitle2 = list.querySelector(".list__title");
+
+            var _complete2 = _completeTitle2.classList.contains("complete");
+
+            if (_complete2) {
+              list.style.display = "flex";
+            }
+          }
+        });
+      });
+      list.addEventListener("click", function (e) {
+        if (e.target.classList.contains("delete")) {
+          var span = e.target.parentElement;
+          var li = span.parentElement;
+          li.classList.add("hide");
+          setTimeout(function () {
+            list.removeChild(li);
+          }, 600);
+        } else if (e.target.classList.contains("mark")) {
+          var actionSpan = e.target.parentElement.previousElementSibling;
+          var checkboxElement = actionSpan.querySelector("input[type=checkbox]");
+          actionSpan.querySelector("input[type=text]").classList.toggle("complete");
+          checkboxElement.checked = !checkboxElement.checked;
+        } else if (e.target.classList.contains("edit")) {
+          var _span = e.target.parentElement;
+          var _li = _span.parentElement;
+
+          var inputText = _li.querySelector(".name .list__title");
+
+          var inputDescription = _li.querySelector(".name .list__description");
+
+          var inputPriority = _li.querySelector(".name .list__priority");
+
+          inputText.classList.toggle("input-border");
+          inputDescription.classList.toggle("input-border");
+          inputPriority.classList.toggle("input-border");
+          inputText.style.cursor = "text";
+          inputDescription.style.cursor = "text";
+          inputPriority.style.cursor = "text";
+          inputText.readOnly = false;
+          inputDescription.readOnly = false;
+          inputPriority.readOnly = false;
+          inputText.addEventListener("keypress", function (e) {
+            var key = e.which || e.keyCode;
+
+            if (key === 13) {
+              inputText.readOnly = true;
+              inputText.style.cursor = "context-menu";
+              inputText.classList.remove("input-border");
+            }
+          });
+          inputDescription.addEventListener("keypress", function (e) {
+            var key = e.which || e.keyCode;
+
+            if (key === 13) {
+              inputDescription.readOnly = true;
+              inputDescription.style.cursor = "context-menu";
+              inputDescription.classList.remove("input-border");
+            }
+          });
+          inputPriority.addEventListener("keypress", function (e) {
+            var key = e.which || e.keyCode;
+
+            if (key === 13) {
+              inputPriority.readOnly = true;
+              inputPriority.style.cursor = "context-menu";
+              inputPriority.classList.remove("input-border");
+            }
+          });
+        }
+      });
+      var formAdd = document.forms["form-add"];
+      formAdd.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var insertedData = formAdd.querySelector("#addTask").value;
+        var insertedDescription = formAdd.querySelector("#addDesc").value;
+        var insertedPriority = formAdd.querySelector("#priority").value;
+        insertedData = "<li class=\"list__item\">\n              <span class=\"name\">\n                  <label class=\"list__checkbox\">\n                      <input class=\"list__check-status\" type=\"checkbox\" class=\"\">\n                  </label>\n                  <input class=\"list__title task-text\" type=\"text\" value=\"".concat(insertedData, "\" readonly=\"readonly\">\n                  <input class=\"list__description\" type=\"text\" value=\"").concat(insertedDescription, "\" readonly=\"readonly\">\n                  <input class=\"list__priority\" type=\"text\" value=\"").concat(insertedPriority, "\" readonly=\"readonly\">\n              </span>\n              <div class=\"action\">\n                  <button class=\"mark\">mark</button>\n                  <button class=\"edit\">edit</button>\n                  <button class=\"delete\">delete</button>\n              </div>\n              </li>");
+        list.insertAdjacentHTML("afterbegin", insertedData);
+        formAdd.querySelector("input[type=text]").value = "";
+        formAdd.querySelector("#addDesc").value = "";
+        modal.style.display = "none";
+      });
+      var searchForm = document.querySelector(".form__search");
+      searchForm.addEventListener("keyup", function (e) {
         var inputVal = e.target.value.toLowerCase();
-        var items = document.querySelectorAll("li");
+        var items = list.getElementsByTagName("li");
         Array.from(items).forEach(function (item) {
-          var itemName = item.querySelector(".list__title").innerHTML;
+          var itemName = item.querySelector(".list__title").value;
 
           if (itemName.toLowerCase().indexOf(inputVal) != -1) {
             item.style.display = "flex";
@@ -350,38 +322,10 @@ function () {
         });
       });
     }
-  }, {
-    key: "loadTasks",
-    value: function loadTasks() {
-      var _this7 = this;
-
-      localStorage.setItem("TASKS", JSON.stringify(this.tasks));
-      var tasksHtml = this.tasks.reduce(function (html, task, index) {
-        return html += _this7.generateTaskHtml(task, index);
-      }, "");
-      document.getElementById("taskList").innerHTML = tasksHtml;
-      localStorage.clear();
-    }
   }]);
 
-  return ToDoClass;
+  return ToDoList;
 }();
-
-var toDo;
-window.addEventListener("load", function () {
-  toDo = new ToDoClass();
-});
-
-/***/ }),
-
-/***/ "./src/index/index.scss":
-/*!******************************!*\
-  !*** ./src/index/index.scss ***!
-  \******************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 

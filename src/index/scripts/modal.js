@@ -1,38 +1,26 @@
-// export class TodoList {
-//   constructor(rootElement, todoData) {
-//     this.rootElement = rootElement;
-//     this.todoData = todoData;
-//     this.todoItem;
-//     this.render();
-//   }
+export class ModalWindow {
+  constructor() {
+    this.render();
+  }
 
-//   render() {}
-// }
+  render() {
+    const modal = document.querySelector("#modalToggle");
 
-// Get the modal
-let modal = document.querySelector("#myModal");
-console.log(modal);
+    document.querySelector("#addBtn").addEventListener("click", e => {
+      e.preventDefault();
+      modal.style.display = "block";
+    });
 
-// Get the button that opens the modal
-var btnToDo = document.querySelector("#addBtn");
+    document.querySelector(".modal__cancel").addEventListener("click", e => {
+      e.preventDefault();
+      modal.style.display = "none";
+    });
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on the button, open the modal
-btnToDo.addEventListener("click", () => {
-  console.log("click");
-  modal.style.display = "block";
-});
-
-// When the user clicks on <span> (x), close the modal
-// span.onclick = function() {
-//   modal.style.display = "none";
-// };
-
-// // When the user clicks anywhere outside of the modal, close it
-// window.onclick = function(event) {
-//   if (event.target == modal) {
-//     modal.style.display = "none";
-//   }
-// };
+    window.addEventListener("click", e => {
+      if (event.target == modal) {
+        e.preventDefault();
+        modal.style.display = "none";
+      }
+    });
+  }
+}
