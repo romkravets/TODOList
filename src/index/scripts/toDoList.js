@@ -1,74 +1,180 @@
-export class TodoList {
-  constructor(rootElement, todoData) {
-    this.rootElement = rootElement;
-    this.todoData = todoData;
-    this.todoItem;
-    this.todoItemD;
-    this.data = {};
-    //this.saveBtn = document.querySelector(".savelist");
+const list = document.getElementById("list");
+const modal = document.querySelector("#modalToggle");
+
+export class ToDoList {
+  constructor() {
+    //this.filterDone();
+    //this.filtredTask();
     this.render();
   }
 
+  // filterDone() {
+  //   var listAllTasks = document.querySelectorAll("#list li");
+  //   for (var i = 0; i < listAllTasks.length; i++) {
+  //     if (listAllTasks[i].classList.contains("checked")) {
+  //       listAllTasks[i].classList.remove("is-hidden");
+  //     } else {
+  //       listAllTasks[i].classList.add("is-hidden");
+  //     }
+  //   }
+  // }
+
+  // filtredTask() {
+  //   const selectElement = document.querySelector("#complite");
+  //   const output = document.querySelector(".compliteOption");
+  //   selectElement.addEventListener("click", event => {
+  //     const outpuTarget =
+  //       selectElement.options[selectElement.selectedIndex].value;
+
+  //     if (outpuTarget == "done") {
+  //       console.log(outpuTarget);
+  //       // this.tasks
+  //       //   .filter(task => task.isComplete === true)
+  //       //   .map(
+  //       //     task =>
+  //       //       (document.getElementById(
+  //       //         "taskList"
+  //       //       ).innerHTML = this.generateTaskHtml(task))
+  //       //   );
+  //     } else if (outpuTarget == "all") {
+  //       console.log(outpuTarget);
+  //       //this.loadTasks();
+  //     } else if (outpuTarget == "open") {
+  //       console.log(outpuTarget);
+  //       // this.tasks
+  //       //   .filter(task => task.isComplete === false)
+  //       //   .map(
+  //       //     task =>
+  //       //       (document.getElementById(
+  //       //         "taskList"
+  //       //       ).innerHTML = this.generateTaskHtml(task))
+  //       //   );
+  //     }
+  //   });
+  //}
+
   render() {
-    // this.todoData.map((todo, index) => {
-    //   this.todoItem = `
-    //    <div class="todo">
-    //      <h3>${todo.title}</h3>
-    //      <p>${todo.descriprion}</p>
-    //      <div>
-    //         <div>
-    //         <span>${todo.priority}</span>
-    //         </div>
-    //      <select>
-    //         <option value="done">done</option>
-    //         <option value="edit">edit</option>
-    //         <option value="delete">delete</option>
-    //      </select>
-    //      </div>
-    //    </div>`;
-    //   // this.todoItem.key = index + 1;
-    //   this.rootElement.innerHTML += this.todoItem;
-    // });
-    // const addList = document.querySelector(".savelist");
-    // addList.addEventListener("click", e => {
-    //   e.preventDefault();
-    //   //let indentification = 0;
-    //   let titleData = document.querySelector("#addTitle").value;
-    //   let descriptionData = document.querySelector("textarea").value;
-    //   let priorityData = document.querySelector("select").value;
-    //   console.log(titleData);
-    //   console.log(descriptionData);
-    //   console.log(priorityData);
-    //   console.log(this.todoData);
-    //   //let id = indentification++;
-    //   // let title = titleData;
-    //   // let description = descriptionData;
-    //   // let priority = priorityData;
-    //   //this.data = { title, description, priority };
-    //   this.data = this.todoData.push({
-    //     title: titleData,
-    //     description: descriptionData,
-    //     priority: priorityData
-    //   });
-    //   this.rootElement.innerHTML += this.todoItem;
-    //   modal.style.display = "none";
-    //var dataString = JSON.stringify(this.data);
-    //this.rootElement.innerHTML += newArr;
-    // });
-    //this.saveBtn.addEventListener("click", () => this.addToDo());
-    // const modal = document.querySelector("#ModalWindow");
-    // const btnToDo = document.querySelector("#addBtn");
-    // const span = document.getElementsByClassName("cancel")[0];
-    // btnToDo.addEventListener("click", () => {
-    //   modal.style.display = "block";
-    // });
-    // span.addEventListener("click", () => {
-    //   modal.style.display = "none";
-    // });
-    // window.addEventListener("click", () => {
-    //   if (event.target == modal) {
-    //     modal.style.display = "none";
-    //   }
-    // });
+    const selectElement = document.querySelector("#complite");
+    const completedTasks = document.querySelector("#doneTask");
+    selectElement.addEventListener("click", event => {
+      const outpuTarget =
+        selectElement.options[selectElement.selectedIndex].value;
+
+      if (outpuTarget == "done") {
+        var listAllTasks = document.querySelectorAll(
+          "#list li .list__check-status"
+        );
+
+        for (var i = 0; i < listAllTasks.length; i++) {
+          // var t = listAllTasks[i].classList.contains("complete");
+          // console.log(t);
+          if (listAllTasks[i].classList.contains("complete")) {
+            listAllTasks[i].style.display = "flex";
+            //listAllTasks[i].classList.remove("is-hidden");
+          }
+        }
+      }
+    });
+
+    list.addEventListener("click", function(e) {
+      if (e.target.classList.contains("delete")) {
+        const span = e.target.parentElement;
+        const li = span.parentElement;
+        li.classList.add("hide");
+        setTimeout(() => {
+          list.removeChild(li);
+        }, 600);
+      } else if (e.target.classList.contains("mark")) {
+        const actionSpan = e.target.parentElement.previousElementSibling;
+        let checkboxElement = actionSpan.querySelector("input[type=checkbox]");
+        console.log(checkboxElement);
+        actionSpan
+          .querySelector("input[type=text]")
+          .classList.toggle("complete");
+        checkboxElement.checked = !checkboxElement.checked;
+      } else if (e.target.classList.contains("edit")) {
+        const span = e.target.parentElement;
+        const li = span.parentElement;
+        const inputText = li.querySelector(".name .list__title");
+        const inputDescription = li.querySelector(".name .list__description");
+        const inputPriority = li.querySelector(".name .list__priority");
+        inputText.classList.toggle("input-border");
+        inputDescription.classList.toggle("input-border");
+        inputPriority.classList.toggle("input-border");
+        inputText.style.cursor = "text";
+        inputDescription.style.cursor = "text";
+        inputPriority.style.cursor = "text";
+        inputText.readOnly = false;
+        inputDescription.readOnly = false;
+        inputPriority.readOnly = false;
+
+        inputText.addEventListener("keypress", function(e) {
+          var key = e.which || e.keyCode;
+          if (key === 13) {
+            inputText.readOnly = true;
+            inputText.style.cursor = "context-menu";
+            inputText.classList.remove("input-border");
+          }
+        });
+        inputDescription.addEventListener("keypress", function(e) {
+          var key = e.which || e.keyCode;
+          if (key === 13) {
+            inputDescription.readOnly = true;
+            inputDescription.style.cursor = "context-menu";
+            inputDescription.classList.remove("input-border");
+          }
+        });
+        inputPriority.addEventListener("keypress", function(e) {
+          var key = e.which || e.keyCode;
+          if (key === 13) {
+            inputPriority.readOnly = true;
+            inputPriority.style.cursor = "context-menu";
+            inputPriority.classList.remove("input-border");
+          }
+        });
+      }
+    });
+
+    const formAdd = document.forms["form-add"];
+    formAdd.addEventListener("submit", function(e) {
+      e.preventDefault();
+      let insertedData = formAdd.querySelector("#addTask").value;
+      let insertedDescription = formAdd.querySelector("#addDesc").value;
+      let insertedPriority = formAdd.querySelector("#priority").value;
+      insertedData = `<li class="list__item">
+              <span class="name">
+                  <label class="list__checkbox">
+                      <input class="list__check-status" type="checkbox"  value="" class="">
+                  </label>
+                  <input class="list__title task-text" type="text" value="${insertedData}" readonly="readonly">
+                  <input class="list__description" type="text" value="${insertedDescription}" readonly="readonly">
+                  <input class="list__priority" type="text" value="${insertedPriority}" readonly="readonly">
+              </span>
+              <div class="action">
+                  <button class="mark">mark</button>
+                  <button class="edit">edit</button>
+                  <button class="delete">delete</button>
+              </div>
+              </li>`;
+      list.insertAdjacentHTML("afterbegin", insertedData);
+      formAdd.querySelector("input[type=text]").value = "";
+      formAdd.querySelector("#addDesc").value = "";
+      modal.style.display = "none";
+    });
+
+    const searchForm = document.querySelector(".form__search");
+
+    searchForm.addEventListener("keyup", function(e) {
+      const inputVal = e.target.value.toLowerCase();
+      const items = list.getElementsByTagName("li");
+      Array.from(items).forEach(function(item) {
+        const itemName = item.querySelector(".list__title").value;
+        if (itemName.toLowerCase().indexOf(inputVal) != -1) {
+          item.style.display = "flex";
+        } else {
+          item.style.display = "none";
+        }
+      });
+    });
   }
 }

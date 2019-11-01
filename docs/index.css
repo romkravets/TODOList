@@ -251,13 +251,10 @@ textarea {
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.2);
   overflow: hidden; }
 
-#header {
-  background: #eee;
-  padding: 30px;
+.form-header {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  border-bottom: 1px dashed lightgray; }
+  align-items: center; }
 
 #main {
   padding: 20px; }
@@ -380,6 +377,9 @@ textarea {
     opacity: 0.7; }
   100% {
     opacity: 0.4; } }
+
+.is-hidden {
+  display: none; }
 
 
 /*# sourceMappingURL=index.css.map*/

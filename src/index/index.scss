@@ -289,13 +289,10 @@ textarea {
   overflow: hidden;
 }
 
-#header {
-  background: #eee;
-  padding: 30px;
+.form-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-bottom: 1px dashed lightgray;
 }
 
 #main {
@@ -445,4 +442,8 @@ textarea {
   100% {
     opacity: 0.4;
   }
+}
+
+.is-hidden {
+  display: none;
 }

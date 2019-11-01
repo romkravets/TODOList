@@ -95,29 +95,171 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.scss */ "./src/index/index.scss");
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _scripts_toDoList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scripts/toDoList */ "./src/index/scripts/toDoList.js");
+/* harmony import */ var _scripts_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./scripts/modal */ "./src/index/scripts/modal.js");
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index.scss */ "./src/index/index.scss");
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+new _scripts_toDoList__WEBPACK_IMPORTED_MODULE_0__["ToDoList"]();
+new _scripts_modal__WEBPACK_IMPORTED_MODULE_1__["ModalWindow"]();
+
+/***/ }),
+
+/***/ "./src/index/index.scss":
+/*!******************************!*\
+  !*** ./src/index/index.scss ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./src/index/scripts/modal.js":
+/*!************************************!*\
+  !*** ./src/index/scripts/modal.js ***!
+  \************************************/
+/*! exports provided: ModalWindow */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModalWindow", function() { return ModalWindow; });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-
-var list = document.getElementById("list");
-
-var ToDoClass =
+var ModalWindow =
 /*#__PURE__*/
 function () {
-  function ToDoClass() {
-    _classCallCheck(this, ToDoClass);
+  function ModalWindow() {
+    _classCallCheck(this, ModalWindow);
 
     this.render();
   }
 
-  _createClass(ToDoClass, [{
+  _createClass(ModalWindow, [{
     key: "render",
     value: function render() {
+      var modal = document.querySelector("#modalToggle");
+      document.querySelector("#addBtn").addEventListener("click", function (e) {
+        e.preventDefault();
+        modal.style.display = "block";
+      });
+      document.querySelector(".modal__cancel").addEventListener("click", function (e) {
+        e.preventDefault();
+        modal.style.display = "none";
+      });
+      window.addEventListener("click", function (e) {
+        if (event.target == modal) {
+          e.preventDefault();
+          modal.style.display = "none";
+        }
+      });
+    }
+  }]);
+
+  return ModalWindow;
+}();
+
+/***/ }),
+
+/***/ "./src/index/scripts/toDoList.js":
+/*!***************************************!*\
+  !*** ./src/index/scripts/toDoList.js ***!
+  \***************************************/
+/*! exports provided: ToDoList */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ToDoList", function() { return ToDoList; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var list = document.getElementById("list");
+var modal = document.querySelector("#modalToggle");
+var ToDoList =
+/*#__PURE__*/
+function () {
+  function ToDoList() {
+    _classCallCheck(this, ToDoList);
+
+    //this.filterDone();
+    //this.filtredTask();
+    this.render();
+  } // filterDone() {
+  //   var listAllTasks = document.querySelectorAll("#list li");
+  //   for (var i = 0; i < listAllTasks.length; i++) {
+  //     if (listAllTasks[i].classList.contains("checked")) {
+  //       listAllTasks[i].classList.remove("is-hidden");
+  //     } else {
+  //       listAllTasks[i].classList.add("is-hidden");
+  //     }
+  //   }
+  // }
+  // filtredTask() {
+  //   const selectElement = document.querySelector("#complite");
+  //   const output = document.querySelector(".compliteOption");
+  //   selectElement.addEventListener("click", event => {
+  //     const outpuTarget =
+  //       selectElement.options[selectElement.selectedIndex].value;
+  //     if (outpuTarget == "done") {
+  //       console.log(outpuTarget);
+  //       // this.tasks
+  //       //   .filter(task => task.isComplete === true)
+  //       //   .map(
+  //       //     task =>
+  //       //       (document.getElementById(
+  //       //         "taskList"
+  //       //       ).innerHTML = this.generateTaskHtml(task))
+  //       //   );
+  //     } else if (outpuTarget == "all") {
+  //       console.log(outpuTarget);
+  //       //this.loadTasks();
+  //     } else if (outpuTarget == "open") {
+  //       console.log(outpuTarget);
+  //       // this.tasks
+  //       //   .filter(task => task.isComplete === false)
+  //       //   .map(
+  //       //     task =>
+  //       //       (document.getElementById(
+  //       //         "taskList"
+  //       //       ).innerHTML = this.generateTaskHtml(task))
+  //       //   );
+  //     }
+  //   });
+  //}
+
+
+  _createClass(ToDoList, [{
+    key: "render",
+    value: function render() {
+      var selectElement = document.querySelector("#complite");
+      var completedTasks = document.querySelector("#doneTask");
+      selectElement.addEventListener("click", function (event) {
+        var outpuTarget = selectElement.options[selectElement.selectedIndex].value;
+
+        if (outpuTarget == "done") {
+          var listAllTasks = document.querySelectorAll("#list li .list__check-status");
+
+          for (var i = 0; i < listAllTasks.length; i++) {
+            // var t = listAllTasks[i].classList.contains("complete");
+            // console.log(t);
+            if (listAllTasks[i].classList.contains("complete")) {
+              listAllTasks[i].style.display = "flex"; //listAllTasks[i].classList.remove("is-hidden");
+            }
+          }
+        }
+      });
       list.addEventListener("click", function (e) {
         if (e.target.classList.contains("delete")) {
           var span = e.target.parentElement;
@@ -206,42 +348,11 @@ function () {
           }
         });
       });
-      var modal = document.querySelector("#modalToggle");
-      document.querySelector("#addBtn").addEventListener("click", function (e) {
-        e.preventDefault();
-        modal.style.display = "block";
-      });
-      document.querySelector(".modal__cancel").addEventListener("click", function (e) {
-        e.preventDefault();
-        modal.style.display = "none";
-      });
-      window.addEventListener("click", function (e) {
-        if (event.target == modal) {
-          e.preventDefault();
-          modal.style.display = "none";
-        }
-      });
     }
   }]);
 
-  return ToDoClass;
+  return ToDoList;
 }();
-
-var toDo;
-window.addEventListener("load", function () {
-  toDo = new ToDoClass();
-});
-
-/***/ }),
-
-/***/ "./src/index/index.scss":
-/*!******************************!*\
-  !*** ./src/index/index.scss ***!
-  \******************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 
