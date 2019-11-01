@@ -193,64 +193,18 @@ function () {
   function ToDoList() {
     _classCallCheck(this, ToDoList);
 
-    //this.filterDone();
-    //this.filtredTask();
     this.render();
-  } // filterDone() {
-  //   var listAllTasks = document.querySelectorAll("#list li");
-  //   for (var i = 0; i < listAllTasks.length; i++) {
-  //     if (listAllTasks[i].classList.contains("checked")) {
-  //       listAllTasks[i].classList.remove("is-hidden");
-  //     } else {
-  //       listAllTasks[i].classList.add("is-hidden");
-  //     }
-  //   }
-  // }
-  // filtredTask() {
-  //   const selectElement = document.querySelector("#complite");
-  //   const output = document.querySelector(".compliteOption");
-  //   selectElement.addEventListener("click", event => {
-  //     const outpuTarget =
-  //       selectElement.options[selectElement.selectedIndex].value;
-  //     if (outpuTarget == "done") {
-  //       console.log(outpuTarget);
-  //       // this.tasks
-  //       //   .filter(task => task.isComplete === true)
-  //       //   .map(
-  //       //     task =>
-  //       //       (document.getElementById(
-  //       //         "taskList"
-  //       //       ).innerHTML = this.generateTaskHtml(task))
-  //       //   );
-  //     } else if (outpuTarget == "all") {
-  //       console.log(outpuTarget);
-  //       //this.loadTasks();
-  //     } else if (outpuTarget == "open") {
-  //       console.log(outpuTarget);
-  //       // this.tasks
-  //       //   .filter(task => task.isComplete === false)
-  //       //   .map(
-  //       //     task =>
-  //       //       (document.getElementById(
-  //       //         "taskList"
-  //       //       ).innerHTML = this.generateTaskHtml(task))
-  //       //   );
-  //     }
-  //   });
-  //}
-
+  }
 
   _createClass(ToDoList, [{
     key: "render",
     value: function render() {
       var selectElement = document.querySelector("#complite");
-      var completedTasks = document.querySelector("#doneTask");
-      selectElement.addEventListener("click", function (event) {
+      selectElement.addEventListener("click", function (e) {
         var outpuTarget = selectElement.options[selectElement.selectedIndex].value;
-
-        if (outpuTarget === "done") {
-          var listAllTasks = document.querySelectorAll("#list li");
-          Array.from(listAllTasks).forEach(function (list) {
+        var listAllTasks = document.querySelectorAll("#list li");
+        Array.from(listAllTasks).forEach(function (list) {
+          if (outpuTarget === "done") {
             var completeTitle = list.querySelector(".list__title");
             var complete = completeTitle.classList.contains("complete");
 
@@ -259,15 +213,26 @@ function () {
             } else if (!complete) {
               list.style.display = "none";
             }
-          });
-        } // else if (outpuTarget === "open") {
-        //   if (!complete) {
-        //     list.style.display = "flex";
-        //   } else if (complete) {
-        //     list.style.display = "none";
-        //   }
-        // }
+          } else if (outpuTarget === "open") {
+            var _completeTitle = list.querySelector(".list__title");
 
+            var _complete = _completeTitle.classList.contains("complete");
+
+            if (!_complete) {
+              list.style.display = "flex";
+            } else if (_complete) {
+              list.style.display = "none";
+            }
+          } else if (outpuTarget === "all") {
+            var _completeTitle2 = list.querySelector(".list__title");
+
+            var _complete2 = _completeTitle2.classList.contains("complete");
+
+            if (_complete2) {
+              list.style.display = "flex";
+            }
+          }
+        });
       });
       list.addEventListener("click", function (e) {
         if (e.target.classList.contains("delete")) {
@@ -280,23 +245,8 @@ function () {
         } else if (e.target.classList.contains("mark")) {
           var actionSpan = e.target.parentElement.previousElementSibling;
           var checkboxElement = actionSpan.querySelector("input[type=checkbox]");
-          console.log(checkboxElement);
           actionSpan.querySelector("input[type=text]").classList.toggle("complete");
-          checkboxElement.checked = !checkboxElement.checked; //const listIems = document.querySelector(".list__item");
-          //listIems.classList.toggle("checked");
-          // Array.from(listIems).forEach(list => {
-          //   if (checkboxElement.checked) {
-          //     list.classList.add("checked");
-          //   }
-          // else {
-          //   list.classList.toggle("unchecked");
-          // }
-          //   if (checkboxElement.checked) {
-          //     liItems[i].classList.add("checked");
-          //   } else if (!checkboxElement.checked) {
-          //     liItems[i].classList.toggle("checked");
-          //   }
-          // });
+          checkboxElement.checked = !checkboxElement.checked;
         } else if (e.target.classList.contains("edit")) {
           var _span = e.target.parentElement;
           var _li = _span.parentElement;

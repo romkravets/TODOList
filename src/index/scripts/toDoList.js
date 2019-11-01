@@ -3,66 +3,18 @@ const modal = document.querySelector("#modalToggle");
 
 export class ToDoList {
   constructor() {
-    //this.filterDone();
-    //this.filtredTask();
     this.render();
   }
 
-  // filterDone() {
-  //   var listAllTasks = document.querySelectorAll("#list li");
-  //   for (var i = 0; i < listAllTasks.length; i++) {
-  //     if (listAllTasks[i].classList.contains("checked")) {
-  //       listAllTasks[i].classList.remove("is-hidden");
-  //     } else {
-  //       listAllTasks[i].classList.add("is-hidden");
-  //     }
-  //   }
-  // }
-
-  // filtredTask() {
-  //   const selectElement = document.querySelector("#complite");
-  //   const output = document.querySelector(".compliteOption");
-  //   selectElement.addEventListener("click", event => {
-  //     const outpuTarget =
-  //       selectElement.options[selectElement.selectedIndex].value;
-
-  //     if (outpuTarget == "done") {
-  //       console.log(outpuTarget);
-  //       // this.tasks
-  //       //   .filter(task => task.isComplete === true)
-  //       //   .map(
-  //       //     task =>
-  //       //       (document.getElementById(
-  //       //         "taskList"
-  //       //       ).innerHTML = this.generateTaskHtml(task))
-  //       //   );
-  //     } else if (outpuTarget == "all") {
-  //       console.log(outpuTarget);
-  //       //this.loadTasks();
-  //     } else if (outpuTarget == "open") {
-  //       console.log(outpuTarget);
-  //       // this.tasks
-  //       //   .filter(task => task.isComplete === false)
-  //       //   .map(
-  //       //     task =>
-  //       //       (document.getElementById(
-  //       //         "taskList"
-  //       //       ).innerHTML = this.generateTaskHtml(task))
-  //       //   );
-  //     }
-  //   });
-  //}
-
   render() {
     const selectElement = document.querySelector("#complite");
-    const completedTasks = document.querySelector("#doneTask");
-    selectElement.addEventListener("click", event => {
+    selectElement.addEventListener("click", e => {
       const outpuTarget =
         selectElement.options[selectElement.selectedIndex].value;
 
-      if (outpuTarget === "done") {
-        const listAllTasks = document.querySelectorAll("#list li");
-        Array.from(listAllTasks).forEach(list => {
+      const listAllTasks = document.querySelectorAll("#list li");
+      Array.from(listAllTasks).forEach(list => {
+        if (outpuTarget === "done") {
           const completeTitle = list.querySelector(".list__title");
           const complete = completeTitle.classList.contains("complete");
           if (complete) {
@@ -70,18 +22,25 @@ export class ToDoList {
           } else if (!complete) {
             list.style.display = "none";
           }
-        });
-      }
-      // else if (outpuTarget === "open") {
-      //   if (!complete) {
-      //     list.style.display = "flex";
-      //   } else if (complete) {
-      //     list.style.display = "none";
-      //   }
-      // }
+        } else if (outpuTarget === "open") {
+          const completeTitle = list.querySelector(".list__title");
+          const complete = completeTitle.classList.contains("complete");
+          if (!complete) {
+            list.style.display = "flex";
+          } else if (complete) {
+            list.style.display = "none";
+          }
+        } else if (outpuTarget === "all") {
+          const completeTitle = list.querySelector(".list__title");
+          const complete = completeTitle.classList.contains("complete");
+          if (complete) {
+            list.style.display = "flex";
+          }
+        }
+      });
     });
 
-    list.addEventListener("click", function(e) {
+    list.addEventListener("click", e => {
       if (e.target.classList.contains("delete")) {
         const span = e.target.parentElement;
         const li = span.parentElement;
@@ -94,26 +53,10 @@ export class ToDoList {
         const checkboxElement = actionSpan.querySelector(
           "input[type=checkbox]"
         );
-        console.log(checkboxElement);
         actionSpan
           .querySelector("input[type=text]")
           .classList.toggle("complete");
         checkboxElement.checked = !checkboxElement.checked;
-        //const listIems = document.querySelector(".list__item");
-        //listIems.classList.toggle("checked");
-        // Array.from(listIems).forEach(list => {
-        //   if (checkboxElement.checked) {
-        //     list.classList.add("checked");
-        //   }
-        // else {
-        //   list.classList.toggle("unchecked");
-        // }
-        //   if (checkboxElement.checked) {
-        //     liItems[i].classList.add("checked");
-        //   } else if (!checkboxElement.checked) {
-        //     liItems[i].classList.toggle("checked");
-        //   }
-        // });
       } else if (e.target.classList.contains("edit")) {
         const span = e.target.parentElement;
         const li = span.parentElement;
@@ -130,24 +73,24 @@ export class ToDoList {
         inputDescription.readOnly = false;
         inputPriority.readOnly = false;
 
-        inputText.addEventListener("keypress", function(e) {
-          var key = e.which || e.keyCode;
+        inputText.addEventListener("keypress", e => {
+          const key = e.which || e.keyCode;
           if (key === 13) {
             inputText.readOnly = true;
             inputText.style.cursor = "context-menu";
             inputText.classList.remove("input-border");
           }
         });
-        inputDescription.addEventListener("keypress", function(e) {
-          var key = e.which || e.keyCode;
+        inputDescription.addEventListener("keypress", e => {
+          const key = e.which || e.keyCode;
           if (key === 13) {
             inputDescription.readOnly = true;
             inputDescription.style.cursor = "context-menu";
             inputDescription.classList.remove("input-border");
           }
         });
-        inputPriority.addEventListener("keypress", function(e) {
-          var key = e.which || e.keyCode;
+        inputPriority.addEventListener("keypress", e => {
+          const key = e.which || e.keyCode;
           if (key === 13) {
             inputPriority.readOnly = true;
             inputPriority.style.cursor = "context-menu";
@@ -158,7 +101,7 @@ export class ToDoList {
     });
 
     const formAdd = document.forms["form-add"];
-    formAdd.addEventListener("submit", function(e) {
+    formAdd.addEventListener("submit", e => {
       e.preventDefault();
       let insertedData = formAdd.querySelector("#addTask").value;
       let insertedDescription = formAdd.querySelector("#addDesc").value;
@@ -186,7 +129,7 @@ export class ToDoList {
 
     const searchForm = document.querySelector(".form__search");
 
-    searchForm.addEventListener("keyup", function(e) {
+    searchForm.addEventListener("keyup", e => {
       const inputVal = e.target.value.toLowerCase();
       const items = list.getElementsByTagName("li");
       Array.from(items).forEach(function(item) {
