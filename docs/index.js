@@ -249,13 +249,16 @@ function () {
         var outpuTarget = selectElement.options[selectElement.selectedIndex].value;
 
         if (outpuTarget == "done") {
-          var listAllTasks = document.querySelectorAll("#list li .list__check-status");
+          var listAllTasks = document.querySelectorAll("#list li");
 
           for (var i = 0; i < listAllTasks.length; i++) {
-            // var t = listAllTasks[i].classList.contains("complete");
-            // console.log(t);
-            if (listAllTasks[i].classList.contains("complete")) {
-              listAllTasks[i].style.display = "flex"; //listAllTasks[i].classList.remove("is-hidden");
+            var t = listAllTasks[i].classList.contains("complete");
+            console.log(t);
+
+            if (t) {
+              listAllTasks[i].style.display = "flex";
+            } else {
+              listAllTasks[i].style.display = "none";
             }
           }
         }
@@ -270,10 +273,17 @@ function () {
           }, 600);
         } else if (e.target.classList.contains("mark")) {
           var actionSpan = e.target.parentElement.previousElementSibling;
+          var liItems = document.querySelectorAll(".list__item");
           var checkboxElement = actionSpan.querySelector("input[type=checkbox]");
           console.log(checkboxElement);
           actionSpan.querySelector("input[type=text]").classList.toggle("complete");
-          checkboxElement.checked = !checkboxElement.checked;
+          checkboxElement.checked = !checkboxElement.checked; // for (var i = 0; i < liItems.length; i++) {
+          //   if (checkboxElement.checked) {
+          //     liItems[i].classList.add("list__item_check");
+          //   } else if (!checkboxElement.checked) {
+          //     liItems[i].classList.remove("list__item_check");
+          //   }
+          // }
         } else if (e.target.classList.contains("edit")) {
           var _span = e.target.parentElement;
           var _li = _span.parentElement;
