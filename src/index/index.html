@@ -17,7 +17,7 @@
       </div>
     </header>
 
-    <main class="main-content">
+    <!-- <main class="main-content">
       <div class="container">
         <div class="row-flex">
           <form action="" class="form">
@@ -39,12 +39,12 @@
                 <option value="low" class="compliteOption">low</option>
               </select>
             </div>
-            <button id="addBtn" class="form__btn">Create</button>
-          </form>
+            <button id="addBtn" class="form__btn">Create</button> -->
+    <!-- </form>
           <ul class="list__items" id="taskList"></ul>
         </div>
       </div>
-    </main>
+    </main> -->
     <!-- <footer class="footer-content">
       <div class="container">
         <p>Roman Kravets</p>
@@ -56,49 +56,63 @@
         <h1>To-Do List</h1>
         <form action="#" id="searchForm">
           <input type="text" placeholder="Search..." value="" />
+          <select id="complite" class="form__complite">
+            <option value="all" class="compliteOption" selected>all</option>
+            <option value="open" class="compliteOption">open</option>
+            <option value="done" class="compliteOption">done</option>
+          </select>
+          <select id="prioritySelect" class="form__priority">
+            <option value="all" class="compliteOption" selected>all</option>
+            <option value="high" class="compliteOption">high</option>
+            <option value="normal" class="compliteOption">hormal</option>
+            <option value="low" class="compliteOption">low</option>
+          </select>
+          <button id="addBtn" class="form__btn">Create</button>
         </form>
       </div>
       <div id="main">
         <h2>Your List:</h2>
         <ul id="list">
           <li class="">
+            <input type="checkbox" />
             <span class="name">
               <input type="text" value="learn css" readonly="readonly" />
               <p class="saveInfo">Press "Enter" to save</p>
             </span>
             <span class="action">
-              <button class="mark fas fas fa-check"></button>
-              <button class="up fas fa-angle-up"></button>
-              <button class="down fas fa-angle-down"></button>
-              <button class="edit fas fa-pencil-alt"></button>
-              <button class="delete fas fa-trash-alt"></button>
+              <button class="mark fas fas fa-check">mark</button>
+              <!-- <button class="up fas fa-angle-up"></button>
+              <button class="down fas fa-angle-down"></button> -->
+              <button class="edit fas fa-pencil-alt">edit</button>
+              <button class="delete fas fa-trash-alt">delete</button>
             </span>
           </li>
           <li>
+            <input type="checkbox" />
             <span class="name">
               <input type="text" value="learn html" readonly="readonly" />
               <p class="saveInfo">Press "Enter" to save</p>
             </span>
             <span class="action">
-              <button class="mark fas fas fa-check"></button>
-              <button class="up fas fa-angle-up"></button>
-              <button class="down fas fa-angle-down"></button>
-              <button class="edit fas fa-pencil-alt"></button>
-              <button class="delete fas fa-trash-alt"></button>
+              <button class="mark fas fas fa-check">mark</button>
+              <!-- <button class="up fas fa-angle-up"></button>
+                <button class="down fas fa-angle-down"></button> -->
+              <button class="edit fas fa-pencil-alt">edit</button>
+              <button class="delete fas fa-trash-alt">delete</button>
             </span>
           </li>
         </ul>
       </div>
-      <div id="footer">
+      <!-- <div id="footer">
         <form action="#" id="form-add">
           <input type="text" placeholder="Add Somthing..." />
           <button class="btn-primary">Add</button>
         </form>
-      </div>
+      </div> -->
     </div>
 
     <div id="modalToggle" class="modal">
-      <form class="modal__content">
+      <form action="#" class="modal__content" id="form-add">
         <label for="addTask">
           Title:<input
             type="text"
@@ -123,10 +137,10 @@
             <option value="low">Low</option>
           </select>
         </div>
-        <div class="modal__btn-block">
-          <button class="modal__cancel modal__btn">Cancel</button>
-          <button id="btnTask" class="modal__btn">Save</button>
-        </div>
+        <!-- <div class="modal__btn-block"> -->
+        <button class="modal__cancel modal__btn">Cancel</button>
+        <button id="btnTask" class="modal__btn  btn-primary">Save</button>
+        <!-- </div> -->
       </form>
     </div>
   </body>

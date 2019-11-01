@@ -97,281 +97,269 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.scss */ "./src/index/index.scss");
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_0__);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-var ToDoClass =
-/*#__PURE__*/
-function () {
-  function ToDoClass() {
-    _classCallCheck(this, ToDoClass);
-
-    this.tasks = JSON.parse(localStorage.getItem("TASKS"));
-
-    if (!this.tasks) {
-      this.tasks = [{
-        task: "execute test task",
-        desc: "Ciklum internship",
-        isComplete: false,
-        priority: "high"
-      }, {
-        task: "lern javascript",
-        desc: "",
-        isComplete: false,
-        priority: "low"
-      }, {
-        task: "apply internship",
-        desc: "send email",
-        isComplete: true,
-        priority: "normal"
-      }];
-    }
-
-    this.loadTasks();
-    this.render();
-    this.addEventListeners();
-    this.btnAddEventListeners();
-    this.modalToggle();
-    this.searchToggle();
-    this.filtredPriority();
-    this.deleteTask();
-    this.toggleTaskStatus();
-    this.filtredTask(this.tasks);
-    this.itemIndex;
-    this.doneTaskBtn = document.querySelectorAll("#doneTask");
-    this.checkedTask = document.querySelectorAll("#list__item input");
-  }
-
-  _createClass(ToDoClass, [{
-    key: "render",
-    value: function render() {
-      for (var i = 0; i < this.tasks.length; i++) {
-        this.itemIndex = this.tasks[i];
-      } // for (let i = 0; i < this.checkedTask.length; i++) {
-      //   console.log(this.checedTask);
-      //   if (this.checkedTask.checked) {
-      //     console.log("checedTask.checked");
-      //   } else {
-      //     console.log("none");
-      //   }
-      // }
-
-    }
-  }, {
-    key: "addEventListeners",
-    value: function addEventListeners() {
-      var _this = this;
-
-      // Add Task keypress
-      document.getElementById("addTask").addEventListener("keypress", function (event) {
-        if (event.keyCode === 13) {
-          _this.addTask(event.target.value);
-
-          event.target.value = "";
-        }
-      });
-    }
-  }, {
-    key: "btnAddEventListeners",
-    value: function btnAddEventListeners() {
-      var _this2 = this;
-
-      // Add Task click
-      document.getElementById("btnTask").addEventListener("click", function (event) {
-        var target = document.getElementById("addTask");
-        var targetDesc = document.getElementById("addDesc");
-        var priority = document.getElementById("priority");
-        var modal = document.querySelector("#modalToggle");
-
-        _this2.addTask(target.value, targetDesc.value, priority.value);
-
-        modal.style.display = "none";
-        target.value = "";
-        targetDesc.value = "";
-      });
-    }
-  }, {
-    key: "addTask",
-    value: function addTask(task, desc, priority) {
-      var newTask = {
-        task: task,
-        desc: desc,
-        isComplete: false,
-        priority: priority
-      };
-      var parentDiv = document.getElementById("addTask").parentElement;
-
-      if (task === "") {
-        parentDiv.classList.add("has-error");
-      } else {
-        parentDiv.classList.remove("has-error");
-        this.tasks.push(newTask);
-        this.loadTasks();
-      }
-    }
-  }, {
-    key: "toggleTaskStatus",
-    value: function toggleTaskStatus() {
-      var _this3 = this;
-
-      var checkedTasks = document.querySelector(".list__check-status");
-      checkedTasks.addEventListener("change", function (event) {
-        _this3.itemIndex.isComplete = !_this3.itemIndex.isComplete; //this.loadTasks();
-      });
-    }
-  }, {
-    key: "filtredTask",
-    value: function filtredTask() {
-      var _this4 = this;
-
-      var selectElement = document.querySelector("#complite");
-      var output = document.querySelector(".compliteOption");
-      selectElement.addEventListener("click", function (event) {
-        var outpuTarget = selectElement.options[selectElement.selectedIndex].value;
-
-        if (outpuTarget == "done") {
-          _this4.tasks.filter(function (task) {
-            return task.isComplete === true;
-          }).map(function (task) {
-            return document.getElementById("taskList").innerHTML = _this4.generateTaskHtml(task);
-          });
-        } else if (outpuTarget == "all") {
-          _this4.loadTasks();
-        } else if (outpuTarget == "open") {
-          _this4.tasks.filter(function (task) {
-            return task.isComplete === false;
-          }).map(function (task) {
-            return document.getElementById("taskList").innerHTML = _this4.generateTaskHtml(task);
-          });
-        }
-      });
-    }
-  }, {
-    key: "filtredPriority",
-    value: function filtredPriority() {
-      var _this5 = this;
-
-      var selectElement = document.querySelector("#prioritySelect");
-      var output = document.querySelector(".compliteOption");
-      selectElement.addEventListener("click", function (event) {
-        var outpuTarget = selectElement.options[selectElement.selectedIndex].value;
-
-        if (outpuTarget == "all") {
-          _this5.loadTasks();
-        } else if (outpuTarget == "high") {
-          _this5.tasks.filter(function (task) {
-            return task.priority === "high";
-          }).map(function (task) {
-            return document.getElementById("taskList").innerHTML = _this5.generateTaskHtml(task);
-          });
-        } else if (outpuTarget == "normal") {
-          _this5.tasks.filter(function (task) {
-            return task.priority === "normal";
-          }).map(function (task) {
-            return document.getElementById("taskList").innerHTML = _this5.generateTaskHtml(task);
-          });
-        } else if (outpuTarget == "low") {
-          _this5.tasks.filter(function (task) {
-            return task.priority === "low";
-          }).map(function (task) {
-            return document.getElementById("taskList").innerHTML = _this5.generateTaskHtml(task);
-          });
-        }
-      });
-    } // loadEventListeners() {
-    //   taskList.addEventListener("click", e => {
-    //     if (e.target.parentElement.classList.contains("select-filter")) {
-    //       e.target.parentElement.parentElement.remove();
-    //       console.log(taskList, "click");
-    //     }
-    //   });
-    // }
-
-  }, {
-    key: "deleteTask",
-    value: function deleteTask(event, itemIndex) {
-      var _this6 = this;
-
-      var deleteTask = document.querySelectorAll("#deleteTask");
-
-      for (var i = 0; i < deleteTask.length; i++) {
-        deleteTask[i].addEventListener("click", function (event) {
-          console.log(deleteTask, "click");
-
-          _this6.tasks.splice(_this6.itemIndex, 1);
-
-          window.location.reload();
-
-          _this6.loadTasks();
-        });
-      }
-    }
-  }, {
-    key: "generateTaskHtml",
-    value: function generateTaskHtml(task, index) {
-      return "\n        <li class=\"list__item\">\n          <label class=\"list__checkbox\" for=\"".concat(task.id, "\">\n            <input class=\"list__check-status\" id=\"").concat(task.id, "\" type=\"checkbox\"  value=\"\" class=\"\" ").concat(task.isComplete ? "checked" : "", "></label>\n          <div class=\"list__title task-text ").concat(task.isComplete ? "complete" : "", "\">\n            ").concat(task.task, "\n          </div>\n          <div class=\"list__description\">\n          ").concat(task.desc, "\n          </div>\n          <div class=\"list__bottom-section\">\n            <div class=\"list__priority\">\n            ").concat(task.priority, "\n            </div>\n            <div class=\"dropdown \">\n              <button class=\"dropbtn\">...</button>\n              <div class=\"dropdown-content select-filter\">\n                <a href=\"#\" value=\"done  id=\"doneTask\"\">done</a>\n                <a href=\"#\" value=\"edit\" class=\"edit\">edit</a>\n                <a href=\"#\" value=\"delete\" id=\"deleteTask\">delete</a>\n              </div>\n            </div>\n          </div>\n        </div>\n      </li>\n    ");
-    }
-  }, {
-    key: "modalToggle",
-    value: function modalToggle() {
-      var modal = document.querySelector("#modalToggle");
-      document.querySelector("#addBtn").addEventListener("click", function (e) {
-        e.preventDefault();
-        modal.style.display = "block";
-      });
-      document.querySelector(".modal__cancel").addEventListener("click", function (e) {
-        e.preventDefault();
-        modal.style.display = "none";
-      });
-      window.addEventListener("click", function (e) {
-        if (event.target == modal) {
-          e.preventDefault();
-          modal.style.display = "none";
-        }
-      });
-    }
-  }, {
-    key: "searchToggle",
-    value: function searchToggle() {
-      document.querySelector(".form__search").addEventListener("keyup", function (e) {
-        var inputVal = e.target.value.toLowerCase();
-        var items = document.querySelectorAll("li");
-        Array.from(items).forEach(function (item) {
-          var itemName = item.querySelector(".list__title").innerHTML;
-
-          if (itemName.toLowerCase().indexOf(inputVal) != -1) {
-            item.style.display = "flex";
-          } else {
-            item.style.display = "none";
-          }
-        });
-      });
-    }
-  }, {
-    key: "loadTasks",
-    value: function loadTasks() {
-      var _this7 = this;
-
-      localStorage.setItem("TASKS", JSON.stringify(this.tasks));
-      var tasksHtml = this.tasks.reduce(function (html, task, index) {
-        return html += _this7.generateTaskHtml(task, index);
-      }, "");
-      document.getElementById("taskList").innerHTML = tasksHtml; //localStorage.clear();
-    }
-  }]);
-
-  return ToDoClass;
-}();
-
-var toDo;
-window.addEventListener("load", function () {
-  toDo = new ToDoClass();
-}); //ul list
+ // class ToDoClass {
+//   constructor() {
+//     this.tasks = JSON.parse(localStorage.getItem("TASKS"));
+//     if (!this.tasks) {
+//       this.tasks = [
+//         {
+//           task: "execute test task",
+//           desc: "Ciklum internship",
+//           isComplete: false,
+//           priority: "high"
+//         },
+//         {
+//           task: "lern javascript",
+//           desc: "",
+//           isComplete: false,
+//           priority: "low"
+//         },
+//         {
+//           task: "apply internship",
+//           desc: "send email",
+//           isComplete: true,
+//           priority: "normal"
+//         }
+//       ];
+//     }
+//     this.loadTasks();
+//     this.render();
+//     this.addEventListeners();
+//     this.btnAddEventListeners();
+//     this.modalToggle();
+//     this.searchToggle();
+//     this.filtredPriority();
+//     this.deleteTask();
+//     this.toggleTaskStatus();
+//     this.filtredTask(this.tasks);
+//     this.itemIndex;
+//     this.doneTaskBtn = document.querySelectorAll("#doneTask");
+//     this.checkedTask = document.querySelectorAll("#list__item input");
+//   }
+//   render() {
+//     for (let i = 0; i < this.tasks.length; i++) {
+//       this.itemIndex = this.tasks[i];
+//     }
+//     // for (let i = 0; i < this.checkedTask.length; i++) {
+//     //   console.log(this.checedTask);
+//     //   if (this.checkedTask.checked) {
+//     //     console.log("checedTask.checked");
+//     //   } else {
+//     //     console.log("none");
+//     //   }
+//     // }
+//   }
+//   addEventListeners() {
+//     // Add Task keypress
+//     document.getElementById("addTask").addEventListener("keypress", event => {
+//       if (event.keyCode === 13) {
+//         this.addTask(event.target.value);
+//         event.target.value = "";
+//       }
+//     });
+//   }
+//   btnAddEventListeners() {
+//     // Add Task click
+//     document.getElementById("btnTask").addEventListener("click", event => {
+//       let target = document.getElementById("addTask");
+//       let targetDesc = document.getElementById("addDesc");
+//       let priority = document.getElementById("priority");
+//       const modal = document.querySelector("#modalToggle");
+//       this.addTask(target.value, targetDesc.value, priority.value);
+//       modal.style.display = "none";
+//       target.value = "";
+//       targetDesc.value = "";
+//     });
+//   }
+//   addTask(task, desc, priority) {
+//     let newTask = {
+//       task,
+//       desc,
+//       isComplete: false,
+//       priority
+//     };
+//     let parentDiv = document.getElementById("addTask").parentElement;
+//     if (task === "") {
+//       parentDiv.classList.add("has-error");
+//     } else {
+//       parentDiv.classList.remove("has-error");
+//       this.tasks.push(newTask);
+//       this.loadTasks();
+//     }
+//   }
+//   toggleTaskStatus() {
+//     const checkedTasks = document.querySelector(".list__check-status");
+//     checkedTasks.addEventListener("change", event => {
+//       this.itemIndex.isComplete = !this.itemIndex.isComplete;
+//       //this.loadTasks();
+//     });
+//   }
+//   filtredTask() {
+//     const selectElement = document.querySelector("#complite");
+//     const output = document.querySelector(".compliteOption");
+//     selectElement.addEventListener("click", event => {
+//       const outpuTarget =
+//         selectElement.options[selectElement.selectedIndex].value;
+//       if (outpuTarget == "done") {
+//         this.tasks
+//           .filter(task => task.isComplete === true)
+//           .map(
+//             task =>
+//               (document.getElementById(
+//                 "taskList"
+//               ).innerHTML = this.generateTaskHtml(task))
+//           );
+//       } else if (outpuTarget == "all") {
+//         this.loadTasks();
+//       } else if (outpuTarget == "open") {
+//         this.tasks
+//           .filter(task => task.isComplete === false)
+//           .map(
+//             task =>
+//               (document.getElementById(
+//                 "taskList"
+//               ).innerHTML = this.generateTaskHtml(task))
+//           );
+//       }
+//     });
+//   }
+//   filtredPriority() {
+//     const selectElement = document.querySelector("#prioritySelect");
+//     const output = document.querySelector(".compliteOption");
+//     selectElement.addEventListener("click", event => {
+//       const outpuTarget =
+//         selectElement.options[selectElement.selectedIndex].value;
+//       if (outpuTarget == "all") {
+//         this.loadTasks();
+//       } else if (outpuTarget == "high") {
+//         this.tasks
+//           .filter(task => task.priority === "high")
+//           .map(
+//             task =>
+//               (document.getElementById(
+//                 "taskList"
+//               ).innerHTML = this.generateTaskHtml(task))
+//           );
+//       } else if (outpuTarget == "normal") {
+//         this.tasks
+//           .filter(task => task.priority === "normal")
+//           .map(
+//             task =>
+//               (document.getElementById(
+//                 "taskList"
+//               ).innerHTML = this.generateTaskHtml(task))
+//           );
+//       } else if (outpuTarget == "low") {
+//         this.tasks
+//           .filter(task => task.priority === "low")
+//           .map(
+//             task =>
+//               (document.getElementById(
+//                 "taskList"
+//               ).innerHTML = this.generateTaskHtml(task))
+//           );
+//       }
+//     });
+//   }
+//   // loadEventListeners() {
+//   //   taskList.addEventListener("click", e => {
+//   //     if (e.target.parentElement.classList.contains("select-filter")) {
+//   //       e.target.parentElement.parentElement.remove();
+//   //       console.log(taskList, "click");
+//   //     }
+//   //   });
+//   // }
+//   deleteTask(event, itemIndex) {
+//     const deleteTask = document.querySelectorAll("#deleteTask");
+//     for (let i = 0; i < deleteTask.length; i++) {
+//       deleteTask[i].addEventListener("click", event => {
+//         console.log(deleteTask, "click");
+//         this.tasks.splice(this.itemIndex, 1);
+//         window.location.reload();
+//         this.loadTasks();
+//       });
+//     }
+//   }
+//   generateTaskHtml(task, index) {
+//     return `
+//         <li class="list__item">
+//           <label class="list__checkbox" for="${task.id}">
+//             <input class="list__check-status" id="${
+//               task.id
+//             }" type="checkbox"  value="" class="" ${
+//       task.isComplete ? "checked" : ""
+//     }></label>
+//           <div class="list__title task-text ${
+//             task.isComplete ? "complete" : ""
+//           }">
+//             ${task.task}
+//           </div>
+//           <div class="list__description">
+//           ${task.desc}
+//           </div>
+//           <div class="list__bottom-section">
+//             <div class="list__priority">
+//             ${task.priority}
+//             </div>
+//             <div class="dropdown ">
+//               <button class="dropbtn">...</button>
+//               <div class="dropdown-content select-filter">
+//                 <a href="#" value="done  id="doneTask"">done</a>
+//                 <a href="#" value="edit" class="edit">edit</a>
+//                 <a href="#" value="delete" id="deleteTask">delete</a>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </li>
+//     `;
+//   }
+//   modalToggle() {
+//     const modal = document.querySelector("#modalToggle");
+//     document.querySelector("#addBtn").addEventListener("click", e => {
+//       e.preventDefault();
+//       modal.style.display = "block";
+//     });
+//     document.querySelector(".modal__cancel").addEventListener("click", e => {
+//       e.preventDefault();
+//       modal.style.display = "none";
+//     });
+//     window.addEventListener("click", e => {
+//       if (event.target == modal) {
+//         e.preventDefault();
+//         modal.style.display = "none";
+//       }
+//     });
+//   }
+//   searchToggle() {
+//     document.querySelector(".form__search").addEventListener("keyup", e => {
+//       const inputVal = e.target.value.toLowerCase();
+//       const items = document.querySelectorAll("li");
+//       Array.from(items).forEach(function(item) {
+//         const itemName = item.querySelector(".list__title").innerHTML;
+//         if (itemName.toLowerCase().indexOf(inputVal) != -1) {
+//           item.style.display = "flex";
+//         } else {
+//           item.style.display = "none";
+//         }
+//       });
+//     });
+//   }
+//   loadTasks() {
+//     localStorage.setItem("TASKS", JSON.stringify(this.tasks));
+//     let tasksHtml = this.tasks.reduce(
+//       (html, task, index) => (html += this.generateTaskHtml(task, index)),
+//       ""
+//     );
+//     document.getElementById("taskList").innerHTML = tasksHtml;
+//     //localStorage.clear();
+//   }
+// }
+// let toDo;
+// window.addEventListener("load", () => {
+//   toDo = new ToDoClass();
+// });
+//ul list
 
 var list = document.getElementById("list"); // Use javascript Bubbling and capturing tech
 // once user click on UL or UL childern
@@ -390,73 +378,72 @@ list.addEventListener("click", function (e) {
   } else if (e.target.classList.contains("mark")) {
     var actionSpan = e.target.parentElement.previousElementSibling;
     actionSpan.querySelector("input[type=text]").classList.toggle("complete"); //move up
-  } else if (e.target.classList.contains("up")) {
-    var _span = e.target.parentElement;
-    var _li = _span.parentElement;
-    var prevLi = _li.previousElementSibling;
+  } // else if (e.target.classList.contains("up")) {
+  //   const span = e.target.parentElement;
+  //   const li = span.parentElement;
+  //   const prevLi = li.previousElementSibling;
+  //   if (prevLi) {
+  //     li.classList.add("move-pulsate");
+  //     list.insertBefore(li, prevLi);
+  //     //use time out to give css animation time
+  //     setTimeout(() => {
+  //       li.classList.remove("move-pulsate");
+  //     }, 800);
+  //   }
+  //move down
+  //}
+  // else if (e.target.classList.contains("down")) {
+  //   const span = e.target.parentElement;
+  //   const li = span.parentElement;
+  //   const nextLi = li.nextElementSibling;
+  //   if (nextLi) {
+  //     li.classList.toggle("move-pulsate");
+  //     list.insertBefore(nextLi, li);
+  //     //use time out to give css animation time
+  //     setTimeout(() => {
+  //       li.classList.remove("move-pulsate");
+  //     }, 800);
+  //   }
+  //edit
+  //}
+  else if (e.target.classList.contains("edit")) {
+      //if user click on edit
+      //add to input text the border line
+      //allow update input text by change readOnly
+      var _span = e.target.parentElement;
+      var _li = _span.parentElement;
 
-    if (prevLi) {
-      _li.classList.add("move-pulsate");
+      var inputText = _li.querySelector(".name input[type=text]");
 
-      list.insertBefore(_li, prevLi); //use time out to give css animation time
+      var saveInfo = _li.querySelector(".name .saveInfo");
 
-      setTimeout(function () {
-        _li.classList.remove("move-pulsate");
-      }, 800);
-    } //move down
+      inputText.classList.add("input-border");
+      inputText.style.cursor = "text";
+      saveInfo.style.display = "block";
+      inputText.readOnly = false; //save by press enter btn
 
-  } else if (e.target.classList.contains("down")) {
-    var _span2 = e.target.parentElement;
-    var _li2 = _span2.parentElement;
-    var nextLi = _li2.nextElementSibling;
+      inputText.addEventListener("keypress", function (e) {
+        var key = e.which || e.keyCode;
 
-    if (nextLi) {
-      _li2.classList.toggle("move-pulsate");
-
-      list.insertBefore(nextLi, _li2); //use time out to give css animation time
-
-      setTimeout(function () {
-        _li2.classList.remove("move-pulsate");
-      }, 800);
-    } //edit
-
-  } else if (e.target.classList.contains("edit")) {
-    //if user click on edit
-    //add to input text the border line
-    //allow update input text by change readOnly
-    var _span3 = e.target.parentElement;
-    var _li3 = _span3.parentElement;
-
-    var inputText = _li3.querySelector(".name input[type=text]");
-
-    var saveInfo = _li3.querySelector(".name .saveInfo");
-
-    inputText.classList.add("input-border");
-    inputText.style.cursor = "text";
-    saveInfo.style.display = "block";
-    inputText.readOnly = false; //save by press enter btn
-
-    inputText.addEventListener("keypress", function (e) {
-      var key = e.which || e.keyCode;
-
-      if (key === 13) {
-        // 13 is enter
-        inputText.readOnly = true;
-        inputText.style.cursor = "context-menu";
-        inputText.classList.remove("input-border");
-        saveInfo.style.display = "none";
-      }
-    });
-  }
+        if (key === 13) {
+          // 13 is enter
+          inputText.readOnly = true;
+          inputText.style.cursor = "context-menu";
+          inputText.classList.remove("input-border");
+          saveInfo.style.display = "none";
+        }
+      });
+    }
 }); //Add new item
 
 var formAdd = document.forms["form-add"];
 formAdd.addEventListener("submit", function (e) {
   e.preventDefault();
   var insertedData = formAdd.querySelector("input[type=text]").value;
-  insertedData = "<li>\n     <span class=\"name\">\n         <input type=\"text\" value=\"".concat(insertedData, "\" readonly=\"readonly\"> \n         <p class=\"saveInfo\">Press \"Enter\" to save</p>\n     </span>\n     <span class=\"action\">\n         <button class=\"mark fas fas fa-check\"></button>\n         <button class=\"up fas fa-angle-up\"></button>\n         <button class=\"down fas fa-angle-down\"></button>\n         <button class=\"edit fas fa-pencil-alt\"></button>\n         <button class=\"delete fas fa-trash-alt\"></button>\n      </span>\n     </li>");
+  insertedData = "<li>\n     <span class=\"name\">\n        <input type=\"checkbox\">\n         <input type=\"text\" value=\"".concat(insertedData, "\" readonly=\"readonly\">\n         <p class=\"saveInfo\">Press \"Enter\" to save</p>\n     </span>\n     <span class=\"action\">\n         <button class=\"mark fas fas fa-check\"></button>\n         <button class=\"up fas fa-angle-up\"></button>\n         <button class=\"down fas fa-angle-down\"></button>\n         <button class=\"edit fas fa-pencil-alt\"></button>\n         <button class=\"delete fas fa-trash-alt\"></button>\n      </span>\n     </li>");
   list.insertAdjacentHTML("afterbegin", insertedData);
   formAdd.querySelector("input[type=text]").value = "";
+  modal.style.display = "none";
 }); //Search thorw item
 
 var searchForm = document.forms["searchForm"].querySelector("input[type=text]"); //once key up
@@ -477,7 +464,21 @@ searchForm.addEventListener("keyup", function (e) {
     }
   });
 });
-create - account - title - ru;
+var modal = document.querySelector("#modalToggle");
+document.querySelector("#addBtn").addEventListener("click", function (e) {
+  e.preventDefault();
+  modal.style.display = "block";
+});
+document.querySelector(".modal__cancel").addEventListener("click", function (e) {
+  e.preventDefault();
+  modal.style.display = "none";
+});
+window.addEventListener("click", function (e) {
+  if (event.target == modal) {
+    e.preventDefault();
+    modal.style.display = "none";
+  }
+});
 
 /***/ }),
 
