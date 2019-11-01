@@ -97,6 +97,12 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.scss */ "./src/index/index.scss");
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_0__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
  // class ToDoClass {
 //   constructor() {
 //     this.tasks = JSON.parse(localStorage.getItem("TASKS"));
@@ -361,123 +367,256 @@ __webpack_require__.r(__webpack_exports__);
 // });
 //ul list
 
-var list = document.getElementById("list"); // Use javascript Bubbling and capturing tech
-// once user click on UL or UL childern
-//predict if it move up, move down, delete, update or mark
+var list = document.getElementById("list");
 
-list.addEventListener("click", function (e) {
-  //delete
-  if (e.target.classList.contains("delete")) {
-    var span = e.target.parentElement;
-    var li = span.parentElement;
-    li.classList.add("hide"); //use time out to give css animation time
+var ToDoClass =
+/*#__PURE__*/
+function () {
+  function ToDoClass() {
+    _classCallCheck(this, ToDoClass);
 
-    setTimeout(function () {
-      list.removeChild(li);
-    }, 600); //mark as complete
-  } else if (e.target.classList.contains("mark")) {
-    var actionSpan = e.target.parentElement.previousElementSibling;
-    actionSpan.querySelector("input[type=text]").classList.toggle("complete"); //move up
-  } // else if (e.target.classList.contains("up")) {
-  //   const span = e.target.parentElement;
-  //   const li = span.parentElement;
-  //   const prevLi = li.previousElementSibling;
-  //   if (prevLi) {
-  //     li.classList.add("move-pulsate");
-  //     list.insertBefore(li, prevLi);
-  //     //use time out to give css animation time
-  //     setTimeout(() => {
-  //       li.classList.remove("move-pulsate");
-  //     }, 800);
-  //   }
-  //move down
-  //}
-  // else if (e.target.classList.contains("down")) {
-  //   const span = e.target.parentElement;
-  //   const li = span.parentElement;
-  //   const nextLi = li.nextElementSibling;
-  //   if (nextLi) {
-  //     li.classList.toggle("move-pulsate");
-  //     list.insertBefore(nextLi, li);
-  //     //use time out to give css animation time
-  //     setTimeout(() => {
-  //       li.classList.remove("move-pulsate");
-  //     }, 800);
-  //   }
-  //edit
-  //}
-  else if (e.target.classList.contains("edit")) {
-      //if user click on edit
-      //add to input text the border line
-      //allow update input text by change readOnly
-      var _span = e.target.parentElement;
-      var _li = _span.parentElement;
+    this.tasks = JSON.parse(localStorage.getItem("TASKS"));
 
-      var inputText = _li.querySelector(".name input[type=text]");
+    if (!this.tasks) {
+      this.tasks = [{
+        task: "execute test task",
+        desc: "Ciklum internship",
+        isComplete: false,
+        priority: "high"
+      }, {
+        task: "lern javascript",
+        desc: "",
+        isComplete: false,
+        priority: "low"
+      }, {
+        task: "apply internship",
+        desc: "send email",
+        isComplete: true,
+        priority: "normal"
+      }];
+    }
 
-      var saveInfo = _li.querySelector(".name .saveInfo");
+    this.render();
+    this.loadTasks();
+  }
 
-      inputText.classList.add("input-border");
-      inputText.style.cursor = "text";
-      saveInfo.style.display = "block";
-      inputText.readOnly = false; //save by press enter btn
+  _createClass(ToDoClass, [{
+    key: "render",
+    value: function render() {
+      // Use javascript Bubbling and capturing tech
+      // once user click on UL or UL childern
+      //predict if it move up, move down, delete, update or mark
+      list.addEventListener("click", function (e) {
+        //delete
+        if (e.target.classList.contains("delete")) {
+          var span = e.target.parentElement;
+          var li = span.parentElement;
+          li.classList.add("hide"); //use time out to give css animation time
 
-      inputText.addEventListener("keypress", function (e) {
-        var key = e.which || e.keyCode;
+          setTimeout(function () {
+            list.removeChild(li);
+          }, 600); //mark as complete
+        } else if (e.target.classList.contains("mark")) {
+          var actionSpan = e.target.parentElement.previousElementSibling;
+          var checkboxElement = document.querySelector("input[type=checkbox]");
+          var checkboxLi = document.querySelector(".list__item");
+          var checkboxLiInput = document.querySelector(".list__item input");
+          console.log(checkboxElement);
+          actionSpan.querySelector("input[type=text]").classList.toggle("complete");
+          checkboxElement.checked = !checkboxElement.checked;
+          checkboxLi.classList.toggle("list__item_complete"); //move up
+        } // else if (e.target.classList.contains("up")) {
+        //   const span = e.target.parentElement;
+        //   const li = span.parentElement;
+        //   const prevLi = li.previousElementSibling;
+        //   if (prevLi) {
+        //     li.classList.add("move-pulsate");
+        //     list.insertBefore(li, prevLi);
+        //     //use time out to give css animation time
+        //     setTimeout(() => {
+        //       li.classList.remove("move-pulsate");
+        //     }, 800);
+        //   }
+        //move down
+        //}
+        // else if (e.target.classList.contains("down")) {
+        //   const span = e.target.parentElement;
+        //   const li = span.parentElement;
+        //   const nextLi = li.nextElementSibling;
+        //   if (nextLi) {
+        //     li.classList.toggle("move-pulsate");
+        //     list.insertBefore(nextLi, li);
+        //     //use time out to give css animation time
+        //     setTimeout(() => {
+        //       li.classList.remove("move-pulsate");
+        //     }, 800);
+        //   }
+        //edit
+        //}
+        else if (e.target.classList.contains("edit")) {
+            //if user click on edit
+            //add to input text the border line
+            //allow update input text by change readOnly
+            var _span = e.target.parentElement;
+            var _li = _span.parentElement;
 
-        if (key === 13) {
-          // 13 is enter
-          inputText.readOnly = true;
-          inputText.style.cursor = "context-menu";
-          inputText.classList.remove("input-border");
-          saveInfo.style.display = "none";
+            var inputText = _li.querySelector(".name .list__title");
+
+            var inputDescription = _li.querySelector(".name .list__description");
+
+            var inputPriority = _li.querySelector(".name .list__priority"); // const saveInfo = li.querySelector(".name .saveInfo");
+
+
+            inputText.classList.add("input-border");
+            inputDescription.classList.add("input-border");
+            inputPriority.classList.add("input-border");
+            inputText.style.cursor = "text";
+            inputDescription.style.cursor = "text";
+            inputPriority.style.cursor = "text"; // saveInfo.style.display = "block";
+
+            inputText.readOnly = false;
+            inputDescription.readOnly = false;
+            inputPriority.readOnly = false; //save by press enter btn
+
+            inputText.addEventListener("keypress", function (e) {
+              var key = e.which || e.keyCode;
+
+              if (key === 13) {
+                // 13 is enter
+                inputText.readOnly = true;
+                inputText.style.cursor = "context-menu";
+                inputText.classList.remove("input-border");
+              }
+            });
+            inputDescription.addEventListener("keypress", function (e) {
+              var key = e.which || e.keyCode;
+
+              if (key === 13) {
+                // 13 is enter
+                inputDescription.readOnly = true;
+                inputDescription.style.cursor = "context-menu";
+                inputDescription.classList.remove("input-border");
+              }
+            });
+            inputPriority.addEventListener("keypress", function (e) {
+              var key = e.which || e.keyCode;
+
+              if (key === 13) {
+                // 13 is enter
+                inputPriority.readOnly = true;
+                inputPriority.style.cursor = "context-menu";
+                inputPriority.classList.remove("input-border");
+              }
+            });
+          }
+      }); //Add new item
+
+      var formAdd = document.forms["form-add"];
+      formAdd.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var insertedData = formAdd.querySelector("#addTask").value;
+        var insertedDescription = formAdd.querySelector("#addDesc").value;
+        var insertedPriority = formAdd.querySelector("#priority").value;
+        insertedData = "<li class=\"list__item\">\n              <span class=\"name\">\n                  <label class=\"list__checkbox\">\n                      <input class=\"list__check-status\" type=\"checkbox\"  value=\"\" class=\"\">\n                  </label>\n                  <input class=\"list__title task-text\" type=\"text\" value=\"".concat(insertedData, "\" readonly=\"readonly\">\n                  <input class=\"list__description\" type=\"text\" value=\"").concat(insertedDescription, "\" readonly=\"readonly\">\n                  <input class=\"list__priority\" type=\"text\" value=\"").concat(insertedPriority, "\" readonly=\"readonly\">\n                  <input class=\"list__priority\" type=\"text\" value=\"").concat(insertedPriority, "\" readonly=\"readonly\">\n              </span>\n              <div class=\"action\">\n                  <button class=\"mark fas fas fa-check\"></button>\n                  <button class=\"edit fas fa-pencil-alt\"></button>\n                  <button class=\"delete fas fa-trash-alt\"></button>\n              </div>\n              </li>");
+        list.insertAdjacentHTML("afterbegin", insertedData);
+        formAdd.querySelector("input[type=text]").value = "";
+        modal.style.display = "none";
+      }); //Search thorw item
+
+      var searchForm = document.forms["searchForm"].querySelector("input[type=text]"); //once key up
+
+      searchForm.addEventListener("keyup", function (e) {
+        //convert input to lower case
+        var inputVal = e.target.value.toLowerCase(); // collect ul items and convert to array
+
+        var items = list.getElementsByTagName("li");
+        Array.from(items).forEach(function (item) {
+          //go to --> li>span>input text
+          var itemName = item.firstElementChild.querySelector("input").value; //compare input with ul items(li)
+
+          if (itemName.toLowerCase().indexOf(inputVal) != -1) {
+            item.style.display = "flex";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      });
+      var modal = document.querySelector("#modalToggle");
+      document.querySelector("#addBtn").addEventListener("click", function (e) {
+        e.preventDefault();
+        modal.style.display = "block";
+      });
+      document.querySelector(".modal__cancel").addEventListener("click", function (e) {
+        e.preventDefault();
+        modal.style.display = "none";
+      });
+      window.addEventListener("click", function (e) {
+        if (event.target == modal) {
+          e.preventDefault();
+          modal.style.display = "none";
         }
       });
     }
-}); //Add new item
+  }, {
+    key: "addEventListeners",
+    value: function addEventListeners() {
+      var _this = this;
 
-var formAdd = document.forms["form-add"];
-formAdd.addEventListener("submit", function (e) {
-  e.preventDefault();
-  var insertedData = formAdd.querySelector("input[type=text]").value;
-  insertedData = "<li>\n     <span class=\"name\">\n        <input type=\"checkbox\">\n         <input type=\"text\" value=\"".concat(insertedData, "\" readonly=\"readonly\">\n         <p class=\"saveInfo\">Press \"Enter\" to save</p>\n     </span>\n     <span class=\"action\">\n         <button class=\"mark fas fas fa-check\"></button>\n         <button class=\"up fas fa-angle-up\"></button>\n         <button class=\"down fas fa-angle-down\"></button>\n         <button class=\"edit fas fa-pencil-alt\"></button>\n         <button class=\"delete fas fa-trash-alt\"></button>\n      </span>\n     </li>");
-  list.insertAdjacentHTML("afterbegin", insertedData);
-  formAdd.querySelector("input[type=text]").value = "";
-  modal.style.display = "none";
-}); //Search thorw item
+      // Add Task keypress
+      document.getElementById("addTask").addEventListener("keypress", function (event) {
+        if (event.keyCode === 13) {
+          _this.addTask(event.target.value);
 
-var searchForm = document.forms["searchForm"].querySelector("input[type=text]"); //once key up
+          event.target.value = "";
+        }
+      });
+    } // btnAddEventListeners() {
+    //   // Add Task click
+    //   document.getElementById("btnTask").addEventListener("click", event => {
+    //     let target = document.getElementById("addTask");
+    //     let targetDesc = document.getElementById("addDesc");
+    //     let priority = document.getElementById("priority");
+    //     const modal = document.querySelector("#modalToggle");
+    //     this.addTask(target.value, targetDesc.value, priority.value);
+    //     modal.style.display = "none";
+    //     target.value = "";
+    //     targetDesc.value = "";
+    //   });
+    // }
+    // addTask(task, desc, priority) {
+    //   let newTask = {
+    //     task,
+    //     desc,
+    //     isComplete: false,
+    //     priority
+    //   };
+    //   let parentDiv = document.getElementById("addTask").parentElement;
+    //   if (task === "") {
+    //     parentDiv.classList.add("has-error");
+    //   } else {
+    //     parentDiv.classList.remove("has-error");
+    //     this.tasks.push(newTask);
+    //     this.loadTasks();
+    //   }
+    // }
+    // loadTasks() {
+    //   localStorage.setItem("TASKS", JSON.stringify(this.tasks));
+    //   let tasksHtml = this.tasks.reduce(
+    //     (html, task, index) => (html += this.generateTaskHtml(task, index)),
+    //     ""
+    //   );
+    //   document.getElementById("taskList").innerHTML = tasksHtml;
+    //   //localStorage.clear();
+    // }
 
-searchForm.addEventListener("keyup", function (e) {
-  //convert input to lower case
-  var inputVal = e.target.value.toLowerCase(); // collect ul items and convert to array
+  }]);
 
-  var items = list.getElementsByTagName("li");
-  Array.from(items).forEach(function (item) {
-    //go to --> li>span>input text
-    var itemName = item.firstElementChild.querySelector("input").value; //compare input with ul items(li)
+  return ToDoClass;
+}();
 
-    if (itemName.toLowerCase().indexOf(inputVal) != -1) {
-      item.style.display = "flex";
-    } else {
-      item.style.display = "none";
-    }
-  });
-});
-var modal = document.querySelector("#modalToggle");
-document.querySelector("#addBtn").addEventListener("click", function (e) {
-  e.preventDefault();
-  modal.style.display = "block";
-});
-document.querySelector(".modal__cancel").addEventListener("click", function (e) {
-  e.preventDefault();
-  modal.style.display = "none";
-});
-window.addEventListener("click", function (e) {
-  if (event.target == modal) {
-    e.preventDefault();
-    modal.style.display = "none";
-  }
+var toDo;
+window.addEventListener("load", function () {
+  toDo = new ToDoClass();
 });
 
 /***/ }),

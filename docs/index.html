@@ -76,8 +76,18 @@
           <li class="">
             <input type="checkbox" />
             <span class="name">
-              <input type="text" value="learn css" readonly="readonly" />
-              <p class="saveInfo">Press "Enter" to save</p>
+              <input
+                class="list__title task-text"
+                type="text"
+                value="learn css"
+                readonly="readonly"
+              />
+              <input
+                class="list__description"
+                type="text"
+                value="learn css desc"
+                readonly="readonly"
+              />
             </span>
             <span class="action">
               <button class="mark fas fas fa-check">mark</button>
@@ -87,11 +97,11 @@
               <button class="delete fas fa-trash-alt">delete</button>
             </span>
           </li>
+
           <li>
             <input type="checkbox" />
             <span class="name">
               <input type="text" value="learn html" readonly="readonly" />
-              <p class="saveInfo">Press "Enter" to save</p>
             </span>
             <span class="action">
               <button class="mark fas fas fa-check">mark</button>
@@ -113,14 +123,14 @@
 
     <div id="modalToggle" class="modal">
       <form action="#" class="modal__content" id="form-add">
-        <label for="addTask">
-          Title:<input
-            type="text"
-            placeholder="Title"
-            class="modal__title"
-            id="addTask"
-          />
-        </label>
+        <!-- <label for="addTask"> -->
+        Title:<input
+          type="text"
+          placeholder="Title"
+          class="modal__title"
+          id="addTask"
+        />
+        <!-- </label> -->
         <label for="addDesc">
           Desctiption:
           <textarea
