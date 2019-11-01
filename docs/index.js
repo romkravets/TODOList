@@ -396,8 +396,7 @@ function () {
       }];
     }
 
-    this.render();
-    this.loadTasks();
+    this.render(); //this.loadTasks();
   }
 
   _createClass(ToDoClass, [{
@@ -418,121 +417,81 @@ function () {
           }, 600); //mark as complete
         } else if (e.target.classList.contains("mark")) {
           var actionSpan = e.target.parentElement.previousElementSibling;
-          var checkboxElement = document.querySelector("input[type=checkbox]");
-          var checkboxLi = document.querySelector(".list__item");
-          var checkboxLiInput = document.querySelector(".list__item input");
+          var checkboxElement = actionSpan.querySelector("input[type=checkbox]"); //let checkboxLi = document.querySelector(".list__item");
+          //let checkboxLiInput = document.querySelector(".list__item input");
+
           console.log(checkboxElement);
           actionSpan.querySelector("input[type=text]").classList.toggle("complete");
-          checkboxElement.checked = !checkboxElement.checked;
-          checkboxLi.classList.toggle("list__item_complete"); //move up
-        } // else if (e.target.classList.contains("up")) {
-        //   const span = e.target.parentElement;
-        //   const li = span.parentElement;
-        //   const prevLi = li.previousElementSibling;
-        //   if (prevLi) {
-        //     li.classList.add("move-pulsate");
-        //     list.insertBefore(li, prevLi);
-        //     //use time out to give css animation time
-        //     setTimeout(() => {
-        //       li.classList.remove("move-pulsate");
-        //     }, 800);
-        //   }
-        //move down
-        //}
-        // else if (e.target.classList.contains("down")) {
-        //   const span = e.target.parentElement;
-        //   const li = span.parentElement;
-        //   const nextLi = li.nextElementSibling;
-        //   if (nextLi) {
-        //     li.classList.toggle("move-pulsate");
-        //     list.insertBefore(nextLi, li);
-        //     //use time out to give css animation time
-        //     setTimeout(() => {
-        //       li.classList.remove("move-pulsate");
-        //     }, 800);
-        //   }
-        //edit
-        //}
-        else if (e.target.classList.contains("edit")) {
-            //if user click on edit
-            //add to input text the border line
-            //allow update input text by change readOnly
-            var _span = e.target.parentElement;
-            var _li = _span.parentElement;
+          checkboxElement.checked = !checkboxElement.checked; //checkboxLi.classList.toggle("list__item_complete");
+        } else if (e.target.classList.contains("edit")) {
+          var _span = e.target.parentElement;
+          var _li = _span.parentElement;
 
-            var inputText = _li.querySelector(".name .list__title");
+          var inputText = _li.querySelector(".name .list__title");
 
-            var inputDescription = _li.querySelector(".name .list__description");
+          var inputDescription = _li.querySelector(".name .list__description");
 
-            var inputPriority = _li.querySelector(".name .list__priority"); // const saveInfo = li.querySelector(".name .saveInfo");
+          var inputPriority = _li.querySelector(".name .list__priority");
 
+          inputText.classList.add("input-border");
+          inputDescription.classList.add("input-border");
+          inputPriority.classList.add("input-border");
+          inputText.style.cursor = "text";
+          inputDescription.style.cursor = "text";
+          inputPriority.style.cursor = "text";
+          inputText.readOnly = false;
+          inputDescription.readOnly = false;
+          inputPriority.readOnly = false;
+          inputText.addEventListener("keypress", function (e) {
+            var key = e.which || e.keyCode;
 
-            inputText.classList.add("input-border");
-            inputDescription.classList.add("input-border");
-            inputPriority.classList.add("input-border");
-            inputText.style.cursor = "text";
-            inputDescription.style.cursor = "text";
-            inputPriority.style.cursor = "text"; // saveInfo.style.display = "block";
+            if (key === 13) {
+              // 13 is enter
+              inputText.readOnly = true;
+              inputText.style.cursor = "context-menu";
+              inputText.classList.remove("input-border");
+            }
+          });
+          inputDescription.addEventListener("keypress", function (e) {
+            var key = e.which || e.keyCode;
 
-            inputText.readOnly = false;
-            inputDescription.readOnly = false;
-            inputPriority.readOnly = false; //save by press enter btn
+            if (key === 13) {
+              // 13 is enter
+              inputDescription.readOnly = true;
+              inputDescription.style.cursor = "context-menu";
+              inputDescription.classList.remove("input-border");
+            }
+          });
+          inputPriority.addEventListener("keypress", function (e) {
+            var key = e.which || e.keyCode;
 
-            inputText.addEventListener("keypress", function (e) {
-              var key = e.which || e.keyCode;
-
-              if (key === 13) {
-                // 13 is enter
-                inputText.readOnly = true;
-                inputText.style.cursor = "context-menu";
-                inputText.classList.remove("input-border");
-              }
-            });
-            inputDescription.addEventListener("keypress", function (e) {
-              var key = e.which || e.keyCode;
-
-              if (key === 13) {
-                // 13 is enter
-                inputDescription.readOnly = true;
-                inputDescription.style.cursor = "context-menu";
-                inputDescription.classList.remove("input-border");
-              }
-            });
-            inputPriority.addEventListener("keypress", function (e) {
-              var key = e.which || e.keyCode;
-
-              if (key === 13) {
-                // 13 is enter
-                inputPriority.readOnly = true;
-                inputPriority.style.cursor = "context-menu";
-                inputPriority.classList.remove("input-border");
-              }
-            });
-          }
-      }); //Add new item
-
+            if (key === 13) {
+              // 13 is enter
+              inputPriority.readOnly = true;
+              inputPriority.style.cursor = "context-menu";
+              inputPriority.classList.remove("input-border");
+            }
+          });
+        }
+      });
       var formAdd = document.forms["form-add"];
       formAdd.addEventListener("submit", function (e) {
         e.preventDefault();
         var insertedData = formAdd.querySelector("#addTask").value;
         var insertedDescription = formAdd.querySelector("#addDesc").value;
         var insertedPriority = formAdd.querySelector("#priority").value;
-        insertedData = "<li class=\"list__item\">\n              <span class=\"name\">\n                  <label class=\"list__checkbox\">\n                      <input class=\"list__check-status\" type=\"checkbox\"  value=\"\" class=\"\">\n                  </label>\n                  <input class=\"list__title task-text\" type=\"text\" value=\"".concat(insertedData, "\" readonly=\"readonly\">\n                  <input class=\"list__description\" type=\"text\" value=\"").concat(insertedDescription, "\" readonly=\"readonly\">\n                  <input class=\"list__priority\" type=\"text\" value=\"").concat(insertedPriority, "\" readonly=\"readonly\">\n                  <input class=\"list__priority\" type=\"text\" value=\"").concat(insertedPriority, "\" readonly=\"readonly\">\n              </span>\n              <div class=\"action\">\n                  <button class=\"mark fas fas fa-check\"></button>\n                  <button class=\"edit fas fa-pencil-alt\"></button>\n                  <button class=\"delete fas fa-trash-alt\"></button>\n              </div>\n              </li>");
+        insertedData = "<li class=\"list__item\">\n              <span class=\"name\">\n                  <label class=\"list__checkbox\">\n                      <input class=\"list__check-status\" type=\"checkbox\"  value=\"\" class=\"\">\n                  </label>\n                  <input class=\"list__title task-text\" type=\"text\" value=\"".concat(insertedData, "\" readonly=\"readonly\">\n                  <input class=\"list__description\" type=\"text\" value=\"").concat(insertedDescription, "\" readonly=\"readonly\">\n                  <input class=\"list__priority\" type=\"text\" value=\"").concat(insertedPriority, "\" readonly=\"readonly\">\n              </span>\n              <div class=\"action\">\n                  <button class=\"mark\">mark</button>\n                  <button class=\"edit\">edit</button>\n                  <button class=\"delete\">delete</button>\n              </div>\n              </li>");
         list.insertAdjacentHTML("afterbegin", insertedData);
         formAdd.querySelector("input[type=text]").value = "";
+        formAdd.querySelector("#addDesc").value = "";
         modal.style.display = "none";
-      }); //Search thorw item
-
-      var searchForm = document.forms["searchForm"].querySelector("input[type=text]"); //once key up
-
+      });
+      var searchForm = document.querySelector(".form__search");
       searchForm.addEventListener("keyup", function (e) {
-        //convert input to lower case
-        var inputVal = e.target.value.toLowerCase(); // collect ul items and convert to array
-
+        var inputVal = e.target.value.toLowerCase();
         var items = list.getElementsByTagName("li");
         Array.from(items).forEach(function (item) {
-          //go to --> li>span>input text
-          var itemName = item.firstElementChild.querySelector("input").value; //compare input with ul items(li)
+          var itemName = item.querySelector(".list__title").value;
 
           if (itemName.toLowerCase().indexOf(inputVal) != -1) {
             item.style.display = "flex";
@@ -562,7 +521,6 @@ function () {
     value: function addEventListeners() {
       var _this = this;
 
-      // Add Task keypress
       document.getElementById("addTask").addEventListener("keypress", function (event) {
         if (event.keyCode === 13) {
           _this.addTask(event.target.value);

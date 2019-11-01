@@ -312,7 +312,7 @@ class ToDoClass {
     }
 
     this.render();
-    this.loadTasks();
+    //this.loadTasks();
   }
 
   render() {
@@ -332,67 +332,31 @@ class ToDoClass {
         //mark as complete
       } else if (e.target.classList.contains("mark")) {
         const actionSpan = e.target.parentElement.previousElementSibling;
-        let checkboxElement = document.querySelector("input[type=checkbox]");
-        let checkboxLi = document.querySelector(".list__item");
-        let checkboxLiInput = document.querySelector(".list__item input");
+        let checkboxElement = actionSpan.querySelector("input[type=checkbox]");
+        //let checkboxLi = document.querySelector(".list__item");
+        //let checkboxLiInput = document.querySelector(".list__item input");
         console.log(checkboxElement);
         actionSpan
           .querySelector("input[type=text]")
           .classList.toggle("complete");
         checkboxElement.checked = !checkboxElement.checked;
-        checkboxLi.classList.toggle("list__item_complete");
-        //move up
-      }
-      // else if (e.target.classList.contains("up")) {
-      //   const span = e.target.parentElement;
-      //   const li = span.parentElement;
-      //   const prevLi = li.previousElementSibling;
-      //   if (prevLi) {
-      //     li.classList.add("move-pulsate");
-      //     list.insertBefore(li, prevLi);
-      //     //use time out to give css animation time
-      //     setTimeout(() => {
-      //       li.classList.remove("move-pulsate");
-      //     }, 800);
-      //   }
-      //move down
-      //}
-      // else if (e.target.classList.contains("down")) {
-      //   const span = e.target.parentElement;
-      //   const li = span.parentElement;
-      //   const nextLi = li.nextElementSibling;
-      //   if (nextLi) {
-      //     li.classList.toggle("move-pulsate");
-      //     list.insertBefore(nextLi, li);
-      //     //use time out to give css animation time
-      //     setTimeout(() => {
-      //       li.classList.remove("move-pulsate");
-      //     }, 800);
-      //   }
-      //edit
-      //}
-      else if (e.target.classList.contains("edit")) {
-        //if user click on edit
-        //add to input text the border line
-        //allow update input text by change readOnly
+        //checkboxLi.classList.toggle("list__item_complete");
+      } else if (e.target.classList.contains("edit")) {
         const span = e.target.parentElement;
         const li = span.parentElement;
         const inputText = li.querySelector(".name .list__title");
         const inputDescription = li.querySelector(".name .list__description");
         const inputPriority = li.querySelector(".name .list__priority");
-        // const saveInfo = li.querySelector(".name .saveInfo");
         inputText.classList.add("input-border");
         inputDescription.classList.add("input-border");
         inputPriority.classList.add("input-border");
         inputText.style.cursor = "text";
         inputDescription.style.cursor = "text";
         inputPriority.style.cursor = "text";
-        // saveInfo.style.display = "block";
         inputText.readOnly = false;
         inputDescription.readOnly = false;
         inputPriority.readOnly = false;
 
-        //save by press enter btn
         inputText.addEventListener("keypress", function(e) {
           var key = e.which || e.keyCode;
           if (key === 13) {
@@ -423,7 +387,6 @@ class ToDoClass {
       }
     });
 
-    //Add new item
     const formAdd = document.forms["form-add"];
     formAdd.addEventListener("submit", function(e) {
       e.preventDefault();
@@ -438,33 +401,26 @@ class ToDoClass {
                   <input class="list__title task-text" type="text" value="${insertedData}" readonly="readonly">
                   <input class="list__description" type="text" value="${insertedDescription}" readonly="readonly">
                   <input class="list__priority" type="text" value="${insertedPriority}" readonly="readonly">
-                  <input class="list__priority" type="text" value="${insertedPriority}" readonly="readonly">
               </span>
               <div class="action">
-                  <button class="mark fas fas fa-check"></button>
-                  <button class="edit fas fa-pencil-alt"></button>
-                  <button class="delete fas fa-trash-alt"></button>
+                  <button class="mark">mark</button>
+                  <button class="edit">edit</button>
+                  <button class="delete">delete</button>
               </div>
               </li>`;
       list.insertAdjacentHTML("afterbegin", insertedData);
       formAdd.querySelector("input[type=text]").value = "";
+      formAdd.querySelector("#addDesc").value = "";
       modal.style.display = "none";
     });
 
-    //Search thorw item
-    const searchForm = document.forms["searchForm"].querySelector(
-      "input[type=text]"
-    );
-    //once key up
+    const searchForm = document.querySelector(".form__search");
+
     searchForm.addEventListener("keyup", function(e) {
-      //convert input to lower case
       const inputVal = e.target.value.toLowerCase();
-      // collect ul items and convert to array
       const items = list.getElementsByTagName("li");
       Array.from(items).forEach(function(item) {
-        //go to --> li>span>input text
-        const itemName = item.firstElementChild.querySelector("input").value;
-        //compare input with ul items(li)
+        const itemName = item.querySelector(".list__title").value;
         if (itemName.toLowerCase().indexOf(inputVal) != -1) {
           item.style.display = "flex";
         } else {
@@ -493,7 +449,6 @@ class ToDoClass {
   }
 
   addEventListeners() {
-    // Add Task keypress
     document.getElementById("addTask").addEventListener("keypress", event => {
       if (event.keyCode === 13) {
         this.addTask(event.target.value);
