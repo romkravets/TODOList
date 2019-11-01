@@ -111,11 +111,8 @@ body {
   padding: 10px 10px;
   margin: 10px;
   border: 1px solid #000000; }
-
-.list__checkbox {
-  position: absolute;
-  top: -10px;
-  right: -10px; }
+  .list__item_complete {
+    background: #eeeeee; }
 
 .list__title {
   font-size: 20px;
@@ -225,40 +222,6 @@ body {
   border-radius: 30%;
   cursor: pointer; }
 
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
-  display: inline-block; }
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-  right: 0; }
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block; }
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {
-  background-color: #f1f1f1; }
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  display: block; }
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
-  background-color: #a9a9a9d7; }
-
 input,
 select,
 button {
@@ -267,6 +230,156 @@ button {
 textarea {
   resize: none;
   outline: none; }
+
+/*text input style*/
+input[type="text"],
+textarea {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 100%;
+  color: gray;
+  outline: none; }
+
+#contianer {
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto;
+  margin-top: 40px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.2);
+  overflow: hidden; }
+
+.form-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+#main {
+  padding: 20px; }
+
+#main ul {
+  list-style-type: none;
+  margin: 0;
+  margin-left: 10px;
+  padding: 0; }
+
+#main ul li {
+  margin-bottom: 20px;
+  padding: 10px 5px;
+  border-left: 5px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  opacity: 1;
+  transition: all 0.5s ease;
+  overflow: hidden; }
+
+#main ul li .name {
+  min-width: 70%;
+  color: #8f8f8f; }
+
+#main ul li input[type="text"] {
+  width: 100%;
+  padding: 9px 8px;
+  color: #444;
+  outline: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  cursor: context-menu;
+  border: none; }
+
+#main ul li input[type="text"].input-border {
+  border: 1px solid #ccc !important; }
+
+#main ul li .name .saveInfo {
+  font-size: 70%;
+  margin-top: 5px;
+  display: none; }
+
+#main ul li .name button {
+  border: 1px solid #28a745;
+  background-color: #28a745;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  display: none; }
+
+#main .action button {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  font-size: 85%;
+  border-radius: 100%;
+  outline: none; }
+
+#main .action button.mark:hover {
+  border: 1px solid #fd7e14;
+  color: #fd7e14; }
+
+#main .action button.edit:hover {
+  border: 1px solid #28a745;
+  color: #28a745; }
+
+#main .action button.up:hover,
+#main .action button.down:hover {
+  border: 1px solid #0facf3;
+  color: #0facf3; }
+
+#main .action button.delete:hover {
+  border: 1px solid #dc3545;
+  color: #dc3545; }
+
+/* list actions helper */
+#main .hide {
+  margin-bottom: 0;
+  padding: 0 20px 0 20px;
+  opacity: 0;
+  height: 0; }
+
+#main .complete {
+  text-decoration: line-through; }
+
+/*  */
+/* footer start */
+/*  */
+#footer {
+  padding: 20px;
+  display: flex;
+  justify-content: center; }
+
+#footer input {
+  float: left;
+  border-right-style: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0; }
+
+#footer button {
+  font-weight: 700;
+  width: auto; }
+
+#footer button:hover {
+  background-color: #45bcf3; }
+
+.test {
+  display: none !important; }
+
+/* animations */
+.move-pulsate {
+  animation: pulsate 0.5s ease-in-out;
+  animation-iteration-count: 1; }
+
+@keyframes pulsate {
+  0% {
+    opacity: 0.4; }
+  50% {
+    opacity: 0.7; }
+  100% {
+    opacity: 0.4; } }
+
+.is-hidden {
+  display: none; }
 
 
 /*# sourceMappingURL=index.css.map*/

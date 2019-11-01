@@ -10,49 +10,49 @@
     <title>TODOList</title>
     <script src="http://localhost:35729/livereload.js"></script>
   <link href="index.css" rel="stylesheet"></head>
+
   <body>
     <header class="header-content">
       <div class="container">
         <h1>TODOList</h1>
       </div>
     </header>
-
-    <main class="main-content">
-      <div class="container">
-        <div class="row-flex">
-          <form action="" class="form">
-            <div>
-              <input class="form__search" placeholder="search by title" />
-            </div>
-            <div>
-              <select id="complite" class="form__complite">
-                <option value="all">all</option>
-                <option value="open">open</option>
-                <option value="done">done</option>
-              </select>
-            </div>
-            <div>
-              <select id="" class="form__priority">
-                <option value="all">all</option>
-                <option value="high">high</option>
-                <option value="normal">hormal</option>
-                <option value="low">how</option>
-              </select>
-            </div>
-            <button id="addBtn" class="form__btn">Create</button>
-          </form>
-          <ul class="list__items" id="taskList"></ul>
-        </div>
+    <div class="container">
+      <div class="form-header">
+        <form action="#" id="searchForm" class="form">
+          <input
+            class="form__search"
+            type="text"
+            placeholder="search by title"
+            value=""
+          />
+          <select id="complite" class="form__complite">
+            <option value="all" class="compliteOption" selected>all</option>
+            <option value="open" class="compliteOption">open</option>
+            <option value="done" id="doneTask">done</option>
+          </select>
+          <select id="prioritySelect" class="form__priority">
+            <option value="all" class="compliteOption" selected>all</option>
+            <option value="high" class="compliteOption">high</option>
+            <option value="normal" class="compliteOption">normal</option>
+            <option value="low" class="compliteOption">low</option>
+          </select>
+          <button id="addBtn" class="form__btn">Create</button>
+        </form>
       </div>
-    </main>
-    <!-- <footer class="footer-content">
-      <div class="container">
-        <p>Roman Kravets</p>
+      <div id="main">
+        <ul id="list"></ul>
       </div>
-    </footer> -->
+      <!-- <div id="footer">
+        <form action="#" id="form-add">
+          <input type="text" placeholder="Add Somthing..." />
+          <button class="btn-primary">Add</button>
+        </form>
+      </div> -->
+    </div>
 
     <div id="modalToggle" class="modal">
-      <form class="modal__content">
+      <form action="#" class="modal__content" id="form-add">
         <label for="addTask">
           Title:<input
             type="text"
