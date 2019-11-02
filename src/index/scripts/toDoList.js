@@ -1,4 +1,4 @@
-const list = document.getElementById("list");
+const TO_DO_LIST = document.getElementById("list");
 const MODAL_FORM = document.querySelector("#modalToggle");
 const TOP_FORM = document.querySelector("#topForm");
 const HEADER = document.querySelector("#header");
@@ -97,22 +97,57 @@ export class ToDoList {
             list.style.display = "none";
           }
         } else if (outpuTarget === "all") {
-          const completeTitle = list.querySelector(".list__title");
-          const complete = completeTitle.classList.contains("complete");
-          if (complete) {
-            list.style.display = "flex";
-          }
+          list.style.display = "flex";
         }
       });
     });
 
-    list.addEventListener("click", e => {
+    const selectElementPriority = document.querySelector("#prioritySelect");
+    selectElementPriority.addEventListener("click", e => {
+      const outpuTargetPriority =
+        selectElementPriority.options[selectElementPriority.selectedIndex]
+          .value;
+
+      const listAllTasks = document.querySelectorAll("#list li");
+      Array.from(listAllTasks).forEach(list => {
+        if (outpuTargetPriority === "high") {
+          const priority = list.querySelector(".list__priority");
+          const priorityComplete = priority.value;
+          console.log(priorityComplete);
+          if (priorityComplete === "high") {
+            list.style.display = "flex";
+          } else {
+            list.style.display = "none";
+          }
+        } else if (outpuTargetPriority === "normal") {
+          const priority = list.querySelector(".list__priority");
+          const priorityComplete = priority.value;
+          if (priorityComplete === "normal") {
+            list.style.display = "flex";
+          } else {
+            list.style.display = "none";
+          }
+        } else if (outpuTargetPriority === "low") {
+          const priority = list.querySelector(".list__priority");
+          const priorityComplete = priority.value;
+          if (priorityComplete === "low") {
+            list.style.display = "flex";
+          } else {
+            list.style.display = "none";
+          }
+        } else if (outpuTargetPriority === "all") {
+          list.style.display = "flex";
+        }
+      });
+    });
+
+    TO_DO_LIST.addEventListener("click", e => {
       if (e.target.classList.contains("delete")) {
         const span = e.target.parentElement;
         const li = span.parentElement;
         li.classList.add("hide");
         setTimeout(() => {
-          list.removeChild(li);
+          TO_DO_LIST.removeChild(li);
         }, 600);
       } else if (e.target.classList.contains("mark")) {
         const actionSpan = e.target.parentElement.previousElementSibling;
@@ -187,7 +222,7 @@ export class ToDoList {
                       <button class="delete">delete</button>
                   </div>
               </li>`;
-      list.insertAdjacentHTML("afterbegin", insertedData);
+      TO_DO_LIST.insertAdjacentHTML("afterbegin", insertedData);
       formAdd.querySelector("input[type=text]").value = "";
       formAdd.querySelector("#addDesc").value = "";
       MODAL_FORM.style.display = "none";
@@ -197,7 +232,7 @@ export class ToDoList {
 
     searchForm.addEventListener("keyup", e => {
       const inputVal = e.target.value.toLowerCase();
-      const items = list.getElementsByTagName("li");
+      const items = TO_DO_LIST.getElementsByTagName("li");
       Array.from(items).forEach(function(item) {
         const itemName = item.querySelector(".list__title").value;
         if (itemName.toLowerCase().indexOf(inputVal) != -1) {
