@@ -96,10 +96,11 @@ body {
   padding: 0;
   min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
+  margin: auto;
 }
 
 .header-content {
-  border-bottom: 1px solid rgb(0, 0, 0);
+  border-bottom: 1px solid rgb(139, 138, 138);
   padding: 10px 10px;
   margin-bottom: 50px;
 }
@@ -126,6 +127,7 @@ body {
     box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, 0.16);
     &_complete {
       background: rgb(248, 248, 248);
+      transition: 0.4s;
     }
   }
   &__checkbox {
@@ -194,15 +196,18 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
   background-color: rgba(246, 246, 246, 0.4);
-
   &__content {
     background-color: rgb(254, 254, 254);
-    margin: 15% auto;
     padding: 20px;
     border: 1px solid rgb(135, 135, 135);
     width: 20%;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
     -webkit-box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, 0.16);
     -moz-box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, 0.16);
     box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, 0.16);
@@ -222,14 +227,15 @@ body {
     width: 100%;
   }
   &__select {
-    width: 50%;
+    width: 100%;
     padding: 10px;
     text-align: center;
     margin: 10px 0;
     cursor: pointer;
+    background-size: 17%;
   }
   &__btn-block {
-    margin-top: 45px;
+    margin-top: 60px;
     display: flex;
     justify-content: space-between;
   }
@@ -281,6 +287,16 @@ body {
   }
 }
 
+.footer-content {
+  border-top: 1px solid rgb(139, 138, 138);
+}
+
+.author {
+  color: rgb(139, 138, 138);
+  padding: 20px 0;
+  display: inline-block;
+}
+
 input,
 select,
 button {
@@ -290,6 +306,10 @@ button {
 textarea {
   resize: none;
   outline: none;
+}
+
+button:hover {
+  border-color: rgb(43, 140, 250);
 }
 
 select {
@@ -320,8 +340,7 @@ input[type="checkbox"] {
   padding: 9px 8px;
   color: rgb(68, 68, 68);
   outline: none;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+  border-radius: 0;
   cursor: context-menu;
   border: none;
 }
@@ -343,16 +362,21 @@ input[type="checkbox"] {
 
 #list .list__item_complete input[type="text"] {
   background: rgb(248, 248, 248);
+  transition: 0.4s;
 }
 
-#main .hide {
+#mainList .hide {
   margin-bottom: 0;
   padding: 0 20px 0 20px;
   opacity: 0;
   height: 0;
 }
 
-#main .complete {
+#mainList {
+  min-height: 50vh;
+}
+
+#mainList .complete {
   text-decoration: line-through;
 }
 
@@ -373,8 +397,4 @@ input[type="checkbox"] {
   100% {
     opacity: 0.4;
   }
-}
-
-.is-hidden {
-  display: none;
 }
