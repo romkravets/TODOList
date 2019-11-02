@@ -58,6 +58,7 @@ export class ToDoList {
             id="addDesc"
           ></textarea>
         </label>
+        <label for="priority">Priority:</label>
         <div class="modal__priority">
           <select id="priority" class="modal__select">
             <option value="high">High</option>
@@ -143,8 +144,8 @@ export class ToDoList {
 
     TO_DO_LIST.addEventListener("click", e => {
       if (e.target.classList.contains("delete")) {
-        const span = e.target.parentElement;
-        const li = span.parentElement;
+        const targetParent = e.target.parentElement;
+        const li = targetParent.parentElement;
         li.classList.add("hide");
         setTimeout(() => {
           TO_DO_LIST.removeChild(li);
@@ -159,11 +160,13 @@ export class ToDoList {
           .classList.toggle("complete");
         checkboxElement.checked = !checkboxElement.checked;
       } else if (e.target.classList.contains("edit")) {
-        const span = e.target.parentElement;
-        const li = span.parentElement;
-        const inputText = li.querySelector(".name .list__title");
-        const inputDescription = li.querySelector(".name .list__description");
-        const inputPriority = li.querySelector(".name .list__priority");
+        const targetParent = e.target.parentElement;
+        const li = targetParent.parentElement;
+        const inputText = li.querySelector(".list__name .list__title");
+        const inputDescription = li.querySelector(
+          ".list__name .list__description"
+        );
+        const inputPriority = li.querySelector(".list__name .list__priority");
         inputText.classList.toggle("input-border");
         inputDescription.classList.toggle("input-border");
         inputPriority.classList.toggle("input-border");
@@ -208,18 +211,18 @@ export class ToDoList {
       let insertedDescription = formAdd.querySelector("#addDesc").value;
       let insertedPriority = formAdd.querySelector("#priority").value;
       insertedData = `<li class="list__item">
-                  <span class="name">
+                  <div class="list__name">
                       <label class="list__checkbox">
                           <input class="list__check-status" type="checkbox" class="">
                       </label>
                       <input class="list__title task-text" type="text" value="${insertedData}" readonly="readonly">
                       <input class="list__description" type="text" value="${insertedDescription}" readonly="readonly">
                       <input class="list__priority" type="text" value="${insertedPriority}" readonly="readonly">
-                  </span>
-                  <div class="action">
-                      <button class="mark">mark</button>
-                      <button class="edit">edit</button>
-                      <button class="delete">delete</button>
+                  </div>
+                  <div class="list__buttons">
+                      <button class="list__button mark">done</button>
+                      <button class="list__button edit">edit</button>
+                      <button class="list__button delete">delete</button>
                   </div>
               </li>`;
       TO_DO_LIST.insertAdjacentHTML("afterbegin", insertedData);
