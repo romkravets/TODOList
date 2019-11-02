@@ -97,11 +97,46 @@ export class ToDoList {
             list.style.display = "none";
           }
         } else if (outpuTarget === "all") {
-          const completeTitle = list.querySelector(".list__title");
-          const complete = completeTitle.classList.contains("complete");
-          if (complete) {
+          list.style.display = "flex";
+        }
+      });
+    });
+
+    const selectElementPriority = document.querySelector("#prioritySelect");
+    selectElementPriority.addEventListener("click", e => {
+      const outpuTargetPriority =
+        selectElementPriority.options[selectElementPriority.selectedIndex]
+          .value;
+
+      const listAllTasks = document.querySelectorAll("#list li");
+      Array.from(listAllTasks).forEach(list => {
+        if (outpuTargetPriority === "high") {
+          const priority = list.querySelector(".list__priority");
+          const priorityComplete = priority.value;
+          console.log(priorityComplete);
+          if (priorityComplete === "high") {
             list.style.display = "flex";
+          } else {
+            list.style.display = "none";
           }
+        } else if (outpuTargetPriority === "normal") {
+          const priority = list.querySelector(".list__priority");
+          const priorityComplete = priority.value;
+          if (priorityComplete === "normal") {
+            list.style.display = "flex";
+          } else {
+            list.style.display = "none";
+          }
+        } else if (outpuTargetPriority === "low") {
+          const priority = list.querySelector(".list__priority");
+          const priorityComplete = priority.value;
+          if (priorityComplete === "low") {
+            list.style.display = "flex";
+          } else {
+            list.style.display = "none";
+          }
+        } else if (outpuTargetPriority === "all") {
+          list.style.display = "flex";
         }
       });
     });

@@ -232,13 +232,47 @@ function () {
               list.style.display = "none";
             }
           } else if (outpuTarget === "all") {
-            var _completeTitle2 = list.querySelector(".list__title");
+            list.style.display = "flex";
+          }
+        });
+      });
+      var selectElementPriority = document.querySelector("#prioritySelect");
+      selectElementPriority.addEventListener("click", function (e) {
+        var outpuTargetPriority = selectElementPriority.options[selectElementPriority.selectedIndex].value;
+        var listAllTasks = document.querySelectorAll("#list li");
+        Array.from(listAllTasks).forEach(function (list) {
+          if (outpuTargetPriority === "high") {
+            var priority = list.querySelector(".list__priority");
+            var priorityComplete = priority.value;
+            console.log(priorityComplete);
 
-            var _complete2 = _completeTitle2.classList.contains("complete");
-
-            if (_complete2) {
+            if (priorityComplete === "high") {
               list.style.display = "flex";
+            } else {
+              list.style.display = "none";
             }
+          } else if (outpuTargetPriority === "normal") {
+            var _priority = list.querySelector(".list__priority");
+
+            var _priorityComplete = _priority.value;
+
+            if (_priorityComplete === "normal") {
+              list.style.display = "flex";
+            } else {
+              list.style.display = "none";
+            }
+          } else if (outpuTargetPriority === "low") {
+            var _priority2 = list.querySelector(".list__priority");
+
+            var _priorityComplete2 = _priority2.value;
+
+            if (_priorityComplete2 === "low") {
+              list.style.display = "flex";
+            } else {
+              list.style.display = "none";
+            }
+          } else if (outpuTargetPriority === "all") {
+            list.style.display = "flex";
           }
         });
       });
