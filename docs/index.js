@@ -134,6 +134,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+var MODAl = document.querySelector("#modalToggle");
 var ModalWindow =
 /*#__PURE__*/
 function () {
@@ -146,52 +147,18 @@ function () {
   _createClass(ModalWindow, [{
     key: "render",
     value: function render() {
-      var modal = document.querySelector("#modalToggle"); // const modalHtml = `
-      //           <form action="#" class="modal__content" id="form-add">
-      //           <label for="addTask">
-      //             Title:<input
-      //               type="text"
-      //               placeholder="Title"
-      //               class="modal__title"
-      //               id="addTask"
-      //             />
-      //           </label>
-      //           <label for="addDesc">
-      //             Desctiption:
-      //             <textarea
-      //               type="text"
-      //               placeholder="Desctiption"
-      //               class="modal__desctiption"
-      //               id="addDesc"
-      //             ></textarea>
-      //           </label>
-      //           <div class="modal__priority">
-      //             <select id="priority" class="modal__select">
-      //               <option value="high">High</option>
-      //               <option value="normal">Normal</option>
-      //               <option value="low">Low</option>
-      //             </select>
-      //           </div>
-      //           <div class="modal__btn-block">
-      //             <button class="modal__cancel modal__btn">Cancel</button>
-      //             <button id="btnTask" class="modal__btn">Save</button>
-      //           </div>
-      //         </form>
-      //      `;
-      // modal.innerHTML += modalHtml;
-
       document.querySelector("#addBtn").addEventListener("click", function (e) {
         e.preventDefault();
-        modal.style.display = "block";
+        MODAl.style.display = "block";
       });
       document.querySelector(".modal__cancel").addEventListener("click", function (e) {
         e.preventDefault();
-        modal.style.display = "none";
+        MODAl.style.display = "none";
       });
       window.addEventListener("click", function (e) {
-        if (event.target == modal) {
+        if (event.target == MODAl) {
           e.preventDefault();
-          modal.style.display = "none";
+          MODAl.style.display = "none";
         }
       });
     }
@@ -342,7 +309,7 @@ function () {
         var insertedData = formAdd.querySelector("#addTask").value;
         var insertedDescription = formAdd.querySelector("#addDesc").value;
         var insertedPriority = formAdd.querySelector("#priority").value;
-        insertedData = "<li class=\"list__item\">\n              <span class=\"name\">\n                  <label class=\"list__checkbox\">\n                      <input class=\"list__check-status\" type=\"checkbox\" class=\"\">\n                  </label>\n                  <input class=\"list__title task-text\" type=\"text\" value=\"".concat(insertedData, "\" readonly=\"readonly\">\n                  <input class=\"list__description\" type=\"text\" value=\"").concat(insertedDescription, "\" readonly=\"readonly\">\n                  <input class=\"list__priority\" type=\"text\" value=\"").concat(insertedPriority, "\" readonly=\"readonly\">\n              </span>\n              <div class=\"action\">\n                  <button class=\"mark\">mark</button>\n                  <button class=\"edit\">edit</button>\n                  <button class=\"delete\">delete</button>\n              </div>\n              </li>");
+        insertedData = "<li class=\"list__item\">\n                  <span class=\"name\">\n                      <label class=\"list__checkbox\">\n                          <input class=\"list__check-status\" type=\"checkbox\" class=\"\">\n                      </label>\n                      <input class=\"list__title task-text\" type=\"text\" value=\"".concat(insertedData, "\" readonly=\"readonly\">\n                      <input class=\"list__description\" type=\"text\" value=\"").concat(insertedDescription, "\" readonly=\"readonly\">\n                      <input class=\"list__priority\" type=\"text\" value=\"").concat(insertedPriority, "\" readonly=\"readonly\">\n                  </span>\n                  <div class=\"action\">\n                      <button class=\"mark\">mark</button>\n                      <button class=\"edit\">edit</button>\n                      <button class=\"delete\">delete</button>\n                  </div>\n              </li>");
         list.insertAdjacentHTML("afterbegin", insertedData);
         formAdd.querySelector("input[type=text]").value = "";
         formAdd.querySelector("#addDesc").value = "";

@@ -173,19 +173,19 @@ export class ToDoList {
       let insertedDescription = formAdd.querySelector("#addDesc").value;
       let insertedPriority = formAdd.querySelector("#priority").value;
       insertedData = `<li class="list__item">
-              <span class="name">
-                  <label class="list__checkbox">
-                      <input class="list__check-status" type="checkbox" class="">
-                  </label>
-                  <input class="list__title task-text" type="text" value="${insertedData}" readonly="readonly">
-                  <input class="list__description" type="text" value="${insertedDescription}" readonly="readonly">
-                  <input class="list__priority" type="text" value="${insertedPriority}" readonly="readonly">
-              </span>
-              <div class="action">
-                  <button class="mark">mark</button>
-                  <button class="edit">edit</button>
-                  <button class="delete">delete</button>
-              </div>
+                  <span class="name">
+                      <label class="list__checkbox">
+                          <input class="list__check-status" type="checkbox" class="">
+                      </label>
+                      <input class="list__title task-text" type="text" value="${insertedData}" readonly="readonly">
+                      <input class="list__description" type="text" value="${insertedDescription}" readonly="readonly">
+                      <input class="list__priority" type="text" value="${insertedPriority}" readonly="readonly">
+                  </span>
+                  <div class="action">
+                      <button class="mark">mark</button>
+                      <button class="edit">edit</button>
+                      <button class="delete">delete</button>
+                  </div>
               </li>`;
       list.insertAdjacentHTML("afterbegin", insertedData);
       formAdd.querySelector("input[type=text]").value = "";
