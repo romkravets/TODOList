@@ -205,7 +205,7 @@ function () {
       HEADER.innerHTML += headerHtml;
       var topFormHtml = "\n          <form action=\"#\" id=\"searchForm\" class=\"form\">\n          <input\n            class=\"form__search\"\n            type=\"text\"\n            placeholder=\"search by title\"\n            value=\"\"\n          />\n          <select id=\"complite\" class=\"form__complite\">\n            <option value=\"all\" class=\"compliteOption\" selected>all</option>\n            <option value=\"open\" class=\"compliteOption\">open</option>\n            <option value=\"done\" id=\"doneTask\">done</option>\n          </select>\n          <select id=\"prioritySelect\" class=\"form__priority\">\n            <option value=\"all\" class=\"compliteOption\" selected>all</option>\n            <option value=\"high\" class=\"compliteOption\">high</option>\n            <option value=\"normal\" class=\"compliteOption\">normal</option>\n            <option value=\"low\" class=\"compliteOption\">low</option>\n          </select>\n          <button id=\"addBtn\" class=\"form__btn\">Create</button>\n        </form>\n         ";
       TOP_FORM.innerHTML += topFormHtml;
-      var modalHtml = "\n    <form action=\"#\" class=\"modal__content\" id=\"form-add\">\n        <label for=\"addTask\">\n          Title:<input\n            type=\"text\"\n            placeholder=\"Title\"\n            class=\"modal__title\"\n            id=\"addTask\"\n          />\n        </label>\n        <label for=\"addDesc\">\n          Desctiption:\n          <textarea\n            type=\"text\"\n            placeholder=\"Desctiption\"\n            class=\"modal__desctiption\"\n            id=\"addDesc\"\n          ></textarea>\n        </label>\n        <div class=\"modal__priority\">\n          <select id=\"priority\" class=\"modal__select\">\n            <option value=\"high\">High</option>\n            <option value=\"normal\">Normal</option>\n            <option value=\"low\">Low</option>\n          </select>\n        </div>\n        <div class=\"modal__btn-block\">\n          <button class=\"modal__cancel modal__btn\">Cancel</button>\n          <button id=\"btnTask\" class=\"modal__btn\">Save</button>\n        </div>\n      </form>\n    ";
+      var modalHtml = "\n    <form action=\"#\" class=\"modal__content\" id=\"form-add\">\n        <label for=\"addTask\">\n          Title:<input\n            type=\"text\"\n            placeholder=\"Title\"\n            class=\"modal__title\"\n            id=\"addTask\"\n          />\n        </label>\n        <label for=\"addDesc\">\n          Desctiption:\n          <textarea\n            type=\"text\"\n            placeholder=\"Desctiption\"\n            class=\"modal__desctiption\"\n            id=\"addDesc\"\n          ></textarea>\n        </label>\n        <label for=\"priority\">Priority:</label>\n        <div class=\"modal__priority\">\n          <select id=\"priority\" class=\"modal__select\">\n            <option value=\"high\">High</option>\n            <option value=\"normal\">Normal</option>\n            <option value=\"low\">Low</option>\n          </select>\n        </div>\n        <div class=\"modal__btn-block\">\n          <button class=\"modal__cancel modal__btn\">Cancel</button>\n          <button id=\"btnTask\" class=\"modal__btn\">Save</button>\n        </div>\n      </form>\n    ";
       MODAL_FORM.innerHTML += modalHtml;
       var selectElement = document.querySelector("#complite");
       selectElement.addEventListener("click", function (e) {
@@ -278,8 +278,8 @@ function () {
       });
       TO_DO_LIST.addEventListener("click", function (e) {
         if (e.target.classList.contains("delete")) {
-          var span = e.target.parentElement;
-          var li = span.parentElement;
+          var targetParent = e.target.parentElement;
+          var li = targetParent.parentElement;
           li.classList.add("hide");
           setTimeout(function () {
             TO_DO_LIST.removeChild(li);
@@ -290,14 +290,14 @@ function () {
           actionSpan.querySelector("input[type=text]").classList.toggle("complete");
           checkboxElement.checked = !checkboxElement.checked;
         } else if (e.target.classList.contains("edit")) {
-          var _span = e.target.parentElement;
-          var _li = _span.parentElement;
+          var _targetParent = e.target.parentElement;
+          var _li = _targetParent.parentElement;
 
-          var inputText = _li.querySelector(".name .list__title");
+          var inputText = _li.querySelector(".list__name .list__title");
 
-          var inputDescription = _li.querySelector(".name .list__description");
+          var inputDescription = _li.querySelector(".list__name .list__description");
 
-          var inputPriority = _li.querySelector(".name .list__priority");
+          var inputPriority = _li.querySelector(".list__name .list__priority");
 
           inputText.classList.toggle("input-border");
           inputDescription.classList.toggle("input-border");
@@ -343,7 +343,7 @@ function () {
         var insertedData = formAdd.querySelector("#addTask").value;
         var insertedDescription = formAdd.querySelector("#addDesc").value;
         var insertedPriority = formAdd.querySelector("#priority").value;
-        insertedData = "<li class=\"list__item\">\n                  <span class=\"name\">\n                      <label class=\"list__checkbox\">\n                          <input class=\"list__check-status\" type=\"checkbox\" class=\"\">\n                      </label>\n                      <input class=\"list__title task-text\" type=\"text\" value=\"".concat(insertedData, "\" readonly=\"readonly\">\n                      <input class=\"list__description\" type=\"text\" value=\"").concat(insertedDescription, "\" readonly=\"readonly\">\n                      <input class=\"list__priority\" type=\"text\" value=\"").concat(insertedPriority, "\" readonly=\"readonly\">\n                  </span>\n                  <div class=\"action\">\n                      <button class=\"mark\">mark</button>\n                      <button class=\"edit\">edit</button>\n                      <button class=\"delete\">delete</button>\n                  </div>\n              </li>");
+        insertedData = "<li class=\"list__item\">\n                  <div class=\"list__name\">\n                      <label class=\"list__checkbox\">\n                          <input class=\"list__check-status\" type=\"checkbox\" class=\"\">\n                      </label>\n                      <input class=\"list__title task-text\" type=\"text\" value=\"".concat(insertedData, "\" readonly=\"readonly\">\n                      <input class=\"list__description\" type=\"text\" value=\"").concat(insertedDescription, "\" readonly=\"readonly\">\n                      <input class=\"list__priority\" type=\"text\" value=\"").concat(insertedPriority, "\" readonly=\"readonly\">\n                  </div>\n                  <div class=\"list__buttons\">\n                      <button class=\"list__button mark\">done</button>\n                      <button class=\"list__button edit\">edit</button>\n                      <button class=\"list__button delete\">delete</button>\n                  </div>\n              </li>");
         TO_DO_LIST.insertAdjacentHTML("afterbegin", insertedData);
         formAdd.querySelector("input[type=text]").value = "";
         formAdd.querySelector("#addDesc").value = "";
