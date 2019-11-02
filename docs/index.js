@@ -146,7 +146,40 @@ function () {
   _createClass(ModalWindow, [{
     key: "render",
     value: function render() {
-      var modal = document.querySelector("#modalToggle");
+      var modal = document.querySelector("#modalToggle"); // const modalHtml = `
+      //           <form action="#" class="modal__content" id="form-add">
+      //           <label for="addTask">
+      //             Title:<input
+      //               type="text"
+      //               placeholder="Title"
+      //               class="modal__title"
+      //               id="addTask"
+      //             />
+      //           </label>
+      //           <label for="addDesc">
+      //             Desctiption:
+      //             <textarea
+      //               type="text"
+      //               placeholder="Desctiption"
+      //               class="modal__desctiption"
+      //               id="addDesc"
+      //             ></textarea>
+      //           </label>
+      //           <div class="modal__priority">
+      //             <select id="priority" class="modal__select">
+      //               <option value="high">High</option>
+      //               <option value="normal">Normal</option>
+      //               <option value="low">Low</option>
+      //             </select>
+      //           </div>
+      //           <div class="modal__btn-block">
+      //             <button class="modal__cancel modal__btn">Cancel</button>
+      //             <button id="btnTask" class="modal__btn">Save</button>
+      //           </div>
+      //         </form>
+      //      `;
+      // modal.innerHTML += modalHtml;
+
       document.querySelector("#addBtn").addEventListener("click", function (e) {
         e.preventDefault();
         modal.style.display = "block";
@@ -186,7 +219,9 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var list = document.getElementById("list");
-var modal = document.querySelector("#modalToggle");
+var MODAL_FORM = document.querySelector("#modalToggle");
+var TOP_FORM = document.querySelector("#topForm");
+var HEADER = document.querySelector("#header");
 var ToDoList =
 /*#__PURE__*/
 function () {
@@ -199,6 +234,12 @@ function () {
   _createClass(ToDoList, [{
     key: "render",
     value: function render() {
+      var headerHtml = "\n    <div class=\"container\">\n        <h1>TODOList</h1>\n    </div>\n   ";
+      HEADER.innerHTML += headerHtml;
+      var topFormHtml = "\n          <form action=\"#\" id=\"searchForm\" class=\"form\">\n          <input\n            class=\"form__search\"\n            type=\"text\"\n            placeholder=\"search by title\"\n            value=\"\"\n          />\n          <select id=\"complite\" class=\"form__complite\">\n            <option value=\"all\" class=\"compliteOption\" selected>all</option>\n            <option value=\"open\" class=\"compliteOption\">open</option>\n            <option value=\"done\" id=\"doneTask\">done</option>\n          </select>\n          <select id=\"prioritySelect\" class=\"form__priority\">\n            <option value=\"all\" class=\"compliteOption\" selected>all</option>\n            <option value=\"high\" class=\"compliteOption\">high</option>\n            <option value=\"normal\" class=\"compliteOption\">normal</option>\n            <option value=\"low\" class=\"compliteOption\">low</option>\n          </select>\n          <button id=\"addBtn\" class=\"form__btn\">Create</button>\n        </form>\n         ";
+      TOP_FORM.innerHTML += topFormHtml;
+      var modalHtml = "\n    <form action=\"#\" class=\"modal__content\" id=\"form-add\">\n        <label for=\"addTask\">\n          Title:<input\n            type=\"text\"\n            placeholder=\"Title\"\n            class=\"modal__title\"\n            id=\"addTask\"\n          />\n        </label>\n        <label for=\"addDesc\">\n          Desctiption:\n          <textarea\n            type=\"text\"\n            placeholder=\"Desctiption\"\n            class=\"modal__desctiption\"\n            id=\"addDesc\"\n          ></textarea>\n        </label>\n        <div class=\"modal__priority\">\n          <select id=\"priority\" class=\"modal__select\">\n            <option value=\"high\">High</option>\n            <option value=\"normal\">Normal</option>\n            <option value=\"low\">Low</option>\n          </select>\n        </div>\n        <div class=\"modal__btn-block\">\n          <button class=\"modal__cancel modal__btn\">Cancel</button>\n          <button id=\"btnTask\" class=\"modal__btn\">Save</button>\n        </div>\n      </form>\n    ";
+      MODAL_FORM.innerHTML += modalHtml;
       var selectElement = document.querySelector("#complite");
       selectElement.addEventListener("click", function (e) {
         var outpuTarget = selectElement.options[selectElement.selectedIndex].value;
@@ -305,7 +346,7 @@ function () {
         list.insertAdjacentHTML("afterbegin", insertedData);
         formAdd.querySelector("input[type=text]").value = "";
         formAdd.querySelector("#addDesc").value = "";
-        modal.style.display = "none";
+        MODAL_FORM.style.display = "none";
       });
       var searchForm = document.querySelector(".form__search");
       searchForm.addEventListener("keyup", function (e) {
