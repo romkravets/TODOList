@@ -1,0 +1,71 @@
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+header,
+nav,
+section,
+footer {
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: auto;
+}
+
+.header-content {
+  border-bottom: 1px solid rgb(139, 138, 138);
+  padding: 10px 10px;
+  margin-bottom: 50px;
+}
+
+input,
+select,
+button {
+  outline: none;
+}
+
+textarea {
+  resize: none;
+  outline: none;
+}
+
+button:hover {
+  border-color: rgb(43, 140, 250);
+}
+
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("img/select-down-arrow.svg");
+  background-size: 2.4rem;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+input[type="text"],
+textarea,
+select {
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 4px;
+  font-size: 100%;
+  color: gray;
+}
+
+input[type="checkbox"] {
+  border-radius: 0;
+}
