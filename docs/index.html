@@ -12,76 +12,16 @@
   <link href="index.css" rel="stylesheet"></head>
 
   <body>
-    <header class="header-content">
+    <header id="header" class="header-content"></header>
+    <main>
       <div class="container">
-        <h1>TODOList</h1>
-      </div>
-    </header>
-    <div class="container">
-      <div class="form-header">
-        <form action="#" id="searchForm" class="form">
-          <input
-            class="form__search"
-            type="text"
-            placeholder="search by title"
-            value=""
-          />
-          <select id="complite" class="form__complite">
-            <option value="all" class="compliteOption" selected>all</option>
-            <option value="open" class="compliteOption">open</option>
-            <option value="done" id="doneTask">done</option>
-          </select>
-          <select id="prioritySelect" class="form__priority">
-            <option value="all" class="compliteOption" selected>all</option>
-            <option value="high" class="compliteOption">high</option>
-            <option value="normal" class="compliteOption">normal</option>
-            <option value="low" class="compliteOption">low</option>
-          </select>
-          <button id="addBtn" class="form__btn">Create</button>
-        </form>
-      </div>
-      <div id="main">
-        <ul id="list"></ul>
-      </div>
-      <!-- <div id="footer">
-        <form action="#" id="form-add">
-          <input type="text" placeholder="Add Somthing..." />
-          <button class="btn-primary">Add</button>
-        </form>
-      </div> -->
-    </div>
-
-    <div id="modalToggle" class="modal">
-      <form action="#" class="modal__content" id="form-add">
-        <label for="addTask">
-          Title:<input
-            type="text"
-            placeholder="Title"
-            class="modal__title"
-            id="addTask"
-          />
-        </label>
-        <label for="addDesc">
-          Desctiption:
-          <textarea
-            type="text"
-            placeholder="Desctiption"
-            class="modal__desctiption"
-            id="addDesc"
-          ></textarea>
-        </label>
-        <div class="modal__priority">
-          <select id="priority" class="modal__select">
-            <option value="high">High</option>
-            <option value="normal">Normal</option>
-            <option value="low">Low</option>
-          </select>
+        <div id="topForm" class="form-header"></div>
+        <div id="main">
+          <ul id="list"></ul>
         </div>
-        <div class="modal__btn-block">
-          <button class="modal__cancel modal__btn">Cancel</button>
-          <button id="btnTask" class="modal__btn">Save</button>
-        </div>
-      </form>
-    </div>
+      </div>
+    </main>
+    <footer></footer>
+    <div id="modalToggle" class="modal"></div>
   <script type="text/javascript" src="index.js"></script></body>
 </html>

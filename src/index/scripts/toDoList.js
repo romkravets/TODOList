@@ -1,5 +1,7 @@
 const list = document.getElementById("list");
-const modal = document.querySelector("#modalToggle");
+const MODAL_FORM = document.querySelector("#modalToggle");
+const TOP_FORM = document.querySelector("#topForm");
+const HEADER = document.querySelector("#header");
 
 export class ToDoList {
   constructor() {
@@ -7,6 +9,70 @@ export class ToDoList {
   }
 
   render() {
+    const headerHtml = `
+    <div class="container">
+        <h1>TODOList</h1>
+    </div>
+   `;
+    HEADER.innerHTML += headerHtml;
+    const topFormHtml = `
+          <form action="#" id="searchForm" class="form">
+          <input
+            class="form__search"
+            type="text"
+            placeholder="search by title"
+            value=""
+          />
+          <select id="complite" class="form__complite">
+            <option value="all" class="compliteOption" selected>all</option>
+            <option value="open" class="compliteOption">open</option>
+            <option value="done" id="doneTask">done</option>
+          </select>
+          <select id="prioritySelect" class="form__priority">
+            <option value="all" class="compliteOption" selected>all</option>
+            <option value="high" class="compliteOption">high</option>
+            <option value="normal" class="compliteOption">normal</option>
+            <option value="low" class="compliteOption">low</option>
+          </select>
+          <button id="addBtn" class="form__btn">Create</button>
+        </form>
+         `;
+    TOP_FORM.innerHTML += topFormHtml;
+
+    const modalHtml = `
+    <form action="#" class="modal__content" id="form-add">
+        <label for="addTask">
+          Title:<input
+            type="text"
+            placeholder="Title"
+            class="modal__title"
+            id="addTask"
+          />
+        </label>
+        <label for="addDesc">
+          Desctiption:
+          <textarea
+            type="text"
+            placeholder="Desctiption"
+            class="modal__desctiption"
+            id="addDesc"
+          ></textarea>
+        </label>
+        <div class="modal__priority">
+          <select id="priority" class="modal__select">
+            <option value="high">High</option>
+            <option value="normal">Normal</option>
+            <option value="low">Low</option>
+          </select>
+        </div>
+        <div class="modal__btn-block">
+          <button class="modal__cancel modal__btn">Cancel</button>
+          <button id="btnTask" class="modal__btn">Save</button>
+        </div>
+      </form>
+    `;
+    MODAL_FORM.innerHTML += modalHtml;
+
     const selectElement = document.querySelector("#complite");
     selectElement.addEventListener("click", e => {
       const outpuTarget =
@@ -124,7 +190,7 @@ export class ToDoList {
       list.insertAdjacentHTML("afterbegin", insertedData);
       formAdd.querySelector("input[type=text]").value = "";
       formAdd.querySelector("#addDesc").value = "";
-      modal.style.display = "none";
+      MODAL_FORM.style.display = "none";
     });
 
     const searchForm = document.querySelector(".form__search");
