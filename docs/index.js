@@ -185,7 +185,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var list = document.getElementById("list");
+var TO_DO_LIST = document.getElementById("list");
 var MODAL_FORM = document.querySelector("#modalToggle");
 var TOP_FORM = document.querySelector("#topForm");
 var HEADER = document.querySelector("#header");
@@ -276,13 +276,13 @@ function () {
           }
         });
       });
-      list.addEventListener("click", function (e) {
+      TO_DO_LIST.addEventListener("click", function (e) {
         if (e.target.classList.contains("delete")) {
           var span = e.target.parentElement;
           var li = span.parentElement;
           li.classList.add("hide");
           setTimeout(function () {
-            list.removeChild(li);
+            TO_DO_LIST.removeChild(li);
           }, 600);
         } else if (e.target.classList.contains("mark")) {
           var actionSpan = e.target.parentElement.previousElementSibling;
@@ -344,7 +344,7 @@ function () {
         var insertedDescription = formAdd.querySelector("#addDesc").value;
         var insertedPriority = formAdd.querySelector("#priority").value;
         insertedData = "<li class=\"list__item\">\n                  <span class=\"name\">\n                      <label class=\"list__checkbox\">\n                          <input class=\"list__check-status\" type=\"checkbox\" class=\"\">\n                      </label>\n                      <input class=\"list__title task-text\" type=\"text\" value=\"".concat(insertedData, "\" readonly=\"readonly\">\n                      <input class=\"list__description\" type=\"text\" value=\"").concat(insertedDescription, "\" readonly=\"readonly\">\n                      <input class=\"list__priority\" type=\"text\" value=\"").concat(insertedPriority, "\" readonly=\"readonly\">\n                  </span>\n                  <div class=\"action\">\n                      <button class=\"mark\">mark</button>\n                      <button class=\"edit\">edit</button>\n                      <button class=\"delete\">delete</button>\n                  </div>\n              </li>");
-        list.insertAdjacentHTML("afterbegin", insertedData);
+        TO_DO_LIST.insertAdjacentHTML("afterbegin", insertedData);
         formAdd.querySelector("input[type=text]").value = "";
         formAdd.querySelector("#addDesc").value = "";
         MODAL_FORM.style.display = "none";
@@ -352,7 +352,7 @@ function () {
       var searchForm = document.querySelector(".form__search");
       searchForm.addEventListener("keyup", function (e) {
         var inputVal = e.target.value.toLowerCase();
-        var items = list.getElementsByTagName("li");
+        var items = TO_DO_LIST.getElementsByTagName("li");
         Array.from(items).forEach(function (item) {
           var itemName = item.querySelector(".list__title").value;
 
