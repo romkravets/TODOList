@@ -23,17 +23,17 @@ export class ToDoList {
             placeholder="search by title"
             value=""
           />
-          <select id="complite" class="form__complite">
-            <option value="all" class="compliteOption" selected>all</option>
-            <option value="open" class="compliteOption">open</option>
-            <option value="done" id="doneTask">done</option>
-          </select>
-          <select id="prioritySelect" class="form__priority">
-            <option value="all" class="compliteOption" selected>all</option>
-            <option value="high" class="compliteOption">high</option>
-            <option value="normal" class="compliteOption">normal</option>
-            <option value="low" class="compliteOption">low</option>
-          </select>
+            <select id="complite" class="form__complite">
+              <option value="all" class="compliteOption" selected>all</option>
+              <option value="open" class="compliteOption">open</option>
+              <option value="done" id="doneTask">done</option>
+            </select>
+            <select id="prioritySelect" class="form__priority">
+              <option value="all" class="compliteOption" selected>all</option>
+              <option value="high" class="compliteOption">high</option>
+              <option value="normal" class="compliteOption">normal</option>
+              <option value="low" class="compliteOption">low</option>
+            </select>
           <button id="addBtn" class="form__btn">Create</button>
         </form>
          `;
@@ -152,12 +152,20 @@ export class ToDoList {
         }, 600);
       } else if (e.target.classList.contains("mark")) {
         const actionSpan = e.target.parentElement.previousElementSibling;
+        const targetParent = e.target.parentElement;
+        const li = targetParent.parentElement;
+        if (li.classList.contains("list__item_complete")) {
+          li.classList.remove("list__item_complete");
+        } else {
+          li.classList.add("list__item_complete");
+        }
         const checkboxElement = actionSpan.querySelector(
           "input[type=checkbox]"
         );
         actionSpan
           .querySelector("input[type=text]")
           .classList.toggle("complete");
+        li.querySelector("input[type=text]").classList.toggle("color-input");
         checkboxElement.checked = !checkboxElement.checked;
       } else if (e.target.classList.contains("edit")) {
         const targetParent = e.target.parentElement;
@@ -217,9 +225,9 @@ export class ToDoList {
                       </label>
                       <input class="list__title task-text" type="text" value="${insertedData}" readonly="readonly">
                       <input class="list__description" type="text" value="${insertedDescription}" readonly="readonly">
-                      <input class="list__priority" type="text" value="${insertedPriority}" readonly="readonly">
+                      <input class="list__priority" id="listPriority" type="text" value="${insertedPriority}" readonly="readonly">
                   </div>
-                  <div class="list__buttons">
+                  <div class="list__buttons dropdown-content">
                       <button class="list__button mark">done</button>
                       <button class="list__button edit">edit</button>
                       <button class="list__button delete">delete</button>

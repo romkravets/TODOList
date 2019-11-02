@@ -99,7 +99,7 @@ body {
 }
 
 .header-content {
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid rgb(0, 0, 0);
   padding: 10px 10px;
   margin-bottom: 50px;
 }
@@ -118,11 +118,14 @@ body {
     align-content: space-between;
     padding: 10px 10px;
     margin: 10px;
-    border: 1px solid #000000;
+    border: 1px solid rgb(238, 238, 238);
     opacity: 1;
     transition: all 0.5s ease;
+    -webkit-box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, 0.16);
+    box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, 0.16);
     &_complete {
-      background: #eeeeee;
+      background: rgb(248, 248, 248);
     }
   }
   &__checkbox {
@@ -153,17 +156,30 @@ body {
     padding: 10px 10px;
     width: 40px;
     text-align: left;
-    border: 1px solid #000000;
+    border: 1px solid rgb(0, 0, 0);
     border-radius: 5px;
     display: inline-block;
+    position: absolute;
+    bottom: 0px;
+    left: 10px;
+    top: 50%;
+    width: 50%;
+    height: 10%;
+    margin-top: 50px;
   }
   &__buttons {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    bottom: 10px;
+    right: 10px;
   }
   &__button {
-    background-color: #ffffff;
-    border: none;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(204, 204, 204);
     height: 30px;
-    width: 30px;
+    width: 60px;
     cursor: pointer;
     font-size: 85%;
     outline: none;
@@ -182,11 +198,14 @@ body {
   background-color: rgba(246, 246, 246, 0.4);
 
   &__content {
-    background-color: #fefefe;
+    background-color: rgb(254, 254, 254);
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #888;
+    border: 1px solid rgb(135, 135, 135);
     width: 20%;
+    -webkit-box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, 0.16);
+    box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, 0.16);
   }
   &__title {
     width: 100%;
@@ -217,7 +236,7 @@ body {
   &__btn {
     background: transparent;
     padding: 10px 20px;
-    border: 1px solid #111111;
+    border: 1px solid rgb(17, 17, 17);
     border-radius: 5px;
     cursor: pointer;
   }
@@ -256,7 +275,7 @@ body {
   &__btn {
     background: transparent;
     padding: 10px 40px;
-    border: 1px solid #111111;
+    border: 1px solid rgb(17, 17, 17);
     border-radius: 5px;
     cursor: pointer;
   }
@@ -286,16 +305,20 @@ select {
 input[type="text"],
 textarea,
 select {
-  border: 1px solid #ccc;
+  border: 1px solid rgb(204, 204, 204);
   border-radius: 4px;
   font-size: 100%;
   color: gray;
 }
 
+input[type="checkbox"] {
+  border-radius: 0;
+}
+
 #list .list__item input[type="text"] {
   width: 100%;
   padding: 9px 8px;
-  color: #444;
+  color: rgb(68, 68, 68);
   outline: none;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -303,8 +326,23 @@ select {
   border: none;
 }
 
+#list .list__item #listPriority {
+  width: 40%;
+  text-align: center;
+  border: 1px dashed rgb(143, 141, 141);
+  border-radius: 5px;
+}
+
+#list .list__item #listPriority.input-border {
+  border: 1px solid rgb(204, 204, 204);
+}
+
 #list .list__item input[type="text"].input-border {
-  border: 1px solid #ccc;
+  border: 1px solid rgb(204, 204, 204);
+}
+
+#list .list__item_complete input[type="text"] {
+  background: rgb(248, 248, 248);
 }
 
 #main .hide {
