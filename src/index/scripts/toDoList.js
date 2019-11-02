@@ -2,6 +2,7 @@ const TO_DO_LIST = document.getElementById("list");
 const MODAL_FORM = document.querySelector("#modalToggle");
 const TOP_FORM = document.querySelector("#topForm");
 const HEADER = document.querySelector("#header");
+const FOOTER = document.querySelector("#footer");
 
 export class ToDoList {
   constructor() {
@@ -47,6 +48,7 @@ export class ToDoList {
             placeholder="Title"
             class="modal__title"
             id="addTask"
+            maxlength="20"
           />
         </label>
         <label for="addDesc">
@@ -56,6 +58,7 @@ export class ToDoList {
             placeholder="Desctiption"
             class="modal__desctiption"
             id="addDesc"
+            maxlength="25"
           ></textarea>
         </label>
         <label for="priority">Priority:</label>
@@ -73,6 +76,13 @@ export class ToDoList {
       </form>
     `;
     MODAL_FORM.innerHTML += modalHtml;
+
+    const footerHtml = `
+      <div class="container">
+        <span class="author">Roman Kravets</span>
+      </div>
+    `;
+    FOOTER.innerHTML += footerHtml;
 
     const selectElement = document.querySelector("#complite");
     selectElement.addEventListener("click", e => {
@@ -165,7 +175,6 @@ export class ToDoList {
         actionSpan
           .querySelector("input[type=text]")
           .classList.toggle("complete");
-        li.querySelector("input[type=text]").classList.toggle("color-input");
         checkboxElement.checked = !checkboxElement.checked;
       } else if (e.target.classList.contains("edit")) {
         const targetParent = e.target.parentElement;
@@ -223,8 +232,8 @@ export class ToDoList {
                       <label class="list__checkbox">
                           <input class="list__check-status" type="checkbox" class="">
                       </label>
-                      <input class="list__title task-text" type="text" value="${insertedData}" readonly="readonly">
-                      <input class="list__description" type="text" value="${insertedDescription}" readonly="readonly">
+                      <input class="list__title task-text" type="text" value="${insertedData}" readonly="readonly" maxlength="25">
+                      <input class="list__description" type="text" value="${insertedDescription}" readonly="readonly"  maxlength="25">
                       <input class="list__priority" id="listPriority" type="text" value="${insertedPriority}" readonly="readonly">
                   </div>
                   <div class="list__buttons dropdown-content">
