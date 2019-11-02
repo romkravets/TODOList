@@ -90,7 +90,7 @@ body {
   font-family: Arial, Helvetica, sans-serif; }
 
 .header-content {
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid black;
   padding: 10px 10px;
   margin-bottom: 50px; }
 
@@ -108,7 +108,7 @@ body {
     align-content: space-between;
     padding: 10px 10px;
     margin: 10px;
-    border: 1px solid #000000;
+    border: 1px solid black;
     opacity: 1;
     transition: all 0.5s ease; }
     .list__item_complete {
@@ -136,14 +136,28 @@ body {
     padding: 10px 10px;
     width: 40px;
     text-align: left;
-    border: 1px solid #000000;
+    border: 1px solid black;
     border-radius: 5px;
-    display: inline-block; }
+    display: inline-block;
+    position: absolute;
+    bottom: 0px;
+    left: 10px;
+    top: 50%;
+    width: 50%;
+    height: 10%;
+    margin-top: 50px; }
+  .list__buttons {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    bottom: 10px;
+    right: 10px; }
   .list__button {
-    background-color: #ffffff;
-    border: none;
+    background-color: white;
+    border: 1px solid #cccccc;
     height: 30px;
-    width: 30px;
+    width: 60px;
     cursor: pointer;
     font-size: 85%;
     outline: none; }
@@ -162,7 +176,7 @@ body {
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #888;
+    border: 1px solid #878787;
     width: 20%; }
   .modal__title {
     width: 100%;
@@ -246,7 +260,7 @@ select {
 input[type="text"],
 textarea,
 select {
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   border-radius: 4px;
   font-size: 100%;
   color: gray; }
@@ -254,15 +268,24 @@ select {
 #list .list__item input[type="text"] {
   width: 100%;
   padding: 9px 8px;
-  color: #444;
+  color: #444444;
   outline: none;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   cursor: context-menu;
   border: none; }
 
+#list .list__item #listPriority {
+  width: 40%;
+  text-align: center;
+  border: 1px dashed #8f8d8d;
+  border-radius: 5px; }
+
+#list .list__item #listPriority.input-border {
+  border: 1px solid #cccccc; }
+
 #list .list__item input[type="text"].input-border {
-  border: 1px solid #ccc; }
+  border: 1px solid #cccccc; }
 
 #main .hide {
   margin-bottom: 0;
