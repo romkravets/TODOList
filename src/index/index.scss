@@ -118,11 +118,14 @@ body {
     align-content: space-between;
     padding: 10px 10px;
     margin: 10px;
-    border: 1px solid rgb(0, 0, 0);
+    border: 1px solid rgb(238, 238, 238);
     opacity: 1;
     transition: all 0.5s ease;
+    -webkit-box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, 0.16);
+    box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, 0.16);
     &_complete {
-      background: rgb(238, 238, 238);
+      background: rgb(248, 248, 248);
     }
   }
   &__checkbox {
@@ -200,6 +203,9 @@ body {
     padding: 20px;
     border: 1px solid rgb(135, 135, 135);
     width: 20%;
+    -webkit-box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, 0.16);
+    box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, 0.16);
   }
   &__title {
     width: 100%;
@@ -305,6 +311,10 @@ select {
   color: gray;
 }
 
+input[type="checkbox"] {
+  border-radius: 0;
+}
+
 #list .list__item input[type="text"] {
   width: 100%;
   padding: 9px 8px;
@@ -329,6 +339,10 @@ select {
 
 #list .list__item input[type="text"].input-border {
   border: 1px solid rgb(204, 204, 204);
+}
+
+#list .list__item_complete input[type="text"] {
+  background: rgb(248, 248, 248);
 }
 
 #main .hide {

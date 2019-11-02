@@ -152,12 +152,20 @@ export class ToDoList {
         }, 600);
       } else if (e.target.classList.contains("mark")) {
         const actionSpan = e.target.parentElement.previousElementSibling;
+        const targetParent = e.target.parentElement;
+        const li = targetParent.parentElement;
+        if (li.classList.contains("list__item_complete")) {
+          li.classList.remove("list__item_complete");
+        } else {
+          li.classList.add("list__item_complete");
+        }
         const checkboxElement = actionSpan.querySelector(
           "input[type=checkbox]"
         );
         actionSpan
           .querySelector("input[type=text]")
           .classList.toggle("complete");
+        li.querySelector("input[type=text]").classList.toggle("color-input");
         checkboxElement.checked = !checkboxElement.checked;
       } else if (e.target.classList.contains("edit")) {
         const targetParent = e.target.parentElement;

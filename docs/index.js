@@ -286,18 +286,30 @@ function () {
           }, 600);
         } else if (e.target.classList.contains("mark")) {
           var actionSpan = e.target.parentElement.previousElementSibling;
-          var checkboxElement = actionSpan.querySelector("input[type=checkbox]");
-          actionSpan.querySelector("input[type=text]").classList.toggle("complete");
-          checkboxElement.checked = !checkboxElement.checked;
-        } else if (e.target.classList.contains("edit")) {
           var _targetParent = e.target.parentElement;
           var _li = _targetParent.parentElement;
 
-          var inputText = _li.querySelector(".list__name .list__title");
+          if (_li.classList.contains("list__item_complete")) {
+            _li.classList.remove("list__item_complete");
+          } else {
+            _li.classList.add("list__item_complete");
+          }
 
-          var inputDescription = _li.querySelector(".list__name .list__description");
+          var checkboxElement = actionSpan.querySelector("input[type=checkbox]");
+          actionSpan.querySelector("input[type=text]").classList.toggle("complete");
 
-          var inputPriority = _li.querySelector(".list__name .list__priority");
+          _li.querySelector("input[type=text]").classList.toggle("color-input");
+
+          checkboxElement.checked = !checkboxElement.checked;
+        } else if (e.target.classList.contains("edit")) {
+          var _targetParent2 = e.target.parentElement;
+          var _li2 = _targetParent2.parentElement;
+
+          var inputText = _li2.querySelector(".list__name .list__title");
+
+          var inputDescription = _li2.querySelector(".list__name .list__description");
+
+          var inputPriority = _li2.querySelector(".list__name .list__priority");
 
           inputText.classList.toggle("input-border");
           inputDescription.classList.toggle("input-border");
