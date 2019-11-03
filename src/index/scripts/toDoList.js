@@ -184,6 +184,7 @@ export class ToDoList {
           ".list__name .list__description"
         );
         const inputPriority = li.querySelector(".list__name .list__priority");
+        const saveInfo = li.querySelector(".list__name .list__name_save-info");
         inputText.classList.toggle("input-border");
         inputDescription.classList.toggle("input-border");
         inputPriority.classList.toggle("input-border");
@@ -193,6 +194,7 @@ export class ToDoList {
         inputText.readOnly = false;
         inputDescription.readOnly = false;
         inputPriority.readOnly = false;
+        saveInfo.style.display = "block";
 
         inputText.addEventListener("keypress", e => {
           const key = e.which || e.keyCode;
@@ -216,6 +218,7 @@ export class ToDoList {
             inputPriority.readOnly = true;
             inputPriority.style.cursor = "context-menu";
             inputPriority.classList.remove("input-border");
+            saveInfo.style.display = "none";
           }
         });
       }
@@ -235,6 +238,7 @@ export class ToDoList {
                       <input class="list__title task-text" type="text" value="${insertedData}" readonly="readonly" maxlength="25">
                       <input class="list__description" type="text" value="${insertedDescription}" readonly="readonly"  maxlength="25">
                       <input class="list__priority" id="listPriority" type="text" value="${insertedPriority}" readonly="readonly">
+                      <p class="list__name_save-info">Press "Enter" to save</p>
                   </div>
                   <div class="list__buttons dropdown-content">
                       <button class="list__button mark">done</button>
