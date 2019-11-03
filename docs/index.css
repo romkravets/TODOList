@@ -311,6 +311,12 @@ input[type="checkbox"] {
 #mainList .complete {
   text-decoration: line-through; }
 
+#list .list__item .list__name .list__name_save-info {
+  font-size: 70%;
+  margin-top: 1px;
+  display: none;
+  color: #8b8a8a; }
+
 .move-pulsate {
   -webkit-animation: pulsate 0.5s ease-in-out;
   animation: pulsate 0.5s ease-in-out;

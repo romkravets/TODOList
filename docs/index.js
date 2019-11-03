@@ -311,6 +311,8 @@ function () {
 
           var inputPriority = _li2.querySelector(".list__name .list__priority");
 
+          var saveInfo = _li2.querySelector(".list__name .list__name_save-info");
+
           inputText.classList.toggle("input-border");
           inputDescription.classList.toggle("input-border");
           inputPriority.classList.toggle("input-border");
@@ -320,6 +322,7 @@ function () {
           inputText.readOnly = false;
           inputDescription.readOnly = false;
           inputPriority.readOnly = false;
+          saveInfo.style.display = "block";
           inputText.addEventListener("keypress", function (e) {
             var key = e.which || e.keyCode;
 
@@ -345,6 +348,7 @@ function () {
               inputPriority.readOnly = true;
               inputPriority.style.cursor = "context-menu";
               inputPriority.classList.remove("input-border");
+              saveInfo.style.display = "none";
             }
           });
         }
@@ -355,7 +359,7 @@ function () {
         var insertedData = formAdd.querySelector("#addTask").value;
         var insertedDescription = formAdd.querySelector("#addDesc").value;
         var insertedPriority = formAdd.querySelector("#priority").value;
-        insertedData = "<li class=\"list__item\">\n                  <div class=\"list__name\">\n                      <label class=\"list__checkbox\">\n                          <input class=\"list__check-status\" type=\"checkbox\" class=\"\">\n                      </label>\n                      <input class=\"list__title task-text\" type=\"text\" value=\"".concat(insertedData, "\" readonly=\"readonly\" maxlength=\"25\">\n                      <input class=\"list__description\" type=\"text\" value=\"").concat(insertedDescription, "\" readonly=\"readonly\"  maxlength=\"25\">\n                      <input class=\"list__priority\" id=\"listPriority\" type=\"text\" value=\"").concat(insertedPriority, "\" readonly=\"readonly\">\n                  </div>\n                  <div class=\"list__buttons dropdown-content\">\n                      <button class=\"list__button mark\">done</button>\n                      <button class=\"list__button edit\">edit</button>\n                      <button class=\"list__button delete\">delete</button>\n                  </div>\n              </li>");
+        insertedData = "<li class=\"list__item\">\n                  <div class=\"list__name\">\n                      <label class=\"list__checkbox\">\n                          <input class=\"list__check-status\" type=\"checkbox\" class=\"\">\n                      </label>\n                      <input class=\"list__title task-text\" type=\"text\" value=\"".concat(insertedData, "\" readonly=\"readonly\" maxlength=\"25\">\n                      <input class=\"list__description\" type=\"text\" value=\"").concat(insertedDescription, "\" readonly=\"readonly\"  maxlength=\"25\">\n                      <input class=\"list__priority\" id=\"listPriority\" type=\"text\" value=\"").concat(insertedPriority, "\" readonly=\"readonly\">\n                      <p class=\"list__name_save-info\">Press \"Enter\" to save</p>\n                  </div>\n                  <div class=\"list__buttons dropdown-content\">\n                      <button class=\"list__button mark\">done</button>\n                      <button class=\"list__button edit\">edit</button>\n                      <button class=\"list__button delete\">delete</button>\n                  </div>\n              </li>");
         TO_DO_LIST.insertAdjacentHTML("afterbegin", insertedData);
         formAdd.querySelector("input[type=text]").value = "";
         formAdd.querySelector("#addDesc").value = "";
